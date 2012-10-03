@@ -16,38 +16,8 @@
  * 
  *******************************************************************************/
 
-package com.bragi.sonify;
+package com.bragi.sonify.composer.lsystem;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
-import com.bragi.sonify.composer.lsystem.LSystemTest;
-
-/**
- * Unit test for the sonificator. It should be run after each checking and each
- * compiling.
- */
-public class AppTest extends TestCase {
-
-	/**
-	 * 
-	 * Create the test case
-	 * 
-	 * @param testName name of the test case
-	 */
-	public AppTest(String testName) {
-		super(testName);
-	}
-
-	/**
-	 * @return the suite of tests being tested
-	 */
-	public static Test suite() {
-		TestSuite s = new TestSuite();
-		s.addTest(new LSystemTest("testGenerate"));
-
-		return s;
-	}
+public class Turtle {
 
 }
