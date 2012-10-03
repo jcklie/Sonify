@@ -12,11 +12,14 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Jan-Christoph Klie - Everything
+ * Jan-Christoph Klie - Everything but RIFF statics
  * 
  *******************************************************************************/
 
 package com.bragi.sonify.music;
+
+import java.lang.reflect.Field;
+import java.util.Random;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiSystem;
@@ -26,6 +29,8 @@ import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Synthesizer;
 
 public class RiffPlayer {
+	
+	static Random randGen = new Random();
 	
 	public static void play(Riff riff) throws MidiUnavailableException, InvalidMidiDataException {
 		Synthesizer synth = MidiSystem.getSynthesizer();
@@ -38,7 +43,7 @@ public class RiffPlayer {
 			rcvr.send(msg, -1);
 			
 			try {
-				Thread.sleep(2 * 400); 
+				Thread.sleep((randGen.nextInt(2) + 1) * 400); 
 			} catch (Exception e) {
 				
 			}
@@ -51,11 +56,13 @@ public class RiffPlayer {
 	}
 	
 	public static void main(String[] args) {
-		Riff riff = new Riff(Note.A5, Note.E5, Note.C5, Note.G4, Note.C5, Note.E5, Note.A5, Note.A5  );
 		try {
-			play(riff);
-		} catch (MidiUnavailableException | InvalidMidiDataException e) {
-			
+			for(int i = 1 ; i <= 94; i++) {
+				Field f = Riff.class.getDeclaredField("RIFF"+i);
+				Object o = f.get( null );
+				play((Riff) o);
+			}			
+		} catch (MidiUnavailableException | InvalidMidiDataException | NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {			
 			e.printStackTrace();
 		}
 	}
