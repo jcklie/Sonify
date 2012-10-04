@@ -45,9 +45,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LSystem {
 	
-	/**
-	 * 
-	 */
 	private Log log = LogFactory.getLog(LSystem.class);
 	
 	/**

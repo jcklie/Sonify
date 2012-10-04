@@ -13,7 +13,7 @@
  *
  * Contributors:
  * Jan-Christoph Klie - Everything but RIFF statics
- * Sebastian Muszytowski - Epic Shell magic and editorregex magic to extract riffs from text
+ * Sebastian Muszytowski - Epic Shell magic and editor regular expression magic to extract riffs from text
  * 
  *******************************************************************************/
 
@@ -21,6 +21,9 @@ package com.bragi.sonify.music;
 
 import java.util.Iterator;
 
+/**
+ * A riff is considered to be a simple melodic fragment.
+ */
 public class Riff implements Iterable<Note> {	
 	
 	public static final Riff RIFF = new Riff(Note.A3,Note.B3,Note.C4,Note.D4);

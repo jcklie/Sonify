@@ -12,21 +12,23 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Jan-Christoph Klie - Everything
+ *  
  * 
  *******************************************************************************/
 
-package com.bragi.sonify;
-
+package com.bragi.sonify.music;
 
 /**
- * I test ma stuff here!
+ * This class offers a framework to create MIDI tracks by
+ * simply providing pitch, note value and instrument
+ * for every note, one after another.
  * 
+ * In addition, one can specify general parameters like
+ * beats per minute.
+ * 
+ * These tracks are combined to form a sequence which can
+ * be written to a MIDI file.
  */
-public class App {
-
-	public static void main(String[] args) {
-		
-	}
+public class SongWriter {
 
 }

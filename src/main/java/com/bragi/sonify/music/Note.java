@@ -79,7 +79,7 @@ public enum Note {
 	Ab5(92),
 	
 	/*
-	 * Octave 5
+	 * Octave 6
 	 */	
 	
 	A6(93),

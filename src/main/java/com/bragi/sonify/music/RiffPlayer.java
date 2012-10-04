@@ -12,7 +12,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Jan-Christoph Klie - Everything but RIFF statics
+ * Jan-Christoph Klie - Everything
  * 
  *******************************************************************************/
 
@@ -28,6 +28,14 @@ import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Synthesizer;
 
+/**
+ * This class is intended to provide simple test capabilities for previously
+ * created riffs. Since a riff only specifies only pitch and no note value,
+ * it is randomly chosen.
+ * 
+ * In this version, all riffs which are declared in the Riff class are played
+ * subsequently. Enjoy this awesome piece of high culture.
+ */
 public class RiffPlayer {
 	
 	static Random randGen = new Random();
@@ -38,12 +46,15 @@ public class RiffPlayer {
 		Receiver rcvr = synth.getReceiver();
 		ShortMessage msg = new ShortMessage();
 		
+		msg.setMessage(ShortMessage.PROGRAM_CHANGE, 0, 25, 0);
+		rcvr.send(msg, -1);
+		
 		for(Note n : riff) {
 			msg.setMessage(ShortMessage.NOTE_ON, 0, n.key, 64);
 			rcvr.send(msg, -1);
 			
 			try {
-				Thread.sleep((randGen.nextInt(2) + 1) * 400); 
+				Thread.sleep((randGen.nextInt(5) + 1) * 200); 
 			} catch (Exception e) {
 				
 			}
