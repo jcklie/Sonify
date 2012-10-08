@@ -16,4 +16,10 @@ Installation steps
 Everytime the **pom.xml** is changed, one need to rerun 3+4.
 A refresh in eclipse after it is enough.
 
+Branches
+--------
+1. Create branch `git branch yourbranchhere`
+2. Checkout branch `git checkout yourbranchere`
+3. Push to branch `git push origin yourbranchere`
+
 ![Bragi Logo](http://s12.postimage.org/8pa2gn46l/TINF11_AI_bragisoft_logo_v1_20120906.jpg )
