@@ -12,7 +12,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Jan-Christoph Klie - Everything
+ * Benedict Holste - everything, ...till now
  * 
  *******************************************************************************/
 
@@ -21,5 +21,6 @@ package com.bragi.sonify.textanalyzer;
 import junit.framework.TestCase;
 
 public class TextAnalyzerTest extends TestCase {
-
+//	URL url = this.getClass().getResource("/test.wsdl");
+//	File testWsdl = new File(url.getFile());
 }

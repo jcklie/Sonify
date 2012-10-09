@@ -19,6 +19,7 @@ package com.bragi.sonify.textanalyzer;
 
 /**
  * The TextAnalyzer class implements the ITextAnalyzer interface and
+ * provides various information about the constitution of an input text.
  * 
  * @author Benedict Holste <benedict@bholste.net>
  *
@@ -29,8 +30,8 @@ public class TextAnalyzer implements ITextAnalyzer{
 	private int totalWordCount;
 	private int averageWordLength;
 	
-	public TextAnalyzer() {
-		
+	public TextAnalyzer(String text) {
+		analyzeText(text);
 	}
 
 	@Override
@@ -77,12 +78,15 @@ public class TextAnalyzer implements ITextAnalyzer{
 			wordLengthSum += word.length();
 		}
 		
-		// calculate teh average word length
-		averageWordLength = wordLengthSum/totalWordCount;
+		// TODO punctuation marks at the end of last word in sentence
+		
+		// calculate the average word length
+		averageWordLength = Math.round(wordLengthSum/totalWordCount);
 		
 		// TODO How to handle whitespace?!
 		// set the total character count
 		totalCharCount = text.length();
 		
 	}
+	
 }

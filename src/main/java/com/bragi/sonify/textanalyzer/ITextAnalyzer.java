@@ -18,7 +18,8 @@
 package com.bragi.sonify.textanalyzer;
 
 /**
- * The ITextAnalyzer interface
+ * The ITextAnalyzer interface determines the necessary methods
+ * and criteria for the constitutional analysis of an input text.
  * 
  * @author Benedict Holste <benedict@bholste.net>
  *
