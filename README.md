@@ -1,6 +1,3 @@
-I WAS HERE. gz BHOLSTE
-
-
 Sonify
 ======
 
