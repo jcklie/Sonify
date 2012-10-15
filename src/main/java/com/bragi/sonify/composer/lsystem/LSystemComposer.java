@@ -30,6 +30,9 @@ import com.bragi.sonify.composer.IComposer;
  * built up of a track
  * 
  * |--intro--|--middelpart1--|--bridge--|--middelpart2--|--outro--|
+ *  * typical: 
+ * |----8----|------32-------|----4-----|-----32--------|----4----| => 80 Takte
+ * |---10%---|------40%------|----5%----|-----40%-------|---5%----|
  * 
  * @param tracklength
  * 		gives the tracklength in 1/4 Note.
@@ -46,15 +49,42 @@ import com.bragi.sonify.composer.IComposer;
 public class LSystemComposer implements IComposer {
 	
 int tracklength;
-int introlength;
-int outrolength;
-int middelpartlength;
-int bridgelength;
+int introlength = 8;
+int outrolength = 4;
+int middelpartlength = 32;
+int bridgelength = 4;
+
+int[] drumset = {0,2,1,0}; //rand numbers
+
+	/**plays a Note in midi
+	 * 
+	 * @param Note 
+	 */
+	private void playNote(int Note){
+		
+		return;
+	}
+	
+	
 
 
 	@Override
 	public Sequence createMidi(String text) {
-		// TODO Auto-generated method stub
+		
+		tracklength = text.length();
+		
+		for(int i = 1; i > tracklength;i++){
+			playNote(text.charAt(i));					//Hauptmelodie
+			if(i >= introlength && i < outrolength){
+				playNote(text.charAt(i) + 12);			//Zweite Stimme eine Oktave höher
+				if(i < middelpartlength && i >= middelpartlength){
+					playNote(drumset[i/4]);				//play Drumset
+				}
+			}
+		}
+		
+		
+		
 		return null;
 	}
 
