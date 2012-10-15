@@ -32,7 +32,10 @@ public class LSystemComposer implements IComposer {
 
 	@Override
 	public Sequence createMidi(String text) {
-		// TODO Auto-generated method stub
+		
+		int tracklength = text.length();
+		
+		
 		return null;
 	}
 
