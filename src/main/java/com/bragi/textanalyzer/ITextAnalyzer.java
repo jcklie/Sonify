@@ -31,6 +31,14 @@ public interface ITextAnalyzer {
 	 * @return The total number of characters
 	 */
 	int totalCharCount();
+
+
+	/**
+	 * Returns the total number of sentences in the input text.
+	 *
+	 * @return The total number of sentences
+	 */
+	int totalSentencesCount();
 	
 	/**
 	 * Returns the total number of words in the input text.
