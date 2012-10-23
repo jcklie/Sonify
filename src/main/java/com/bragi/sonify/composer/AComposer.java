@@ -38,7 +38,7 @@ public abstract class AComposer {
 	 * @param text The text used to determine the generation process
 	 * @return The generated sequence
 	 */
-	abstract Sequence createMidi(String text);
+	public abstract Sequence createMidi(String text);
 
 }
 
