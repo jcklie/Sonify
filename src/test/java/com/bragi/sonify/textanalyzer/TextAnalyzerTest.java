@@ -12,21 +12,15 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Jan-Christoph Klie - Everything
+ * Benedict Holste - everything, ...till now
  * 
  *******************************************************************************/
 
-package com.bragi.sonify;
+package com.bragi.sonify.textanalyzer;
 
+import junit.framework.TestCase;
 
-/**
- * I test ma stuff here!
- * 
- */
-public class App {
-
-	public static void main(String[] args) {
-		
-	}
-
+public class TextAnalyzerTest extends TestCase {
+//	URL url = this.getClass().getResource("/test.wsdl");
+//	File testWsdl = new File(url.getFile());
 }

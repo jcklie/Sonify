@@ -21,13 +21,15 @@ package com.bragi.sonify.composer;
 import javax.sound.midi.Sequence;
 
 /**
- * IComposer is the basic interface of all algorithms which create
- * MIDI-Sequences from a given input encapsulated in a class. 
+ * AComposer is the basic class of all classes which encapsulate algorithms to
+ * create MIDI-Sequences from a given input text and genre.
  * 
  * @author Jan-Christoph Klie
  * 
  */
-public interface IComposer {
+public abstract class AComposer {
+	
+	 
 
 	/**
 	 * Generates a Sequence (collection of Tracks which itself are a
@@ -36,7 +38,7 @@ public interface IComposer {
 	 * @param text The text used to determine the generation process
 	 * @return The generated sequence
 	 */
-	Sequence createMidi(String text);
+	public abstract Sequence createMidi(String text);
 
 }
 
