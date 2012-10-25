@@ -19,7 +19,10 @@
 package com.bragi.sonify.music;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiSystem;
@@ -28,19 +31,23 @@ import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
 import javax.sound.midi.Synthesizer;
 
+import com.bragi.sonify.music.SongWriter.TrackHandle;
+
 /**
  * This class is intended to provide simple test capabilities for previously
- * created riffs. Since a riff only specifies only pitch and no note value,
- * it is randomly chosen.
+ * created riffs. Since a riff only specifies pitch and no note value, it is
+ * randomly chosen.
  * 
  * In this version, all riffs which are declared in the Riff class are played
  * subsequently. Enjoy this awesome piece of high culture.
+ * 
+ * Acts as my digital playground. (JCK)
  */
 public class RiffPlayer {
 	
 	static Random randGen = new Random();
 	
-	public static void play(Riff riff) throws MidiUnavailableException, InvalidMidiDataException {
+	public static void play(Riff riff, Rhythm rhythm) throws MidiUnavailableException, InvalidMidiDataException {
 		Synthesizer synth = MidiSystem.getSynthesizer();
 		synth.open();
 		Receiver rcvr = synth.getReceiver();
@@ -49,12 +56,14 @@ public class RiffPlayer {
 		msg.setMessage(ShortMessage.PROGRAM_CHANGE, 0, 25, 0);
 		rcvr.send(msg, -1);
 		
-		for(Note n : riff) {
+		for(int i = 0; i < riff.getData().length; i++) {
+			Note n = riff.getData()[i];
+			NoteValue v = rhythm.getData()[i%rhythm.getData().length];
 			msg.setMessage(ShortMessage.NOTE_ON, 0, n.key, 64);
 			rcvr.send(msg, -1);
 			
 			try {
-				Thread.sleep((randGen.nextInt(5) + 1) * 200); 
+				Thread.sleep(v.val * 2); 
 			} catch (Exception e) {
 				
 			}
@@ -67,13 +76,56 @@ public class RiffPlayer {
 	}
 	
 	public static void main(String[] args) {
+
+		Random rnd = new Random();
 		try {
+			List<Riff> riffz = new ArrayList<Riff>();
+			List<Rhythm> r = new ArrayList<Rhythm>();
+
+			SongWriter s = new SongWriter();
+			TrackHandle track1 = s.createNewTrack();
+			TrackHandle track2 = s.createNewTrack();
+			
+			s.setInstrument(track1, Instrument.AcousticGrandPiano);		
+			s.setInstrument(track2, Instrument.Contrabass);			
+			
+			s.setPressure(track1, 100);
+			s.setPressure(track2, 60);
+			
 			for(int i = 1 ; i <= 94; i++) {
 				Field f = Riff.class.getDeclaredField("RIFF"+i);
-				Object o = f.get( null );
-				play((Riff) o);
+				riffz.add( (Riff) f.get( null ));
+			}
+			
+			for(int i = 1 ; i <= 14; i++) {
+				Field f = Rhythm.class.getDeclaredField("RHYTHM"+i);
+				r.add( (Rhythm) f.get( null ));
+			}
+			
+			
+			s.setBPM(track1, 200);
+			s.setBPM(track2, 200);			
+			
+			while( riffz.size() > 0) {
+				int i = rnd.nextInt(riffz.size());
+				int j = rnd.nextInt(r.size());
+				Note[] curRiff = riffz.get(i).getData();
+				NoteValue[] curRhythm = r.get(j).getData();
+				
+				for( int a = 0; a < curRiff.length; a++ ) {
+					s.addNote(track1, curRiff[a], curRhythm[a%curRhythm.length]);
+					s.addInterval(track2, curRiff[a], curRhythm[a%curRhythm.length], Interval.PERFECT_FOURTH_D);
+				}
+				
+				riffz.remove(i);				
 			}			
-		} catch (MidiUnavailableException | InvalidMidiDataException | NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {			
+			
+			s.endTrack(track1);
+			s.play();
+
+
+			
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}
 	}
