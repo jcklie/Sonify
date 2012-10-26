@@ -21,6 +21,8 @@ package com.bragi.sonify.music;
 
 import java.util.Iterator;
 
+import com.bragi.sonify.util.ArrayIterator;
+
 /**
  * A riff is considered to be a simple melodic fragment.
  */
@@ -132,31 +134,14 @@ public class Riff implements Iterable<Note> {
 	public Riff(Note... data) {
 		this.data = data;
 	}
-
-	private class RiffIterator implements Iterator<Note> {
-		private Note[] data;
-		private int pos = 0;
-
-		public RiffIterator(Note[] data) {
-			this.data = data;
-		}
-
-		public boolean hasNext() {
-			return pos < data.length;
-		}
-
-		public Note next() {
-			return data[pos++];			
-		}
-
-		public void remove() {
-			throw new UnsupportedOperationException();
-		}
+	
+	protected Note[] getData() {
+		return data;
 	}
 
 	@Override
 	public Iterator<Note> iterator() {
-		return new RiffIterator(data);
+		return new ArrayIterator<Note>(data);
 	}
 
 }
