@@ -18,9 +18,16 @@
 
 package com.bragi.sonify.textanalyzer;
 
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
 public class TextAnalyzerTest extends TestCase {
 //	URL url = this.getClass().getResource("/test.wsdl");
 //	File testWsdl = new File(url.getFile());
+	
+	@Test
+	public void testFoo() {
+		
+	}
 }
