@@ -87,7 +87,7 @@ public class RiffPlayer {
 			TrackHandle track2 = s.createNewTrack();
 			
 			s.setInstrument(track1, Instrument.AcousticGrandPiano);		
-			s.setInstrument(track2, Instrument.Contrabass);			
+			s.setInstrument(track2, Instrument.AcousticGrandPiano);			
 			
 			s.setPressure(track1, 100);
 			s.setPressure(track2, 60);
@@ -114,7 +114,7 @@ public class RiffPlayer {
 				
 				for( int a = 0; a < curRiff.length; a++ ) {
 					s.addNote(track1, curRiff[a], curRhythm[a%curRhythm.length]);
-					s.addInterval(track2, curRiff[a], curRhythm[a%curRhythm.length], Interval.PERFECT_FOURTH_D);
+					s.addInterval(track2, curRiff[a], curRhythm[a%curRhythm.length], Interval.PERFECT_FIFTH);
 				}
 				
 				riffz.remove(i);				
