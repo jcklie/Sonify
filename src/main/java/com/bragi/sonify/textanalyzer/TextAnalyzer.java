@@ -12,7 +12,8 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Benedict Holste - everything, ...till now
+ * Benedict Holste - General layout of the class, implementation of totalCharCount, totalWordCount, averageWordLength
+ * Sebastian Muszytowski - Documentation and implementation of totalSentenceCount, averageSentenceLength
  *******************************************************************************/
 
 package com.bragi.sonify.textanalyzer;
@@ -22,55 +23,54 @@ package com.bragi.sonify.textanalyzer;
  * provides various information about the constitution of an input text.
  * 
  * @author Benedict Holste <benedict@bholste.net>
+ * @author Sebastian Muszytowski <sebastian@muszytowski.net>
  *
  */
-public class TextAnalyzer implements ITextAnalyzer{
+public class TextAnalyzer {
 	
 	private int totalCharCount;
 	private int totalWordCount;
 	private int averageWordLength;
+	private int totalSentenceCount;
+	private int averageSentenceCharLength;
+	private int averageSentenceWordLength;
 	
 	public TextAnalyzer(String text) {
 		analyzeText(text);
 	}
 
-	@Override
 	public int totalCharCount() {
-		// TODO Auto-generated method stub
 		return totalCharCount;
 	}
 
-	@Override
 	public int totalWordCount() {
-		// TODO Auto-generated method stub
-		return totalCharCount;
+		return totalWordCount;
+	}
+	
+	public int totalSentenceCount() {
+		return totalSentenceCount;
 	}
 
-	@Override
-	public int totalPunctuationCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int averageWordLength() {
-		// TODO Auto-generated method stub
 		return averageWordLength;
 	}
 
-	@Override
-	public int averageSentenceLength() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int averageSentenceCharLength() {
+		return averageSentenceCharLength;
+	}
+	
+	public int averageSentenceWordLength() {
+		return averageSentenceWordLength;
 	}
 
-	@Override
-	public void analyzeText(String text) {
-		
-		// TODO How to handle numbers, e.g. 1,2,3...?!
+	private void analyzeText(String text) {
 		// set the total number of words
-		String[] words = text.split(" ");
+		String[] words = text.split("\\s+");
 		totalWordCount = words.length;
+		
+		/*
+		 * Average sentence length
+		 */
 		
 		// loop over all words and sum up their length
 		int wordLengthSum = 0;
@@ -78,15 +78,40 @@ public class TextAnalyzer implements ITextAnalyzer{
 			wordLengthSum += word.length();
 		}
 		
-		// TODO punctuation marks at the end of last word in sentence
+		
+		
 		
 		// calculate the average word length
 		averageWordLength = Math.round(wordLengthSum/totalWordCount);
 		
-		// TODO How to handle whitespace?!
-		// set the total character count
+		/*
+		 * Set the total character count
+		 */
 		totalCharCount = text.length();
 		
+		/*
+		 * Sentence count
+		 */
+		
+		String[] sentences = text.split("(?<=[\\S])[\\.\\!\\?]\\s+");
+		totalSentenceCount = sentences.length;
+		
+		/*
+		 * Average sentence length
+		 */
+		
+		int sentenceCharLengthSum = 0;
+		int sentenceWordLengthSum = 0;
+		for(String sentence : sentences) {
+			sentenceCharLengthSum += sentence.length();
+			words = sentence.split("\\s+");
+			for(String word : words) {
+				sentenceWordLengthSum += word.length();
+			}			
+		}		
+		
+		averageSentenceCharLength = Math.round(sentenceCharLengthSum/totalSentenceCount);	
+		averageSentenceWordLength = Math.round(sentenceWordLengthSum/totalSentenceCount);		
 	}
 	
 }

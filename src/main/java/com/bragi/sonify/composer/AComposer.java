@@ -20,6 +20,9 @@ package com.bragi.sonify.composer;
 
 import javax.sound.midi.Sequence;
 
+import com.bragi.sonify.music.SongWriter;
+import com.bragi.sonify.textanalyzer.TextAnalyzer;
+
 /**
  * AComposer is the basic class of all classes which encapsulate algorithms to
  * create MIDI-Sequences from a given input text and genre.
@@ -29,7 +32,12 @@ import javax.sound.midi.Sequence;
  */
 public abstract class AComposer {
 	
-	 
+	private TextAnalyzer analyzer;
+	private SongWriter songwriter;
+	
+	public AComposer(String text) {
+		analyzer = new TextAnalyzer(text);
+	}	 
 
 	/**
 	 * Generates a Sequence (collection of Tracks which itself are a
@@ -38,7 +46,7 @@ public abstract class AComposer {
 	 * @param text The text used to determine the generation process
 	 * @return The generated sequence
 	 */
-	public abstract Sequence createMidi(String text);
+	public abstract Sequence createMidi();
 
 }
 

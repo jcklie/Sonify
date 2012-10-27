@@ -27,8 +27,13 @@ import com.bragi.sonify.composer.AComposer;
  */
 public class LSystemComposer extends AComposer {
 
+	public LSystemComposer(String text) {
+		super(text);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
-	public Sequence createMidi(String text) {
+	public Sequence createMidi() {
 		// TODO Auto-generated method stub
 		return null;
 	}
