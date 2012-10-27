@@ -24,7 +24,6 @@ package com.bragi.sonify.textanalyzer;
  * 
  * @author Benedict Holste <benedict@bholste.net>
  * @author Sebastian Muszytowski <sebastian@muszytowski.net>
- *
  */
 public class TextAnalyzer {
 	
@@ -35,53 +34,105 @@ public class TextAnalyzer {
 	private int averageSentenceCharLength;
 	private int averageSentenceWordLength;
 	
+	/**
+	 * Constructor for TextAnalyzer
+	 * 
+	 * @param text Text to be analyzed. This has to be real text!
+	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
+	 */
 	public TextAnalyzer(String text) {
 		analyzeText(text);
 	}
 
+	/**
+	 * Function which returns the calculated character count
+	 * @return Integer Total character count
+	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
+	 */
 	public int totalCharCount() {
 		return totalCharCount;
 	}
 
+	/**
+	 * Function which returns the calculated word count
+	 * @return Integer Total word count
+	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
+	 */
 	public int totalWordCount() {
 		return totalWordCount;
 	}
 	
+	/**
+	 * Function which returns the calculated sentence count
+	 * @return Integer Total sentence count
+	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
+	 */
 	public int totalSentenceCount() {
 		return totalSentenceCount;
 	}
 
+	/**
+	 * Function which returns the calculated average word length
+	 * @return Integer Average word length
+	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
+	 */
 	public int averageWordLength() {
 		return averageWordLength;
 	}
 
+	/**
+	 * Function which returns the calculated average sentence length
+	 * 
+	 * The calculated value contains average of the sum of all characters
+	 * in the sentence
+	 * @return Integer Average sentence character length
+	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
+	 */
 	public int averageSentenceCharLength() {
 		return averageSentenceCharLength;
 	}
 	
+	/**
+	 * Function which returns the calculated average word length
+	 * 
+	 * The calculated value contains average of the length of all words
+	 * in the sentence
+	 * @return Integer Average sentence word length
+	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
+	 */
 	public int averageSentenceWordLength() {
 		return averageSentenceWordLength;
 	}
 
+	/**
+	 * Function which analyzes the text and writes text characteristics into
+	 * the private member variables which then can be accessed via the provided
+	 * functions.
+	 * 
+	 * @param text Text to be analyzed
+	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
+	 */
 	private void analyzeText(String text) {
-		// set the total number of words
+	
+		/*
+		 * Total word count
+		 */
 		String[] words = text.split("\\s+");
 		totalWordCount = words.length;
 		
 		/*
 		 * Average sentence length
+		 * 
+		 * loop over all words to get the value
 		 */
-		
-		// loop over all words and sum up their length
 		int wordLengthSum = 0;
 		for(String word : words) {
 			wordLengthSum += word.length();
 		}
 		
-		
-		
-		
-		// calculate the average word length
+		/*
+		 * Average word length
+		 */
 		averageWordLength = Math.round(wordLengthSum/totalWordCount);
 		
 		/*
@@ -92,14 +143,12 @@ public class TextAnalyzer {
 		/*
 		 * Sentence count
 		 */
-		
 		String[] sentences = text.split("(?<=[\\S])[\\.\\!\\?]\\s+");
 		totalSentenceCount = sentences.length;
 		
 		/*
 		 * Average sentence length
 		 */
-		
 		int sentenceCharLengthSum = 0;
 		int sentenceWordLengthSum = 0;
 		for(String sentence : sentences) {
@@ -109,7 +158,6 @@ public class TextAnalyzer {
 				sentenceWordLengthSum += word.length();
 			}			
 		}		
-		
 		averageSentenceCharLength = Math.round(sentenceCharLengthSum/totalSentenceCount);	
 		averageSentenceWordLength = Math.round(sentenceWordLengthSum/totalSentenceCount);		
 	}
