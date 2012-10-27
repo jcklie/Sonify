@@ -25,6 +25,8 @@ import com.bragi.sonify.util.ArrayIterator;
 /**
  * Rhythm is the variation of the length and accentuation of a series of sounds
  * or other events. Samples are given here. A rhythm is simply a list of NoteValues. 
+ * 
+ * @author Jan-Christoph Klie
  */
 public class Rhythm implements Iterable<NoteValue> {
 	

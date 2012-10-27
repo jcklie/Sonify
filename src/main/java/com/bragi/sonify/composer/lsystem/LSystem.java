@@ -42,6 +42,8 @@ import org.apache.commons.logging.LogFactory;
  * in V which does not appear on the left hand side of a production in P, the
  * identity production A → A is assumed; these symbols are called constants or
  * terminals.
+ * 
+ * @author Jan-Christoph Klie
  */
 public class LSystem {
 	
