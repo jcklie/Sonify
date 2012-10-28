@@ -24,6 +24,8 @@ package com.bragi.sonify.music;
  * 
  * For a further description of numbering notes in MIDI, refer to * 
  * http://computermusicresource.com/midikeys.html
+ * 
+ * @author Jan-Christoph Klie
  */
 public enum Note {
 	

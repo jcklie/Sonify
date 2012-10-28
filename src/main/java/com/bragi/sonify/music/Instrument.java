@@ -25,6 +25,8 @@ package com.bragi.sonify.music;
  * 
  * For a further description, refer to:
  * http://soundprogramming.net/file_formats/general_midi_instrument_list
+ * 
+ * @author Jan-Christoph Klie
  */
 public enum Instrument {
 	

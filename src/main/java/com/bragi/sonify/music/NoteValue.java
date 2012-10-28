@@ -26,6 +26,8 @@ package com.bragi.sonify.music;
  * 
  * D means the note is dotted: Its value is 3/2 of the undotted version.
  * T means the note is a triole part : Its value is 2/3 of the untrioled version.
+ * 
+ * @author Jan-Christoph Klie
  */
 public enum NoteValue {
 	

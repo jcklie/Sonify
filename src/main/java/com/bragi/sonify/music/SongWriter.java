@@ -42,6 +42,8 @@ import javax.sound.midi.Transmitter;
  * 
  * These tracks are combined to form a sequence which can be written to a MIDI
  * file.
+ * 
+ * @author Jan-Christoph Klie
  */
 public class SongWriter {
 	

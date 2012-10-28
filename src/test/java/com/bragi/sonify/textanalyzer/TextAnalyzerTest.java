@@ -12,22 +12,67 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Benedict Holste - everything, ...till now
+ * Benedict Holste - General class layout
+ * Sebastian Muszytowski - Implementing ALL the assertions + documentation
  * 
  *******************************************************************************/
 
 package com.bragi.sonify.textanalyzer;
 
-import org.junit.Test;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 
 import junit.framework.TestCase;
 
+import org.junit.Test;
+
+/**
+ * Class for testing the TextAnalyzer using JUnit
+ * 
+ * A test file located in src/test/resource/sample.txt is loaded and 
+ * processed by the TextAnalyzer. All metrics for this file are already
+ * known due to manual research. The output of the text analyzer is 
+ * compared to the manually researched results. All test pass when the 
+ * automatically calculated values match the manual calculated ones.
+ * 
+ * @author Benedict Holste <benedict@bholste.net>
+ * @author Sebastian Muszytowski <sebastian@muszytowski.net>
+ */
 public class TextAnalyzerTest extends TestCase {
-//	URL url = this.getClass().getResource("/test.wsdl");
-//	File testWsdl = new File(url.getFile());
+	
+	private static String readFile(File f) throws IOException {
+		FileInputStream stream = new FileInputStream(f);
+		try {
+			FileChannel fc = stream.getChannel();
+			MappedByteBuffer bb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
+			/* Instead of using default, pass in a decoder. */
+			return Charset.defaultCharset().decode(bb).toString();
+		} finally {
+			stream.close();
+		}
+	}
 	
 	@Test
-	public void testFoo() {
+	public void test() throws IOException {
+		URL url = this.getClass().getResource("/sample.txt");
+		File f = new File(url.getFile());
+		
+		String s = readFile(f);
+		TextAnalyzer analyzer = new TextAnalyzer(s);		
+
+		assertEquals(515, analyzer.totalCharCount());
+		assertEquals(81, analyzer.totalWordCount());
+		assertEquals(8, analyzer.totalSentenceCount());
+		
+		assertEquals(5, analyzer.averageWordLength());
+		assertEquals(62, analyzer.averageSentenceCharLength());
+		assertEquals(53, analyzer.averageSentenceWordLength());
+
 		
 	}
 }
