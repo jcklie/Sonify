@@ -96,12 +96,16 @@ public class GUI extends JFrame {
 	// *************************************
 	private void inputButtonActionPerformed() {
 		inputFile = new FileChooser(this).inputFile();
-		inputField.setText(inputFile.getAbsolutePath());
+		if (inputFile != null){
+			inputField.setText(inputFile.getAbsolutePath());
+		}
 	}
 
 	private void outputButtonActionPerformed() {
 		outputFile = new FileChooser(this).outputFile();
-		outputField.setText(outputFile.getAbsolutePath());
+		if (outputFile != null){
+			outputField.setText(outputFile.getAbsolutePath());
+		}
 	}
 
 	private void startSonificationButtonActionPerformed() {
@@ -141,22 +145,26 @@ public class GUI extends JFrame {
 		public File inputFile() {
 			this.setMode(FileDialog.LOAD);
 			this.setMultipleMode(false);
+			this.setTitle("Eingabedatei auswählen...");
 			this.setFilenameFilter(filterTXT);
 			this.setVisible(true);
 			if (this.getFile() != null) {
 				files = this.getFiles();
+				return files[0];
 			}
-			return files[0];
+			return null;
 		}
 
 		// outputfile dialog
 		public File outputFile() {
 			this.setMode(FileDialog.SAVE);
+			this.setTitle("Ausgabedatei auswählen...");
 			this.setVisible(true);
 			if (this.getFile() != null) {
 				files = this.getFiles();
+				return files[0];
 			}
-			return files[0];
+			return null;
 		}
 
 		private File[] files;
