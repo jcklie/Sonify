@@ -42,6 +42,8 @@ import com.bragi.sonify.music.SongWriter.TrackHandle;
  * subsequently. Enjoy this awesome piece of high culture.
  * 
  * Acts as my digital playground. (JCK)
+ * 
+ * @author Jan-Christoph Klie
  */
 public class RiffPlayer {
 	

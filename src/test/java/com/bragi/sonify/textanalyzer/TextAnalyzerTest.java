@@ -13,7 +13,7 @@
  *
  * Contributors:
  * Benedict Holste - General class layout
- * Sebastian Muszytowski - Implementing ALL the assertions
+ * Sebastian Muszytowski - Implementing ALL the assertions + documentation
  * 
  *******************************************************************************/
 
@@ -32,6 +32,14 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 /**
+ * Class for testing the TextAnalyzer using JUnit
+ * 
+ * A test file located in src/test/resource/sample.txt is loaded and 
+ * processed by the TextAnalyzer. All metrics for this file are already
+ * known due to manual research. The output of the text analyzer is 
+ * compared to the manually researched results. All test pass when the 
+ * automatically calculated values match the manual calculated ones.
+ * 
  * @author Benedict Holste <benedict@bholste.net>
  * @author Sebastian Muszytowski <sebastian@muszytowski.net>
  */
