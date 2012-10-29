@@ -18,7 +18,7 @@ public class GUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	/* compoments */
+	/* compondents */
 	private JPanel contentPane;
 	private JTextField inputField;
 	private JTextField outputField;
@@ -46,7 +46,7 @@ public class GUI extends JFrame {
 	 * initializes the GUI compoments
 	 */
 	private void initComponents() {
-		// initialize contenPane
+		// initialize contentPane
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		contentPane.setLayout(new GridLayout(3, 2, 5, 5));
@@ -64,7 +64,7 @@ public class GUI extends JFrame {
 		startSonificationButton = new JButton("Audifikation starten");
 		genreChooser = new JComboBox<String>(genres);
 
-		// add compoments to contentPane
+		// add components to contentPane
 		contentPane.add(inputField);
 		contentPane.add(inputButton);
 		contentPane.add(outputField);
@@ -75,7 +75,7 @@ public class GUI extends JFrame {
 		pack();
 
 		/**
-		 * listener
+		 * actionlistener
 		 */
 		inputButton.addActionListener(new ActionListener() {
 
