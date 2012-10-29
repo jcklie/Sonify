@@ -1,6 +1,5 @@
 package com.bragi.sonify;
 
-import java.awt.EventQueue;
 import java.awt.FileDialog;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -17,55 +16,67 @@ import javax.swing.border.EmptyBorder;
 
 public class GUI extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
+	/* compoments */
+	private JPanel contentPane;
+	private JTextField inputField;
+	private JTextField outputField;
+	private JComboBox<String> genreChooser;
+	private JButton inputButton;
+	private JButton outputButton;
+	private JButton startSonificationButton;
+
+	/* variables */
+	private final String[] genres = { "Drama", "Kinderbuch", "Lyrik", "Roman",
+			"Sachbuch" };
+	private File inputFile;
+	private File outputFile;
+
 	/**
-	 * @param args
+	 * constructor
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI frame = new GUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	public GUI() {
+	public GUI(String title) {
+		super(title);
 		initComponents();
+		setVisible(true);
 	}
 
 	/**
-	 * build gui
+	 * initializes the GUI compoments
 	 */
 	private void initComponents() {
-		// *************************************
-		// set frame preferences
-		// *************************************
-		setTitle("BragiSoft - Sonify");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// initialize contenPane
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
-		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(3, 2, 5, 5));
+
+		// frame
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setContentPane(contentPane);
+		setResizable(false);
+
+		// initialize components
+		inputField = new JTextField();
+		outputField = new JTextField();
+		inputButton = new JButton("Eingabedatei wählen");
+		outputButton = new JButton("Ausgabedatei wählen");
+		startSonificationButton = new JButton("Audifikation starten");
+		genreChooser = new JComboBox<String>(genres);
+
+		// add compoments to contentPane
 		contentPane.add(inputField);
 		contentPane.add(inputButton);
 		contentPane.add(outputField);
 		contentPane.add(outputButton);
 		contentPane.add(genreChooser);
 		contentPane.add(startSonificationButton);
+
 		pack();
 
-		// *************************************
-		// listener
-		// *************************************
+		/**
+		 * listener
+		 */
 		inputButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -91,19 +102,19 @@ public class GUI extends JFrame {
 		});
 	}
 
-	// *************************************
-	// action-performed methods
-	// *************************************
+	/**
+	 * action-performed methods
+	 */
 	private void inputButtonActionPerformed() {
 		inputFile = new FileChooser(this).inputFile();
-		if (inputFile != null){
+		if (inputFile != null) {
 			inputField.setText(inputFile.getAbsolutePath());
 		}
 	}
 
 	private void outputButtonActionPerformed() {
 		outputFile = new FileChooser(this).outputFile();
-		if (outputFile != null){
+		if (outputFile != null) {
 			outputField.setText(outputFile.getAbsolutePath());
 		}
 	}
@@ -112,24 +123,13 @@ public class GUI extends JFrame {
 		//
 	}
 
-	// *************************************
-	// variables, components, etc.
-	// *************************************
-	private JPanel contentPane;
-	private JTextField inputField = new JTextField();
-	private JTextField outputField = new JTextField();
-	private String[] genres = { "Drama", "Kinderbuch", "Lyrik", "Roman",
-			"Sachbuch" };
-	private JComboBox<String> genreChooser = new JComboBox<String>(genres);
-	private JButton inputButton = new JButton("Eingabedatei auswählen");
-	private JButton outputButton = new JButton("Ausgabedatei auswählen");
-	private JButton startSonificationButton = new JButton(
-			"Audifizierung starten");
-	private File inputFile;
-	private File outputFile;
-	
-	
-	
+	/**
+	 * main-method
+	 */
+	public static void main(String[] args) {
+		new GUI("Brafisoft - Sonify");
+	}
+
 	class FileChooser extends FileDialog {
 
 		/**
@@ -137,11 +137,25 @@ public class GUI extends JFrame {
 		 */
 		private static final long serialVersionUID = 1L;
 
+		/* variables */
+		private File[] files;
+		private FilenameFilter filterTXT = new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String s) {
+				return (s.toLowerCase().endsWith(".txt"));
+			}
+		};
+
+		/**
+		 * constructor
+		 */
 		public FileChooser(JFrame frame) {
 			super(frame);
 		}
 
-		// inputfile dialog
+		/**
+		 * input FileDialog
+		 */
 		public File inputFile() {
 			this.setMode(FileDialog.LOAD);
 			this.setMultipleMode(false);
@@ -155,7 +169,9 @@ public class GUI extends JFrame {
 			return null;
 		}
 
-		// outputfile dialog
+		/**
+		 * output FileDialog
+		 */
 		public File outputFile() {
 			this.setMode(FileDialog.SAVE);
 			this.setTitle("Ausgabedatei auswählen...");
@@ -166,13 +182,5 @@ public class GUI extends JFrame {
 			}
 			return null;
 		}
-
-		private File[] files;
-		private FilenameFilter filterTXT = new FilenameFilter() {
-			@Override
-			public boolean accept(File dir, String s) {
-				return (s.toLowerCase().endsWith(".txt"));
-			}
-		};
 	}
 }
