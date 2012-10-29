@@ -1,3 +1,21 @@
+/*******************************************************************************
+ * Copyright (c) 2012 BragiSoft, Inc.
+ * This source is subject to the BragiSoft Permissive License.
+ * Please see the License.txt file for more information.
+ * All other rights reserved.
+ * 
+ * THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
+ * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ * PARTICULAR PURPOSE.
+ * 
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * Contributors:
+ * Martin Kießling - Everything
+ * 
+ *******************************************************************************/
+
 package com.bragi.sonify;
 
 import java.awt.FileDialog;
@@ -14,11 +32,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * This class is the GUI of the sonificator.
+ * 
+ * @author Martin Kießling
+ */
 public class GUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	/* compondents */
+	/* components */
 	private JPanel contentPane;
 	private JTextField inputField;
 	private JTextField outputField;
@@ -130,11 +153,13 @@ public class GUI extends JFrame {
 		new GUI("Brafisoft - Sonify");
 	}
 
+	/**
+	 * This class is a simple FileChooser.
+	 * 
+	 * @author Martin Kießling
+	 */
 	class FileChooser extends FileDialog {
 
-		/**
-		 * This class is a simple FileChooser
-		 */
 		private static final long serialVersionUID = 1L;
 
 		/* variables */
