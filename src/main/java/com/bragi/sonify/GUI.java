@@ -57,7 +57,7 @@ public class GUI extends JFrame implements ActionListener {
 	private File outputFile;
 
 	/**
-	 * constructor
+	 * constructor of GUI
 	 */
 	public GUI(String title) {
 		super(title);
@@ -66,7 +66,7 @@ public class GUI extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * initializes the GUI compoments
+	 * This function initializes the GUI compoments
 	 */
 	private void initComponents() {
 		// initialize contentPane
@@ -97,15 +97,16 @@ public class GUI extends JFrame implements ActionListener {
 
 		pack();
 
-		/**
-		 * actionListener
-		 */
+		// add actionListeners to buttons
 		inputButton.addActionListener(this);
 		outputButton.addActionListener(this);
 		startSonificationButton.addActionListener(this);
 	}
-	
-	/* actionListener-Method */
+
+	/**
+	 * Overrides the actionPerformed-method and determines which button was
+	 * pressed to start the right action.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Object src = arg0.getSource();
@@ -125,7 +126,7 @@ public class GUI extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * main-method
+	 * The main-method creates a new Instance of GUI.
 	 */
 	public static void main(String[] args) {
 		new GUI("Brafisoft - Sonify");
@@ -134,14 +135,21 @@ public class GUI extends JFrame implements ActionListener {
 	/**
 	 * This class is a simple FileChooser.
 	 * 
+	 * @param file
+	 *            is whether the input or the output file
+	 * @param FilenameFilter
+	 *            filters only textfiles for the open-dialog
 	 * @author Martin Kießling
 	 */
-	class FileChooser extends FileDialog {
+	private class FileChooser extends FileDialog {
+		// TODO: bug, when choosing a file from recently used
+		// GtkFileDialogPeer.java throws NullPointerException. Test under
+		// Windows necessary to see if Fthe problem exists.
 
 		private static final long serialVersionUID = 1L;
 
 		/* variables */
-		private File[] files;
+		private File file;
 		private FilenameFilter filterTXT = new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String s) {
@@ -150,14 +158,16 @@ public class GUI extends JFrame implements ActionListener {
 		};
 
 		/**
-		 * constructor
+		 * constructor of FileChooser
 		 */
 		public FileChooser(JFrame frame) {
 			super(frame);
 		}
 
 		/**
-		 * input FileDialog
+		 * This method returns a file which is meant to be the input-file.
+		 * 
+		 * @return returns the input-file
 		 */
 		public File inputFile() {
 			this.setMode(FileDialog.LOAD);
@@ -165,23 +175,26 @@ public class GUI extends JFrame implements ActionListener {
 			this.setTitle("Eingabedatei auswählen...");
 			this.setFilenameFilter(filterTXT);
 			this.setVisible(true);
-			if (this.getFile() != null) {
-				files = this.getFiles();
-				return files[0];
+			if (this.getFiles()[0] != null) {
+				file = this.getFiles()[0];
+				return file;
 			}
 			return null;
 		}
 
 		/**
-		 * output FileDialog
+		 * This method returns a file which is meant to be the output-file.
+		 * 
+		 * @return returns the input-file
 		 */
 		public File outputFile() {
 			this.setMode(FileDialog.SAVE);
+			this.setFile(".mid");
 			this.setTitle("Ausgabedatei auswählen...");
 			this.setVisible(true);
-			if (this.getFile() != null) {
-				files = this.getFiles();
-				return files[0];
+			if (this.getFiles()[0] != null) {
+				file = this.getFiles()[0];
+				return file;
 			}
 			return null;
 		}
