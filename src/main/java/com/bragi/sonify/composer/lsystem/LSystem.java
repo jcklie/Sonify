@@ -47,7 +47,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LSystem {
 	
-	private Log log = LogFactory.getLog(LSystem.class);
+	
 	
 	/**
 	 * The set of symbols which can be replaced by the given rules.
@@ -100,7 +100,6 @@ public class LSystem {
 		
 		for(int i = 0; i < generations; i++) {
 			state = nextStep(state);
-			log.debug(state);
 		}
 		
 		return state;

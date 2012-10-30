@@ -59,7 +59,7 @@ public class RiffPlayer {
 		rcvr.send(msg, -1);
 		
 		for(int i = 0; i < riff.getData().length; i++) {
-			Note n = riff.getData()[i];
+			Pitch n = riff.getData()[i];
 			NoteValue v = rhythm.getData()[i%rhythm.getData().length];
 			msg.setMessage(ShortMessage.NOTE_ON, 0, n.key, 64);
 			rcvr.send(msg, -1);
@@ -111,7 +111,7 @@ public class RiffPlayer {
 			while( riffz.size() > 0) {
 				int i = rnd.nextInt(riffz.size());
 				int j = rnd.nextInt(r.size());
-				Note[] curRiff = riffz.get(i).getData();
+				Pitch[] curRiff = riffz.get(i).getData();
 				NoteValue[] curRhythm = r.get(j).getData();
 				
 				for( int a = 0; a < curRiff.length; a++ ) {
