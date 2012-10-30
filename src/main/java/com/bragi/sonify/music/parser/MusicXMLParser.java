@@ -133,7 +133,6 @@ public class MusicXMLParser {
 							pitch = Pitch.valueOf(step+octave);
 							break;
 						case NOTE:
-							System.out.println(position);
 							notes.add(new Note(pitch, duration, position));
 							break;
 						case MEASURE:							
@@ -155,7 +154,7 @@ public class MusicXMLParser {
 
 	public static void main(String[] args) throws InvalidMidiDataException, MidiUnavailableException, IOException {
 		SongWriter s = new SongWriter(12);
-		File f = new File( "src/test/resources/musicxml/seite1.xml");
+		File f = new File( "src/test/resources/musicxml/seite2.xml");
 		List<Measure> l = readConfig(f);
 		
 		TrackHandle track = s.createNewTrack();
