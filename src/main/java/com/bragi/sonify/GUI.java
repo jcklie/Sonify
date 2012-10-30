@@ -37,7 +37,7 @@ import javax.swing.border.EmptyBorder;
  * 
  * @author Martin Kießling
  */
-public class GUI extends JFrame {
+public class GUI extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
@@ -100,50 +100,27 @@ public class GUI extends JFrame {
 		/**
 		 * actionlistener
 		 */
-		inputButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				inputButtonActionPerformed();
-			}
-		});
-
-		outputButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				outputButtonActionPerformed();
-			}
-		});
-
-		startSonificationButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				startSonificationButtonActionPerformed();
-			}
-		});
+		inputButton.addActionListener(this);
+		outputButton.addActionListener(this);
+		startSonificationButton.addActionListener(this);
 	}
 
-	/**
-	 * action-performed methods
-	 */
-	private void inputButtonActionPerformed() {
-		inputFile = new FileChooser(this).inputFile();
-		if (inputFile != null) {
-			inputField.setText(inputFile.getAbsolutePath());
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		Object src = arg0.getSource();
+		if (src == inputButton) {
+			inputFile = new FileChooser(this).inputFile();
+			if (inputFile != null) {
+				inputField.setText(inputFile.getAbsolutePath());
+			}
+		} else if (src == outputButton) {
+			outputFile = new FileChooser(this).outputFile();
+			if (outputFile != null) {
+				outputField.setText(outputFile.getAbsolutePath());
+			}
+		} else if (src == startSonificationButton) {
+			// Do something
 		}
-	}
-
-	private void outputButtonActionPerformed() {
-		outputFile = new FileChooser(this).outputFile();
-		if (outputFile != null) {
-			outputField.setText(outputFile.getAbsolutePath());
-		}
-	}
-
-	private void startSonificationButtonActionPerformed() {
-		//
 	}
 
 	/**
