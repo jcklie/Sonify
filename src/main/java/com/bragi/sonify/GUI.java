@@ -12,7 +12,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Martin Kieﬂling - Everything
+ * Martin KieÔøΩling - Everything
  * 
  *******************************************************************************/
 
@@ -35,7 +35,7 @@ import javax.swing.filechooser.FileFilter;
 /**
  * This class is the GUI of the sonificator.
  * 
- * @author Martin Kieﬂling
+ * @author Martin Kie√üling
  */
 public class GUI extends JFrame implements ActionListener {
 
@@ -82,8 +82,8 @@ public class GUI extends JFrame implements ActionListener {
 		// initialize components
 		inputField = new JTextField();
 		outputField = new JTextField();
-		inputButton = new JButton("Eingabedatei w‰hlen");
-		outputButton = new JButton("Ausgabedatei w‰hlen");
+		inputButton = new JButton("Eingabedatei w√§hlen");
+		outputButton = new JButton("Ausgabedatei w√§hlen");
 		startSonificationButton = new JButton("Audifikation starten");
 		genreChooser = new JComboBox<String>(genres);
 
@@ -139,7 +139,7 @@ public class GUI extends JFrame implements ActionListener {
 	 *            is whether the input or the output file
 	 * @param FilenameFilter
 	 *            filters only textfiles for the open-dialog
-	 * @author Martin Kieﬂling
+	 * @author Martin Kie√üling
 	 */
 	private class FileChooser extends JFileChooser {
 		private static final long serialVersionUID = 1L;
@@ -176,8 +176,12 @@ public class GUI extends JFrame implements ActionListener {
 			this.setMultiSelectionEnabled(false);
 			int state = this.showOpenDialog(contentPane);
 			if (state == JFileChooser.APPROVE_OPTION) {
-				file = this.getSelectedFile();
-				return file;
+				if (this.getSelectedFile().exists()) {
+					file = this.getSelectedFile();
+					return file;
+				} else {
+					return null;
+				}
 			} else {
 				return null;
 			}
