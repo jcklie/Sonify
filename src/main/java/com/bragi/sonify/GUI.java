@@ -98,13 +98,14 @@ public class GUI extends JFrame implements ActionListener {
 		pack();
 
 		/**
-		 * actionlistener
+		 * actionListener
 		 */
 		inputButton.addActionListener(this);
 		outputButton.addActionListener(this);
 		startSonificationButton.addActionListener(this);
 	}
-
+	
+	/* actionListener-Method */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		Object src = arg0.getSource();
