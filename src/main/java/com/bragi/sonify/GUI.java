@@ -185,7 +185,7 @@ public class GUI extends JFrame implements ActionListener {
 		/**
 		 * This method returns a file which is meant to be the output-file.
 		 * 
-		 * @return returns the input-file
+		 * @return returns the output-file
 		 */
 		public File outputFile() {
 			this.setMode(FileDialog.SAVE);
