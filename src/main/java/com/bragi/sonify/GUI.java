@@ -12,30 +12,30 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Martin Kie√üling - Everything
+ * Martin Kieﬂling - Everything
  * 
  *******************************************************************************/
 
 package com.bragi.sonify;
 
-import java.awt.FileDialog;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FilenameFilter;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileFilter;
 
 /**
  * This class is the GUI of the sonificator.
  * 
- * @author Martin Kie√üling
+ * @author Martin Kieﬂling
  */
 public class GUI extends JFrame implements ActionListener {
 
@@ -82,8 +82,8 @@ public class GUI extends JFrame implements ActionListener {
 		// initialize components
 		inputField = new JTextField();
 		outputField = new JTextField();
-		inputButton = new JButton("Eingabedatei w√§hlen");
-		outputButton = new JButton("Ausgabedatei w√§hlen");
+		inputButton = new JButton("Eingabedatei w‰hlen");
+		outputButton = new JButton("Ausgabedatei w‰hlen");
 		startSonificationButton = new JButton("Audifikation starten");
 		genreChooser = new JComboBox<String>(genres);
 
@@ -111,12 +111,12 @@ public class GUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		Object src = arg0.getSource();
 		if (src == inputButton) {
-			inputFile = new FileChooser(this).inputFile();
+			inputFile = new FileChooser().inputFile();
 			if (inputFile != null) {
 				inputField.setText(inputFile.getAbsolutePath());
 			}
 		} else if (src == outputButton) {
-			outputFile = new FileChooser(this).outputFile();
+			outputFile = new FileChooser().outputFile();
 			if (outputFile != null) {
 				outputField.setText(outputFile.getAbsolutePath());
 			}
@@ -139,29 +139,31 @@ public class GUI extends JFrame implements ActionListener {
 	 *            is whether the input or the output file
 	 * @param FilenameFilter
 	 *            filters only textfiles for the open-dialog
-	 * @author Martin Kie√üling
+	 * @author Martin Kieﬂling
 	 */
-	private class FileChooser extends FileDialog {
-		// TODO: bug, when choosing a file from recently used
-		// GtkFileDialogPeer.java throws NullPointerException. Test under
-		// Windows necessary to see if Fthe problem exists.
-
+	private class FileChooser extends JFileChooser {
 		private static final long serialVersionUID = 1L;
 
 		/* variables */
 		private File file;
-		private FilenameFilter filterTXT = new FilenameFilter() {
+		private FileFilter filterTXT = new FileFilter() {
 			@Override
-			public boolean accept(File dir, String s) {
-				return (s.toLowerCase().endsWith(".txt"));
+			public boolean accept(File f) {
+				return f.isDirectory()
+						|| f.getName().toLowerCase().endsWith(".txt");
+			}
+
+			@Override
+			public String getDescription() {
+				return ".txt";
 			}
 		};
 
 		/**
 		 * constructor of FileChooser
 		 */
-		public FileChooser(JFrame frame) {
-			super(frame);
+		public FileChooser() {
+			super();
 		}
 
 		/**
@@ -170,16 +172,15 @@ public class GUI extends JFrame implements ActionListener {
 		 * @return returns the input-file
 		 */
 		public File inputFile() {
-			this.setMode(FileDialog.LOAD);
-			this.setMultipleMode(false);
-			this.setTitle("Eingabedatei ausw√§hlen...");
-			this.setFilenameFilter(filterTXT);
-			this.setVisible(true);
-			if (this.getFiles()[0] != null) {
-				file = this.getFiles()[0];
+			this.setFileFilter(filterTXT);
+			this.setMultiSelectionEnabled(false);
+			int state = this.showOpenDialog(contentPane);
+			if (state == JFileChooser.APPROVE_OPTION) {
+				file = this.getSelectedFile();
 				return file;
+			} else {
+				return null;
 			}
-			return null;
 		}
 
 		/**
@@ -188,15 +189,13 @@ public class GUI extends JFrame implements ActionListener {
 		 * @return returns the output-file
 		 */
 		public File outputFile() {
-			this.setMode(FileDialog.SAVE);
-			this.setFile(".mid");
-			this.setTitle("Ausgabedatei ausw√§hlen...");
-			this.setVisible(true);
-			if (this.getFiles()[0] != null) {
-				file = this.getFiles()[0];
+			int state = this.showSaveDialog(contentPane);
+			if (state == JFileChooser.APPROVE_OPTION) {
+				file = this.getSelectedFile();
 				return file;
+			} else {
+				return null;
 			}
-			return null;
 		}
 	}
 }
