@@ -27,6 +27,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -66,7 +67,7 @@ public class GUI extends JFrame implements ActionListener {
 	}
 
 	/**
-	 * This function initializes the GUI compoments
+	 * This function initializes the GUI components
 	 */
 	private void initComponents() {
 		// initialize contentPane
@@ -81,7 +82,9 @@ public class GUI extends JFrame implements ActionListener {
 
 		// initialize components
 		inputField = new JTextField();
+		inputField.setEditable(false);
 		outputField = new JTextField();
+		outputField.setEditable(false);
 		inputButton = new JButton("Eingabedatei wählen");
 		outputButton = new JButton("Ausgabedatei wählen");
 		startSonificationButton = new JButton("Audifikation starten");
@@ -114,11 +117,15 @@ public class GUI extends JFrame implements ActionListener {
 			inputFile = new FileChooser().inputFile();
 			if (inputFile != null) {
 				inputField.setText(inputFile.getAbsolutePath());
+			} else {
+				inputField.setText(null);
 			}
 		} else if (src == outputButton) {
 			outputFile = new FileChooser().outputFile();
 			if (outputFile != null) {
 				outputField.setText(outputFile.getAbsolutePath());
+			} else {
+				outputField.setText(null);
 			}
 		} else if (src == startSonificationButton) {
 			// Do something
@@ -180,6 +187,9 @@ public class GUI extends JFrame implements ActionListener {
 					file = this.getSelectedFile();
 					return file;
 				} else {
+					JOptionPane.showMessageDialog(contentPane,
+							"Die angegebene Datei existiert nicht.",
+							"Information", JOptionPane.INFORMATION_MESSAGE);
 					return null;
 				}
 			} else {
