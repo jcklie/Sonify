@@ -12,7 +12,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Martin Kießling - Everything
+ * Martin Kiessling - Everything
  * 
  *******************************************************************************/
 
@@ -36,7 +36,7 @@ import javax.swing.filechooser.FileFilter;
 /**
  * This class is the GUI of the sonificator.
  * 
- * @author Martin Kießling
+ * @author Martin Kiessling
  */
 public class GUI extends JFrame implements ActionListener {
 
@@ -85,8 +85,8 @@ public class GUI extends JFrame implements ActionListener {
 		inputField.setEditable(false);
 		outputField = new JTextField();
 		outputField.setEditable(false);
-		inputButton = new JButton("Eingabedatei wählen");
-		outputButton = new JButton("Ausgabedatei wählen");
+		inputButton = new JButton("Eingabedatei...");
+		outputButton = new JButton("Ausgabedatei...");
 		startSonificationButton = new JButton("Audifikation starten");
 		genreChooser = new JComboBox<String>(genres);
 
@@ -146,7 +146,7 @@ public class GUI extends JFrame implements ActionListener {
 	 *            is either the input or the output file
 	 * @param FilenameFilter
 	 *            filters only textfiles for the open-dialog
-	 * @author Martin Kießling
+	 * @author Martin Kiessling
 	 */
 	private class FileChooser extends JFileChooser {
 		private static final long serialVersionUID = 1L;
