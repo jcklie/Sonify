@@ -12,7 +12,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Martin KieÔøΩling - Everything
+ * Martin Kieﬂling - Everything
  * 
  *******************************************************************************/
 
@@ -36,7 +36,7 @@ import javax.swing.filechooser.FileFilter;
 /**
  * This class is the GUI of the sonificator.
  * 
- * @author Martin Kie√üling
+ * @author Martin Kieﬂling
  */
 public class GUI extends JFrame implements ActionListener {
 
@@ -190,10 +190,18 @@ public class GUI extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(contentPane,
 							"Die angegebene Datei existiert nicht.",
 							"Information", JOptionPane.INFORMATION_MESSAGE);
-					return null;
+					if (inputFile != null) {
+						return inputFile;
+					} else {
+						return null;
+					}
 				}
 			} else {
-				return null;
+				if (inputFile != null) {
+					return inputFile;
+				} else {
+					return null;
+				}
 			}
 		}
 
@@ -208,7 +216,11 @@ public class GUI extends JFrame implements ActionListener {
 				file = this.getSelectedFile();
 				return file;
 			} else {
-				return null;
+				if (outputFile != null) {
+					return outputFile;
+				} else {
+					return null;
+				}
 			}
 		}
 	}
