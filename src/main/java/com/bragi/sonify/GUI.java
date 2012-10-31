@@ -85,8 +85,8 @@ public class GUI extends JFrame implements ActionListener {
 		inputField.setEditable(false);
 		outputField = new JTextField();
 		outputField.setEditable(false);
-		inputButton = new JButton("Eingabedatei w√§hlen");
-		outputButton = new JButton("Ausgabedatei w√§hlen");
+		inputButton = new JButton("Eingabedatei w‰hlen");
+		outputButton = new JButton("Ausgabedatei w‰hlen");
 		startSonificationButton = new JButton("Audifikation starten");
 		genreChooser = new JComboBox<String>(genres);
 
@@ -146,7 +146,7 @@ public class GUI extends JFrame implements ActionListener {
 	 *            is whether the input or the output file
 	 * @param FilenameFilter
 	 *            filters only textfiles for the open-dialog
-	 * @author Martin Kie√üling
+	 * @author Martin Kieﬂling
 	 */
 	private class FileChooser extends JFileChooser {
 		private static final long serialVersionUID = 1L;
