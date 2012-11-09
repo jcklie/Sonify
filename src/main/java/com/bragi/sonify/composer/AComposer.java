@@ -24,8 +24,8 @@ import java.io.IOException;
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.Sequence;
 
-import com.bragi.sonify.FileUtil;
 import com.bragi.sonify.textanalyzer.TextAnalyzer;
+import com.bragi.sonify.util.FileUtil;
 
 /**
  * AComposer is the basic class of all classes which encapsulate algorithms to

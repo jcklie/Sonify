@@ -21,9 +21,6 @@ package com.bragi.sonify.composer.lsystem;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * An L-System is a mathematical structure, namely a variant of a formal
  * grammar. It is very similar to a semi-Thue system. 

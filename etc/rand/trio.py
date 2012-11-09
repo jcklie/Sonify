@@ -16,3 +16,32 @@ t13 = {'1':30, '2':8, '3':69, '4':57, '5':12, '6':51}
 t14 = {'1':95, '2':35, '3':58, '4':87, '5':23, '6':60}
 t15 = {'1':19, '2':47, '3':90, '4':33, '5':50, '6':78}
 t16 = {'1':66, '2':88, '3':21, '4':10, '5':91, '6':31}
+
+measureHead = """
+/*
+ * Measure {0}
+ */
+"""
+
+def print_properly(map, i):
+  print(  measureHead.format(i) )
+  print( "measureMap = measureMapList.get({0});".format(i-1) )
+  for i in range( 1, 7):
+    print( "measureMap.put({0}, {1});".format(i, map[str(i)]) )
+
+print_properly(t1, 1)
+print_properly(t2, 2)
+print_properly(t3, 3)
+print_properly(t4, 4)
+print_properly(t5, 5)
+print_properly(t6, 6)
+print_properly(t7, 7)
+print_properly(t8, 8)
+print_properly(t9, 9)
+print_properly(t10, 10)
+print_properly(t11, 11)
+print_properly(t12, 12)
+print_properly(t13, 13)
+print_properly(t14, 14)
+print_properly(t15, 15)
+print_properly(t16, 16)

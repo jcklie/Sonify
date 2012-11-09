@@ -30,6 +30,8 @@ import javax.sound.midi.Sequence;
 import junit.framework.TestCase;
 import junitx.framework.FileAssert;
 
+import org.junit.Test;
+
 import com.bragi.sonify.composer.AComposer;
 
 /**
@@ -37,9 +39,9 @@ import com.bragi.sonify.composer.AComposer;
  * 
  * @author Jan-Christoph Klie <rentier42@gmail.com>
  */
-public class MozartWaltzDiceGameTest extends TestCase {
+public class MozartTrioDiceGameTest extends TestCase {
 	
-	public MozartWaltzDiceGameTest(String testName) {
+	public MozartTrioDiceGameTest(String testName) {
 		super(testName);
 	}
 	
@@ -51,15 +53,15 @@ public class MozartWaltzDiceGameTest extends TestCase {
 	 */
 	public void testReproducabillity() {		
 		try {
-			File f = new File("src/test/resources/literature/kinderbuch.txt"); 
+			File f = new File("src/test/resources/literature/roman.txt"); 
 			
-			AComposer firstComposer = new MozartWaltzDiceGame(f);
+			AComposer firstComposer = new MozartTrioDiceGame(f);
 			Sequence firstSequence = firstComposer.createSequence();
 			Path firstTempPath = Files.createTempFile(null, null );
 			File firstFile = firstTempPath.toFile();
 			MidiSystem.write( firstSequence, 1, firstFile);
 			
-			AComposer secondComposer = new MozartWaltzDiceGame(f);
+			AComposer secondComposer = new MozartTrioDiceGame(f);
 			Sequence secondSequence = secondComposer.createSequence();
 			Path secondTempPath = Files.createTempFile(null, null );
 			File secondFile = secondTempPath.toFile();
