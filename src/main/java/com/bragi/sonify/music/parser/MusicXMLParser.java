@@ -27,6 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
@@ -63,7 +64,6 @@ public class MusicXMLParser {
 		List<Measure> items = new LinkedList<Measure>();
 		
 		List<Note> notes = new LinkedList<Note>();
-		
 		Pitch pitch = null;
 		String step = null;
 		String octave = null;
@@ -154,7 +154,7 @@ public class MusicXMLParser {
 
 	public static void main(String[] args) throws InvalidMidiDataException, MidiUnavailableException, IOException {
 		SongWriter s = new SongWriter(12);
-		File f = new File( "src/test/resources/musicxml/seite2.xml");
+		File f = new File( "src/test/resources/musicxml/MozartPianoSonata.xml");
 		List<Measure> l = readConfig(f);
 		
 		TrackHandle track = s.createNewTrack();
@@ -162,16 +162,17 @@ public class MusicXMLParser {
 		
 		s.setInstrument(track, Instrument.AcousticGrandPiano);		
 		s.setPressure(track, 64);		
-		s.setBPM(track, 100);
+
 		
 		for(Measure m : l) {			
 			s.addMeasure(track, m, 36);
 		}
 		
-		s.endTrack(track);
-
 		
-		s.play();
+
+		File out = new File("/tmp/midifile.mid");
+		MidiSystem.write(s.getSequence(),1,out);
+		//s.play();
 	}
 
 }

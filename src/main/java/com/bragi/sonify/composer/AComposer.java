@@ -18,9 +18,13 @@
 
 package com.bragi.sonify.composer;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.Sequence;
 
-import com.bragi.sonify.music.SongWriter;
+import com.bragi.sonify.FileUtil;
 import com.bragi.sonify.textanalyzer.TextAnalyzer;
 
 /**
@@ -32,11 +36,10 @@ import com.bragi.sonify.textanalyzer.TextAnalyzer;
  */
 public abstract class AComposer {
 	
-	private TextAnalyzer analyzer;
-	private SongWriter songwriter;
+	protected TextAnalyzer analyzer;
 	
-	public AComposer(String text) {
-		analyzer = new TextAnalyzer(text);
+	public AComposer(File f) throws IOException {
+		analyzer = new TextAnalyzer(FileUtil.readFile(f));
 	}	 
 
 	/**
@@ -45,8 +48,10 @@ public abstract class AComposer {
 	 * 
 	 * @param text The text used to determine the generation process
 	 * @return The generated sequence
+	 * @throws InvalidMidiDataException 
+	 * @throws IOException 
 	 */
-	public abstract Sequence createMidi();
+	public abstract Sequence createSequence() throws InvalidMidiDataException, IOException;
 
 }
 

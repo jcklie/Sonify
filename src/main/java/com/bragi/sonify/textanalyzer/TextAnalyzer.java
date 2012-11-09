@@ -161,5 +161,44 @@ public class TextAnalyzer {
 		averageSentenceCharLength = Math.round(sentenceCharLengthSum/totalSentenceCount);	
 		averageSentenceWordLength = Math.round(sentenceWordLengthSum/totalSentenceCount);		
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + averageSentenceCharLength;
+		result = prime * result + averageSentenceWordLength;
+		result = prime * result + averageWordLength;
+		result = prime * result + totalCharCount;
+		result = prime * result + totalSentenceCount;
+		result = prime * result + totalWordCount;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TextAnalyzer other = (TextAnalyzer) obj;
+		if (averageSentenceCharLength != other.averageSentenceCharLength)
+			return false;
+		if (averageSentenceWordLength != other.averageSentenceWordLength)
+			return false;
+		if (averageWordLength != other.averageWordLength)
+			return false;
+		if (totalCharCount != other.totalCharCount)
+			return false;
+		if (totalSentenceCount != other.totalSentenceCount)
+			return false;
+		if (totalWordCount != other.totalWordCount)
+			return false;
+		return true;
+	}
+	
+	
 	
 }

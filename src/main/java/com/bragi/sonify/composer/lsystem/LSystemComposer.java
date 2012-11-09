@@ -18,6 +18,10 @@
 
 package com.bragi.sonify.composer.lsystem;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.Sequence;
 
 import com.bragi.sonify.composer.AComposer;
@@ -29,17 +33,18 @@ import com.bragi.sonify.composer.AComposer;
  */
 public class LSystemComposer extends AComposer {
 
-	public LSystemComposer(String text) {
-		super(text);
+	public LSystemComposer(File f) throws IOException {
+		super(f);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Sequence createMidi() {
+	public Sequence createSequence() throws InvalidMidiDataException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+
 
 
 
