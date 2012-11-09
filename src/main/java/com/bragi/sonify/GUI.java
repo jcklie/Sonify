@@ -1,13 +1,31 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
+/*******************************************************************************
+ * Copyright (c) 2012 BragiSoft, Inc.
+ * This source is subject to the BragiSoft Permissive License.
+ * Please see the License.txt file for more information.
+ * All other rights reserved.
+ * 
+ * THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
+ * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ * PARTICULAR PURPOSE.
+ * 
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * Contributors:
+ * Dominik Künne - Everything
+ * 
+ *******************************************************************************/
 package com.bragi.sonify;
 
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -16,6 +34,10 @@ import javax.swing.*;
  */
 public class GUI {
     
+    public GUI(String title) {
+        initComponents();
+    }
+
     
     /**
      * @param component the name of the component you want to add
@@ -35,26 +57,34 @@ public class GUI {
     
     
     
-    public static void initComponents(){
+    public static void initComponents() {
         
-        //initialising the Strings rock, hiphop, klassik
-        String rock = new String("Rock");
-        String hiphop = new String("HipHop");
-        String klassik = new String("Klassik");
+        File inputFile;
+        File outputFile;
+        
+        //initialising the Strings roman, sachbuch, lyrik, kinderbuch, drama, filename
+        String roman = new String("Roman");
+        String sachbuch = new String("Sachbuch");
+        String lyrik = new String("Lyrik");
+        String kinderbuch = new String("Kinderbuch");
+        String drama = new String("Drama");
+        String filename = new String("");
+        
         // creating the JFrame
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        //crating the JButtons
+        //creating the JButtons
         JButton input_button = new JButton("Input auswählen");
         JButton start_button = new JButton("Audifikation starten");
         JButton output_button = new JButton("Outputpfad wählen");
+        
         //creating the JLabel and the JTextField
         JLabel ueberschrift_label = new JLabel("Audifikator");
         ueberschrift_label.setFont(new Font("Arial", Font.PLAIN, 22));
         final JTextField input_textfield = new JTextField("");
         final JTextField output_textfield = new JTextField("");
-        JComboBox combo_genre = new JComboBox(new Object[] { rock, hiphop, klassik});
+        JComboBox combo_genre = new JComboBox(new Object[] { roman, sachbuch, lyrik, kinderbuch, drama});
         Container c = frame.getContentPane();
         
         //adding components to GUI
@@ -67,10 +97,11 @@ public class GUI {
         addComponent(start_button, container, 410, 180, 200, 65);
         addComponent(combo_genre, container, 40, 180, 280, 30);
         
-       
+       //creating the frame
         frame.setSize(650, 350);
         frame.setResizable(false);
         frame.setVisible(true);
+        
         
         
         input_button.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +135,8 @@ public class GUI {
                  }
         });
         
+        
+        
         start_button.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +145,11 @@ public class GUI {
             //here the audification should start
             private void start_buttonActionPerformed(ActionEvent evt) {
                 JOptionPane.showMessageDialog(null, "Audifikation erfolgreich beendet!");
+                
+         
+
+            
+       
         
                  }
         });
@@ -120,7 +158,7 @@ public class GUI {
     
     public static void main(String[] args) {
         
-        initComponents();
+        new GUI("Bragisoft-GUI");
     }
 
     
