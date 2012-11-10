@@ -112,9 +112,11 @@ public class GUI extends JFrame implements ActionListener {
 				JLabel.CENTER);
 		corporateName.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
 
-		// add components to contentPane
+		// add components to corporatePane
 		corporatePane.add(corporateName);
 		corporatePane.add(new JLabel(corporateLogo));
+
+		// add components to contentPane
 		contentPane.add(inputField);
 		contentPane.add(inputButton);
 		contentPane.add(outputField);
