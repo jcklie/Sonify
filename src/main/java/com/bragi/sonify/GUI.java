@@ -122,7 +122,7 @@ public class GUI extends JFrame implements ActionListener {
 		outputField.setEditable(false);
 		inputButton = new JButton("Eingabedatei...");
 		outputButton = new JButton("Ausgabedatei...");
-		startSonificationButton = new JButton("Audifikation starten");
+		startSonificationButton = new JButton("Sonifizierung starten");
 		genreChooser = new JComboBox<String>(genreStrings);
 		corporateLogo = new ImageIcon(omnisenseIcon);
 		corporateName = new JLabel(
@@ -232,7 +232,7 @@ public class GUI extends JFrame implements ActionListener {
 	 * The main-method creates a new Instance of GUI.
 	 */
 	public static void main(String[] args) {
-		new GUI("OMNI Sense - Audifizierung");
+		new GUI("OMNI Sense - Sonifizierung");
 	}
 
 	/**
