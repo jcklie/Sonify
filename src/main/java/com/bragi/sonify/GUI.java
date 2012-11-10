@@ -12,8 +12,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Dominik Kuenne - First 'working' very basic prototype
- * Martin Kiessling - Everything else
+ * Martin Kiessling - Everything
  * 
  *******************************************************************************/
 
@@ -26,10 +25,8 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.util.EnumSet;
+import java.io.FilenameFilter;
 
-import javax.sound.midi.InvalidMidiDataException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -42,12 +39,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * This class is the GUI of the sonificator.
  * 
- * @author Dominik Kuenne
  * @author Martin Kiessling
  */
 public class GUI extends JFrame implements ActionListener {
@@ -65,15 +59,14 @@ public class GUI extends JFrame implements ActionListener {
 	private JPanel corporatePane;
 	private ImageIcon corporateLogo;
 	private JLabel corporateName;
-	
-	private static final String ICON_PATH = "etc/img/OmniSenseAuge.png";
 
 	/* variables */
-	private final EnumSet<Genre> genres = EnumSet.allOf(Genre.class);
-	private final Image omnisenseIcon = new ImageIcon(ICON_PATH).getImage().getScaledInstance(150, 75, java.awt.Image.SCALE_SMOOTH);
+	private final String[] genres = { "Drama", "Kinderbuch", "Lyrik", "Roman",
+			"Sachbuch" };
+	private final Image test = new ImageIcon("etc/img/OmniSenseAuge.png")
+			.getImage().getScaledInstance(150, 75, java.awt.Image.SCALE_SMOOTH);
 	private File inputFile;
 	private File outputFile;
-	private String selectedGenre;
 
 	/**
 	 * constructor of GUI
@@ -88,15 +81,6 @@ public class GUI extends JFrame implements ActionListener {
 	 * This function initializes the GUI components
 	 */
 	private void initComponents() {
-		String[] genreStrings = new String[ genres.size()];
-		int i = 0;
-		for( Genre g : genres) {
-			genreStrings[i++] = g.name;
-		}
-		
-		// initialize selected genre
-		selectedGenre = genreStrings[0];
-		
 		// initialize corporatePane
 		corporatePane = new JPanel();
 		corporatePane.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -122,9 +106,11 @@ public class GUI extends JFrame implements ActionListener {
 		inputButton = new JButton("Eingabedatei...");
 		outputButton = new JButton("Ausgabedatei...");
 		startSonificationButton = new JButton("Audifikation starten");
-		genreChooser = new JComboBox<String>(genreStrings);
-		corporateLogo = new ImageIcon(omnisenseIcon);
-		corporateName = new JLabel(	"<html>OMNI <FONT COLOR=#009933>Sense</FONT></html>", JLabel.CENTER);
+		genreChooser = new JComboBox<String>(genres);
+		corporateLogo = new ImageIcon(test);
+		corporateName = new JLabel(
+				"<html>OMNI <FONT COLOR=#009933>Sense</FONT></html>",
+				JLabel.CENTER);
 		corporateName.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
 
 		// add components to contentPane
@@ -143,8 +129,6 @@ public class GUI extends JFrame implements ActionListener {
 		inputButton.addActionListener(this);
 		outputButton.addActionListener(this);
 		startSonificationButton.addActionListener(this);
-		genreChooser.addActionListener(this);
-		
 	}
 
 	/**
@@ -152,8 +136,8 @@ public class GUI extends JFrame implements ActionListener {
 	 * pressed to start the right action.
 	 */
 	@Override
-	public void actionPerformed(ActionEvent event) {
-		Object src = event.getSource();
+	public void actionPerformed(ActionEvent arg0) {
+		Object src = arg0.getSource();
 		if (src == inputButton) {
 			inputFile = new FileChooser().inputFile();
 			if (inputFile != null) {
@@ -168,38 +152,9 @@ public class GUI extends JFrame implements ActionListener {
 			} else {
 				outputField.setText(null);
 			}
-		} else if ( src == genreChooser) {
-			// Returns an array of Objects containing one element -- the selected item
-			Object selected[] = genreChooser.getSelectedObjects();
-			if( selected.length == 0 ) {
-				selectedGenre = null;
-			} else {
-				selectedGenre = (String) selected[0];
-			}
 		} else if (src == startSonificationButton) {
-			if( inputFile != null && outputFile != null && selectedGenre != null ) {
-				try {
-					if( outputFile.exists()) {
-						Object[] options = {"Ja", "Nein"};
-						int selected = JOptionPane.showOptionDialog(null, "Die Datei mit dem Namen " + outputFile.getAbsolutePath()
-								+ "existiert bereits. Wollen Sie diese wirklich überschreiben?", "Ausgabedatei existiert bereits!", JOptionPane.DEFAULT_OPTION,
-								JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-						if( selected == 1) {
-							return;
-						}
-					}
-					Sonificator.sonificate( Genre.getByName(selectedGenre), inputFile, outputFile);
-					JOptionPane.showMessageDialog(null, "Sonifizierung wurde erfolgreich abgeschlossen!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
-				}catch (IOException e) {					
-					JOptionPane.showMessageDialog(null, e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
-				} catch (InvalidMidiDataException e) {
-					JOptionPane.showMessageDialog(null, "Die Dateien zum Generieren der Musik sind korrupt. Wenden Sie sich an den IT-Support unter der Nummer 867-5309", "Installation korrupt!", JOptionPane.ERROR_MESSAGE);
-				} catch(NotImplementedException e) {
-					JOptionPane.showMessageDialog(null, "Der Algorithmus zum Generieren von " + selectedGenre
-							+ " ist noch nicht implementiert! Bitte wählen Sie eine anderes Genre aus.", "Fehler", JOptionPane.ERROR_MESSAGE);
-				}
-			}
-		} 
+			// Do something
+		}
 	}
 
 	/**
@@ -212,8 +167,10 @@ public class GUI extends JFrame implements ActionListener {
 	/**
 	 * This class is a simple FileChooser.
 	 * 
-	 * @param file is either the input or the output file
-	 * @param FilenameFilter filters only textfiles for the open-dialog
+	 * @param file
+	 *            is either the input or the output file
+	 * @param FilenameFilter
+	 *            filters only textfiles for the open-dialog
 	 * @author Martin Kiessling
 	 */
 	private class FileChooser extends JFileChooser {
@@ -222,10 +179,10 @@ public class GUI extends JFrame implements ActionListener {
 		/* variables */
 		private File file;
 		private FileFilter filterTXT = new FileFilter() {
-			
 			@Override
 			public boolean accept(File f) {
-				return f.isDirectory() || f.getName().toLowerCase().endsWith(".txt");
+				return f.isDirectory()
+						|| f.getName().toLowerCase().endsWith(".txt");
 			}
 
 			@Override
@@ -271,6 +228,7 @@ public class GUI extends JFrame implements ActionListener {
 					return null;
 				}
 			}
+			return null;
 		}
 
 		/**
@@ -290,6 +248,7 @@ public class GUI extends JFrame implements ActionListener {
 					return null;
 				}
 			}
+			return null;
 		}
 	}
 }
