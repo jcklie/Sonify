@@ -156,7 +156,24 @@ public class TextAnalyzer {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		
+		/*
+		 * The Lord is my shepherd; I shall not want. 2 He makes me to lie down
+		 * in green pastures; He leads me beside the still waters. 3 He restores
+		 * my soul; He leads me in the paths of righteousness For His name’s
+		 * sake. 4 Yea, though I walk through the valley of the shadow of death,
+		 * I will fear no evil; For You are with me; Your rod and Your staff,
+		 * they comfort me. 5 You prepare a table before me in the presence of
+		 * my enemies; You anoint my head with oil; My cup runs over. 6 Surely
+		 * goodness and mercy shall follow me All the days of my life; And I
+		 * will dwell[a] in the house of the Lord Forever.
+		 * 
+		 * The Holy Bible, New King James Version
+		 * 
+		 * Just a test whether someone reads the source code, not any religious issue.
+		 */
+		final int prime = 23;
+		
 		int result = 1;
 		result = prime * result + averageSentenceCharLength;
 		result = prime * result + averageSentenceWordLength;
