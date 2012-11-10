@@ -21,14 +21,11 @@ package com.bragi.sonify.composer.riffology;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.Sequence;
 
 import com.bragi.sonify.composer.AComposer;
-import com.bragi.sonify.music.Measure;
 
 /**
  * This AComposer uses the measures given by the sheet music

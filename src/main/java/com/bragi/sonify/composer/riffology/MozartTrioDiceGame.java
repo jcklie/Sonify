@@ -28,7 +28,6 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
 
 import com.bragi.sonify.composer.AComposer;
@@ -289,14 +288,4 @@ public class MozartTrioDiceGame extends AComposer {
 		}		
 		return appender.getSequence();
 	}
-	
-	public static void main(String[] args) throws IOException, InvalidMidiDataException {
-		File f = new File("src/test/resources/literature/roman.txt"); 
-		AComposer composer = new MozartTrioDiceGame(f);
-		Sequence s = composer.createSequence();
-		
-		File out = new File("/tmp/midifile_roa.mid");
-		MidiSystem.write( s,1,out);
-	}
-
 }

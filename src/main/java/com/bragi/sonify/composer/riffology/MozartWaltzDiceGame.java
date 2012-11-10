@@ -28,7 +28,6 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
 
 import com.bragi.sonify.composer.AComposer;
@@ -345,8 +344,8 @@ public class MozartWaltzDiceGame extends AComposer {
 		measureMap.put(11, 78);
 		measureMap.put(12, 131);
 		
-	}
-	
+	}	
+
 	public MozartWaltzDiceGame(File f) throws IOException {		
 		super(f);
 	}
@@ -368,13 +367,4 @@ public class MozartWaltzDiceGame extends AComposer {
 		return appender.getSequence();
 	}
 	
-	public static void main(String[] args) throws IOException, InvalidMidiDataException {
-		File f = new File("src/test/resources/literature/kinderbuch.txt"); 
-		AComposer composer = new MozartWaltzDiceGame(f);
-		Sequence s = composer.createSequence();
-		
-		File out = new File("/tmp/midifile.mid");
-		MidiSystem.write( s,1,out);
-	}
-
 }
