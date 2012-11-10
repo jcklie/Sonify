@@ -59,7 +59,7 @@ public class TextAnalyzerTest extends TestCase {
 	
 	@Test
 	public void test() throws IOException {
-		URL url = this.getClass().getResource("/sample.txt");
+		URL url = this.getClass().getResource("/literature/sample.txt");
 		File f = new File(url.getFile());
 		
 		String s = readFile(f);
