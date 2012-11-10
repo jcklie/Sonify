@@ -25,7 +25,6 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FilenameFilter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -105,7 +104,7 @@ public class GUI extends JFrame implements ActionListener {
 		outputField.setEditable(false);
 		inputButton = new JButton("Eingabedatei...");
 		outputButton = new JButton("Ausgabedatei...");
-		startSonificationButton = new JButton("Audifikation starten");
+		startSonificationButton = new JButton("Sonifizierung starten");
 		genreChooser = new JComboBox<String>(genres);
 		corporateLogo = new ImageIcon(test);
 		corporateName = new JLabel(
@@ -113,9 +112,11 @@ public class GUI extends JFrame implements ActionListener {
 				JLabel.CENTER);
 		corporateName.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
 
-		// add components to contentPane
+		// add components to corporatePane
 		corporatePane.add(corporateName);
 		corporatePane.add(new JLabel(corporateLogo));
+
+		// add components to contentPane
 		contentPane.add(inputField);
 		contentPane.add(inputButton);
 		contentPane.add(outputField);
@@ -161,7 +162,7 @@ public class GUI extends JFrame implements ActionListener {
 	 * The main-method creates a new Instance of GUI.
 	 */
 	public static void main(String[] args) {
-		new GUI("OMNI Sense - Audifizierung");
+		new GUI("OMNI Sense - Sonifizierung");
 	}
 
 	/**
@@ -228,7 +229,6 @@ public class GUI extends JFrame implements ActionListener {
 					return null;
 				}
 			}
-			return null;
 		}
 
 		/**
@@ -240,6 +240,10 @@ public class GUI extends JFrame implements ActionListener {
 			int state = this.showSaveDialog(contentPane);
 			if (state == JFileChooser.APPROVE_OPTION) {
 				file = this.getSelectedFile();
+				if (!(this.getSelectedFile().getName().toLowerCase()
+						.endsWith(".mid"))) {
+					file = new File(file.getPath() + ".mid");
+				}
 				return file;
 			} else {
 				if (outputFile != null) {
@@ -248,7 +252,6 @@ public class GUI extends JFrame implements ActionListener {
 					return null;
 				}
 			}
-			return null;
 		}
 	}
 }
