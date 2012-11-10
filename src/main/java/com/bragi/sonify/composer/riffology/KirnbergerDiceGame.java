@@ -12,7 +12,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Sebastian Muszytowski - Digitalizing the sheet music and generating the midi files for every measure of the sheets
+ * Sebastian Muszytowski - Digitalizing the sheet music and generating the midi files for every measure of the sheets. TLDR: The digitizing
  * Jan-Christoph Klie - Everything else
  * 
  *******************************************************************************/
@@ -41,12 +41,15 @@ import com.bragi.sonify.music.Measure;
  * http://www.capella.de/us/index.cfm/products/capella-scan/info-capella-scan/.
  * 
  * Since the recognition was only 20-70 percent correct, the result was
- * controlled and measure for measure was extracted to MIDI files (can be found
- * in etc/midi/kirnberger.
+ * controlled and corrected by hand. Then measure for measure was extracted to
+ * MIDI files (they can be found in etc/midi/kirnberger).
  * 
  * To generate music, a dice represented by a random generator is used to choose
  * from the set of measures. How exactly the rules are can be read in the
  * quoted book or in the PDF found on www.pian-e-forte.de/noten/pdf/109599.pdf .
+ * 
+ * @author Sebastian Muszytowski <sebastian@muszytowski.net>
+ * @author Jan-Christoph Klie
  */
 public class KirnbergerDiceGame extends AComposer {
 

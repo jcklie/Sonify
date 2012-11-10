@@ -12,7 +12,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Sebastian Muszytowski - Digitalizing the sheet music and generating the midi files for every measure of the sheets
+ * Sebastian Muszytowski - Digitalizing the sheet music and generating the midi files for every measure of the sheets TLDR: The digitizing
  * Jan-Christoph Klie - Everything else
  * 
  *******************************************************************************/
@@ -32,13 +32,30 @@ import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
 
 import com.bragi.sonify.composer.AComposer;
-import com.bragi.sonify.music.MidiAppender;
 
 /**
- * This AComposer uses the measures given by the sheet music 
+ * This AComposer uses the measures given by the sheet music "Anleitung so viel
+ * Walzer oder Schleifer mit zwei Würfeln zu componiren so viel man will ohne
+ * musikalisch zu seyn noch etwas von der Composition zu verstehen" from
+ * Wolfgang Amadeus Mozart as found in [Haupenthal, Gerhard: Geschichte der
+ * Würfelmusik in Beispielen. Teilband 2: Noten.].
  * 
- * @author Jan-Christoph Klie
+ * Only the measures of the waltz part were used.
+ * 
+ * The sheets there were handwritten and were digitized by using the Music OCR
+ * (OMR, Optical Music Recognition) software capella scan
+ * http://www.capella.de/us/index.cfm/products/capella-scan/info-capella-scan/.
+ * 
+ * Since the recognition was only 20-70 percent correct, the result was
+ * controlled and corrected by hand. Then measure for measure was extracted to
+ * MIDI files (can be found in etc/midi/mozart_waltz.
+ * 
+ * To generate music, a dice represented by a random generator is used to choose
+ * from the set of measures. How exactly the rules are can be read in the quoted
+ * book or in the PDF found on www.pian-e-forte.de/noten/pdf/109599.pdf .
+ * 
  * @author Sebastian Muszytowski <sebastian@muszytowski.net>
+ * @author Jan-Christoph Klie
  */
 public class MozartWaltzDiceGame extends AComposer {
 	
