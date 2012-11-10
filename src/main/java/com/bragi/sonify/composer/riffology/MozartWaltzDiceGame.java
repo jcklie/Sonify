@@ -1,3 +1,22 @@
+/*******************************************************************************
+ * Copyright (c) 2012 BragiSoft, Inc.
+ * This source is subject to the BragiSoft Permissive License.
+ * Please see the License.txt file for more information.
+ * All other rights reserved.
+ * 
+ * THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
+ * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ * PARTICULAR PURPOSE.
+ * 
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * Contributors:
+ * Sebastian Muszytowski - Digitalizing the sheet music and generating the midi files for every measure of the sheets
+ * Jan-Christoph Klie - Everything else
+ * 
+ *******************************************************************************/
+
 package com.bragi.sonify.composer.riffology;
 
 import java.io.File;
@@ -15,6 +34,12 @@ import javax.sound.midi.Sequence;
 import com.bragi.sonify.composer.AComposer;
 import com.bragi.sonify.music.MidiAppender;
 
+/**
+ * This AComposer uses the measures given by the sheet music 
+ * 
+ * @author Jan-Christoph Klie
+ * @author Sebastian Muszytowski <sebastian@muszytowski.net>
+ */
 public class MozartWaltzDiceGame extends AComposer {
 	
 	private static List<Map<Integer, Integer>> measureMapList;

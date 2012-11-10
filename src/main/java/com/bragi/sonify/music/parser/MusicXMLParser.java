@@ -43,7 +43,13 @@ import com.bragi.sonify.music.SongWriter;
 import com.bragi.sonify.music.SongWriter.TrackHandle;
 
 /**
+ * 
+ * First implementation of a MusicXML parser. The idea was to use it to generate
+ * a list of measures which is then interpreted by an AComposer.
+ * 
+ * @deprecated
  * @author Jan-Christoph Klie
+ * 
  */
 public class MusicXMLParser {
 	

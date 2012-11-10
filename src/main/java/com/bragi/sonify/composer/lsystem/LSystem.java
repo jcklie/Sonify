@@ -40,11 +40,10 @@ import java.util.Set;
  * identity production A → A is assumed; these symbols are called constants or
  * terminals.
  * 
+ * @deprecated
  * @author Jan-Christoph Klie
  */
-public class LSystem {
-	
-	
+public class LSystem {	
 	
 	/**
 	 * The set of symbols which can be replaced by the given rules.

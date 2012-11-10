@@ -38,6 +38,12 @@ public abstract class AComposer {
 	
 	protected TextAnalyzer analyzer;
 	
+	/**
+	 * Creates an AComposer instance including analyzing the text in file f by
+	 * the TextAnalyzer class.
+	 * @param f The file pointing on the text file
+	 * @throws IOException
+	 */
 	public AComposer(File f) throws IOException {
 		analyzer = new TextAnalyzer(FileUtil.readFile(f));
 	}	 

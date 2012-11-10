@@ -1,8 +1,32 @@
+/*******************************************************************************
+ * Copyright (c) 2012 BragiSoft, Inc.
+ * This source is subject to the BragiSoft Permissive License.
+ * Please see the License.txt file for more information.
+ * All other rights reserved.
+ * 
+ * THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY 
+ * KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+ * PARTICULAR PURPOSE.
+ * 
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * Contributors:
+ * Jan-Christoph Klie - Everything
+ * 
+ *******************************************************************************/
+
 package com.bragi.sonify.music.parser;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @deprecated
+ * Intended to use for setting the pointer on MusicXML files
+ * 
+ * @author Jan-Christoph Klie
+ */
 public class Counter {
 
 	private Map<Integer, Integer> ticks;

@@ -30,8 +30,6 @@ import javax.sound.midi.Sequence;
 import junit.framework.TestCase;
 import junitx.framework.FileAssert;
 
-import org.junit.Test;
-
 import com.bragi.sonify.composer.AComposer;
 
 /**
