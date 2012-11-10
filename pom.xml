@@ -30,6 +30,12 @@
         <version>[1.2]</version>
         <scope>compile</scope>
     </dependency>
+    <dependency>
+		<groupId>xom</groupId>
+		<artifactId>xom</artifactId>
+		<version>[1.1d2]</version>
+		<scope>compile</scope>
+</dependency>
 	</dependencies>
 	<build>
 		<plugins>

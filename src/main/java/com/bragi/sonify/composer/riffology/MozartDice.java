@@ -2,7 +2,7 @@ package com.bragi.sonify.composer.riffology;
 
 import javax.sound.midi.Sequence;
 
-import com.bragi.sonify.music.Melody;
+import com.bragi.sonify.music.Measure;
 import com.bragi.sonify.textanalyzer.TextAnalyzer;
 
 public class MozartDice implements DiceGame {
@@ -15,7 +15,7 @@ public class MozartDice implements DiceGame {
 		return null;
 	}
 	
-	private static Melody[] FIRST_THROW;
+	private static Measure[] FIRST_THROW;
 	
 	/**
 	 * First throw

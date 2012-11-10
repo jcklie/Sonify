@@ -52,7 +52,6 @@ public class SongWriter {
 	private int curID = 0;
 	
 	private static final int MICROSECONDS_PER_MINUTE = 60000000;
-
 	
 	/**
 	 * This class acts as a handle for the tracks of the SongWriter, since these
@@ -98,12 +97,20 @@ public class SongWriter {
 	}
 	
 	/**
-	 * Creates a clean SongWriter with no tracks.
+	 * Creates a clean SongWriter with no tracks and given pulses per quarter.
+	 * @throws InvalidMidiDataException
+	 */
+	public SongWriter(int ppq) throws InvalidMidiDataException {
+		sequence = new Sequence(Sequence.PPQ,ppq);
+	}	
+	
+	/**
+	 * Creates a clean SongWriter with no tracks and default pulses per quarter (24).
 	 * @throws InvalidMidiDataException
 	 */
 	public SongWriter() throws InvalidMidiDataException {
-		sequence = new Sequence(Sequence.PPQ,24);
-	}	
+		this(24);
+	}
 	
 	/**
 	 * Adds a newly created track to the sequence of the SongWriter
@@ -182,7 +189,19 @@ public class SongWriter {
 	 * @param duration
 	 * @throws InvalidMidiDataException
 	 */
-	public void addNote(TrackHandle handle, Note note, NoteValue duration) throws InvalidMidiDataException {	
+	public void addNote(TrackHandle handle, Pitch note, NoteValue duration) throws InvalidMidiDataException {	
+		addNote(handle, note, duration.val);
+	}
+	
+	/**
+	 * Adds a note with the specified duration to the given track
+	 * 
+	 * @param handle The handle for the track to set the instrument for
+	 * @param note
+	 * @param duration
+	 * @throws InvalidMidiDataException
+	 */
+	public void addNote(TrackHandle handle, Pitch note, int duration) throws InvalidMidiDataException {	
 		ShortMessage msg;
 		MidiEvent me;
 		
@@ -191,7 +210,7 @@ public class SongWriter {
 		me = new MidiEvent(msg,(long)handle.ticks);
 		handle.track.add(me);
 		
-		handle.ticks += duration.val;
+		handle.ticks += duration;
 		
 		msg = new ShortMessage();
 		msg.setMessage(ShortMessage.NOTE_OFF, handle.id, note.key + handle.transposition.val , 0);
@@ -211,7 +230,21 @@ public class SongWriter {
 	 * @param interval The interval of the note to add in comparison to the old.
 	 * @throws InvalidMidiDataException
 	 */
-	public void addInterval(TrackHandle handle, Note note, NoteValue duration, Interval interval) throws InvalidMidiDataException {
+	public void addInterval(TrackHandle handle, Pitch note, NoteValue duration, Interval interval) throws InvalidMidiDataException {
+		addInterval(handle, note, duration.val, interval);
+	}
+	
+	/**
+	 * Adds a node specified by an interval from a given note. The added note
+	 * has the value of the specified note plus the value of the interval
+	 * 
+	 * @param handle The handle for the track to set the instrument for
+	 * @param note The note which is the reference for the interval.
+	 * @param duration The duration of the note
+	 * @param interval The interval of the note to add in comparison to the old.
+	 * @throws InvalidMidiDataException
+	 */
+	public void addInterval(TrackHandle handle, Pitch note, int duration, Interval interval) throws InvalidMidiDataException {
 		ShortMessage msg;
 		MidiEvent me;
 		
@@ -220,7 +253,7 @@ public class SongWriter {
 		me = new MidiEvent(msg,(long)handle.ticks);
 		handle.track.add(me);
 		
-		handle.ticks += duration.val;
+		handle.ticks += duration;
 		
 		msg = new ShortMessage();
 		msg.setMessage(ShortMessage.NOTE_OFF, handle.id, note.key + interval.val + handle.transposition.val, 0);
@@ -228,6 +261,27 @@ public class SongWriter {
 		handle.track.add(me);
 		
 		handle.ticks++;
+	}
+	
+	public void addMeasure(TrackHandle handle, Measure measure, int measureSize) throws InvalidMidiDataException {
+		ShortMessage msg;
+		MidiEvent me;
+		
+		for(Note note : measure) {
+			msg = new ShortMessage();
+			msg.setMessage(ShortMessage.NOTE_ON, handle.id, note.pitch.key + handle.transposition.val, handle.pressure);
+			me = new MidiEvent(msg,(long)handle.ticks + note.position);
+			handle.track.add(me);			
+			
+			msg = new ShortMessage();
+			msg.setMessage(ShortMessage.NOTE_OFF, handle.id, note.pitch.key  + handle.transposition.val, 0);
+			me = new MidiEvent(msg,(long)handle.ticks + note.position + note.duration);
+			handle.track.add(me);
+			
+			
+		}
+		
+		handle.ticks += measureSize;
 	}
 	
 	/**

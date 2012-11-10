@@ -18,15 +18,20 @@
 
 package com.bragi.sonify;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -50,10 +55,15 @@ public class GUI extends JFrame implements ActionListener {
 	private JButton inputButton;
 	private JButton outputButton;
 	private JButton startSonificationButton;
+	private JPanel corporatePane;
+	private ImageIcon corporateLogo;
+	private JLabel corporateName;
 
 	/* variables */
 	private final String[] genres = { "Drama", "Kinderbuch", "Lyrik", "Roman",
 			"Sachbuch" };
+	private final Image test = new ImageIcon("etc/img/OmniSenseAuge.png")
+			.getImage().getScaledInstance(150, 75, java.awt.Image.SCALE_SMOOTH);
 	private File inputFile;
 	private File outputFile;
 
@@ -70,6 +80,11 @@ public class GUI extends JFrame implements ActionListener {
 	 * This function initializes the GUI components
 	 */
 	private void initComponents() {
+		// initialize corporatePane
+		corporatePane = new JPanel();
+		corporatePane.setBorder(new EmptyBorder(10, 10, 10, 10));
+		corporatePane.setLayout(new GridLayout(1, 2, 5, 5));
+
 		// initialize contentPane
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -77,7 +92,9 @@ public class GUI extends JFrame implements ActionListener {
 
 		// frame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setContentPane(contentPane);
+		setLayout(new BorderLayout());
+		add(corporatePane, BorderLayout.NORTH);
+		add(contentPane, BorderLayout.SOUTH);
 		setResizable(false);
 
 		// initialize components
@@ -89,8 +106,15 @@ public class GUI extends JFrame implements ActionListener {
 		outputButton = new JButton("Ausgabedatei...");
 		startSonificationButton = new JButton("Audifikation starten");
 		genreChooser = new JComboBox<String>(genres);
+		corporateLogo = new ImageIcon(test);
+		corporateName = new JLabel(
+				"<html>OMNI <FONT COLOR=#009933>Sense</FONT></html>",
+				JLabel.CENTER);
+		corporateName.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
 
 		// add components to contentPane
+		corporatePane.add(corporateName);
+		corporatePane.add(new JLabel(corporateLogo));
 		contentPane.add(inputField);
 		contentPane.add(inputButton);
 		contentPane.add(outputField);
@@ -136,7 +160,7 @@ public class GUI extends JFrame implements ActionListener {
 	 * The main-method creates a new Instance of GUI.
 	 */
 	public static void main(String[] args) {
-		new GUI("Brafisoft - Sonify");
+		new GUI("OMNI Sense - Audifizierung");
 	}
 
 	/**
