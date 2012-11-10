@@ -104,7 +104,7 @@ public class GUI extends JFrame implements ActionListener {
 		outputField.setEditable(false);
 		inputButton = new JButton("Eingabedatei...");
 		outputButton = new JButton("Ausgabedatei...");
-		startSonificationButton = new JButton("Audifikation starten");
+		startSonificationButton = new JButton("Sonifizierung starten");
 		genreChooser = new JComboBox<String>(genres);
 		corporateLogo = new ImageIcon(test);
 		corporateName = new JLabel(
@@ -162,7 +162,7 @@ public class GUI extends JFrame implements ActionListener {
 	 * The main-method creates a new Instance of GUI.
 	 */
 	public static void main(String[] args) {
-		new GUI("OMNI Sense - Audifizierung");
+		new GUI("OMNI Sense - Sonifizierung");
 	}
 
 	/**
@@ -240,6 +240,10 @@ public class GUI extends JFrame implements ActionListener {
 			int state = this.showSaveDialog(contentPane);
 			if (state == JFileChooser.APPROVE_OPTION) {
 				file = this.getSelectedFile();
+				if (!(this.getSelectedFile().getName().toLowerCase()
+						.endsWith(".mid"))) {
+					file = new File(file.getPath() + ".mid");
+				}
 				return file;
 			} else {
 				if (outputFile != null) {
