@@ -314,8 +314,8 @@ public class KirnbergerDiceGame extends AComposer {
 		/*
 		 * Magic number NUM_MEASURES_PER_PART says that we use measures for the
 		 * second part, which start at index NUM_MEASURES_PER_PART. Magic number
-		 * NUM_MEASURES_PER_PART*2 says that we go to the last measure for the
-		 * second part
+		 * NUM_MEASURES_PER_PART*2 says that we go up to the last measure for
+		 * the second part
 		 */
 		for (int i = NUM_MEASURES_PER_PART; i < NUM_MEASURES_PER_PART*2; i++) {
 			// One dice roll
