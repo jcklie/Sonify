@@ -25,6 +25,7 @@ package com.bragi.sonify.music;
  * all possible intervals which can occur in one octave (12 semitones) by
  * the number of semitones between two given notes.
  * 
+ * @deprecated
  * @author Jan-Christoph Klie
  */
 public enum Interval {

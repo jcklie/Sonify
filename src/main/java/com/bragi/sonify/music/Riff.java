@@ -26,6 +26,7 @@ import com.bragi.sonify.util.ArrayIterator;
 /**
  * A riff is considered to be a simple melodic fragment.
  * 
+ * @deprecated
  * @author Jan-Christoph Klie
  */
 public class Riff implements Iterable<Pitch> {	

@@ -18,10 +18,14 @@
 
 package com.bragi.sonify.composer;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.Sequence;
 
-import com.bragi.sonify.music.SongWriter;
 import com.bragi.sonify.textanalyzer.TextAnalyzer;
+import com.bragi.sonify.util.FileUtil;
 
 /**
  * AComposer is the basic class of all classes which encapsulate algorithms to
@@ -32,11 +36,16 @@ import com.bragi.sonify.textanalyzer.TextAnalyzer;
  */
 public abstract class AComposer {
 	
-	private TextAnalyzer analyzer;
-	private SongWriter songwriter;
+	protected TextAnalyzer analyzer;
 	
-	public AComposer(String text) {
-		analyzer = new TextAnalyzer(text);
+	/**
+	 * Creates an AComposer instance including analyzing the text in file f by
+	 * the TextAnalyzer class.
+	 * @param f The file pointing on the text file
+	 * @throws IOException
+	 */
+	public AComposer(File f) throws IOException {
+		analyzer = new TextAnalyzer(FileUtil.readFile(f));
 	}	 
 
 	/**
@@ -45,8 +54,10 @@ public abstract class AComposer {
 	 * 
 	 * @param text The text used to determine the generation process
 	 * @return The generated sequence
+	 * @throws InvalidMidiDataException 
+	 * @throws IOException 
 	 */
-	public abstract Sequence createMidi();
+	public abstract Sequence createSequence() throws InvalidMidiDataException, IOException;
 
 }
 

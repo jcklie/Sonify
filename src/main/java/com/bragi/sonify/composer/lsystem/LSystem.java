@@ -21,9 +21,6 @@ package com.bragi.sonify.composer.lsystem;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * An L-System is a mathematical structure, namely a variant of a formal
  * grammar. It is very similar to a semi-Thue system. 
@@ -43,11 +40,10 @@ import org.apache.commons.logging.LogFactory;
  * identity production A → A is assumed; these symbols are called constants or
  * terminals.
  * 
+ * @deprecated
  * @author Jan-Christoph Klie
  */
-public class LSystem {
-	
-	
+public class LSystem {	
 	
 	/**
 	 * The set of symbols which can be replaced by the given rules.

@@ -1,0 +1,25 @@
+<measure>
+	<track>
+		<tracknumber>0</tracknumber>
+		<note>
+			<pitch>c5</pitch>
+			<duration>4</duration>
+		</note>
+		<note>
+			<pitch>c5</pitch>
+			<duration>4</duration>
+		</note>
+		<note>
+			<pitch>c5</pitch>
+			<duration>4</duration>
+		</note>
+		<note>
+			<pitch>c5</pitch>
+			<duration>8</duration>
+		</note>
+		<note>
+			<pitch>c4</pitch>
+			<duration>4</duration>
+		</note>
+	</track>
+</measure>

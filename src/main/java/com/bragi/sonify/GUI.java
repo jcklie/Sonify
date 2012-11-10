@@ -12,7 +12,12 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
+<<<<<<< HEAD
  * Martin Kiessling - Everything
+=======
+ * Dominik Kuenne - First 'working' very basic prototype
+ * Martin Kiessling - Everything else
+>>>>>>> master
  * 
  *******************************************************************************/
 
@@ -25,7 +30,14 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+<<<<<<< HEAD
 
+=======
+import java.io.IOException;
+import java.util.EnumSet;
+
+import javax.sound.midi.InvalidMidiDataException;
+>>>>>>> master
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -37,10 +49,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
+<<<<<<< HEAD
+=======
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+>>>>>>> master
 
 /**
  * This class is the GUI of the sonificator.
  * 
+<<<<<<< HEAD
+=======
+ * @author Dominik Kuenne
+>>>>>>> master
  * @author Martin Kiessling
  */
 public class GUI extends JFrame implements ActionListener {
@@ -58,14 +79,24 @@ public class GUI extends JFrame implements ActionListener {
 	private JPanel corporatePane;
 	private ImageIcon corporateLogo;
 	private JLabel corporateName;
+<<<<<<< HEAD
 
 	/* variables */
 	private final String[] genres = { "Drama", "Kinderbuch", "Lyrik", "Roman",
 			"Sachbuch" };
 	private final Image test = new ImageIcon("etc/img/OmniSenseAuge.png")
 			.getImage().getScaledInstance(150, 75, java.awt.Image.SCALE_SMOOTH);
+=======
+	
+	private static final String ICON_PATH = "etc/img/OmniSenseAuge.png";
+
+	/* variables */
+	private final EnumSet<Genre> genres = EnumSet.allOf(Genre.class);
+	private final Image omnisenseIcon = new ImageIcon(ICON_PATH).getImage().getScaledInstance(150, 75, java.awt.Image.SCALE_SMOOTH);
+>>>>>>> master
 	private File inputFile;
 	private File outputFile;
+	private String selectedGenre;
 
 	/**
 	 * constructor of GUI
@@ -80,6 +111,18 @@ public class GUI extends JFrame implements ActionListener {
 	 * This function initializes the GUI components
 	 */
 	private void initComponents() {
+<<<<<<< HEAD
+=======
+		String[] genreStrings = new String[ genres.size()];
+		int i = 0;
+		for( Genre g : genres) {
+			genreStrings[i++] = g.name;
+		}
+		
+		// initialize selected genre
+		selectedGenre = genreStrings[0];
+		
+>>>>>>> master
 		// initialize corporatePane
 		corporatePane = new JPanel();
 		corporatePane.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -104,6 +147,7 @@ public class GUI extends JFrame implements ActionListener {
 		outputField.setEditable(false);
 		inputButton = new JButton("Eingabedatei...");
 		outputButton = new JButton("Ausgabedatei...");
+<<<<<<< HEAD
 		startSonificationButton = new JButton("Sonifizierung starten");
 		genreChooser = new JComboBox<String>(genres);
 		corporateLogo = new ImageIcon(test);
@@ -115,8 +159,17 @@ public class GUI extends JFrame implements ActionListener {
 		// add components to corporatePane
 		corporatePane.add(corporateName);
 		corporatePane.add(new JLabel(corporateLogo));
+=======
+		startSonificationButton = new JButton("Audifikation starten");
+		genreChooser = new JComboBox<String>(genreStrings);
+		corporateLogo = new ImageIcon(omnisenseIcon);
+		corporateName = new JLabel(	"<html>OMNI <FONT COLOR=#009933>Sense</FONT></html>", JLabel.CENTER);
+		corporateName.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
+>>>>>>> master
 
 		// add components to contentPane
+		corporatePane.add(corporateName);
+		corporatePane.add(new JLabel(corporateLogo));
 		contentPane.add(inputField);
 		contentPane.add(inputButton);
 		contentPane.add(outputField);
@@ -130,6 +183,8 @@ public class GUI extends JFrame implements ActionListener {
 		inputButton.addActionListener(this);
 		outputButton.addActionListener(this);
 		startSonificationButton.addActionListener(this);
+		genreChooser.addActionListener(this);
+		
 	}
 
 	/**
@@ -137,8 +192,8 @@ public class GUI extends JFrame implements ActionListener {
 	 * pressed to start the right action.
 	 */
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		Object src = arg0.getSource();
+	public void actionPerformed(ActionEvent event) {
+		Object src = event.getSource();
 		if (src == inputButton) {
 			inputFile = new FileChooser().inputFile();
 			if (inputFile != null) {
@@ -152,26 +207,67 @@ public class GUI extends JFrame implements ActionListener {
 				outputField.setText(outputFile.getAbsolutePath());
 			} else {
 				outputField.setText(null);
+<<<<<<< HEAD
+=======
+			}
+		} else if ( src == genreChooser) {
+			// Returns an array of Objects containing one element -- the selected item
+			Object selected[] = genreChooser.getSelectedObjects();
+			if( selected.length == 0 ) {
+				selectedGenre = null;
+			} else {
+				selectedGenre = (String) selected[0];
+>>>>>>> master
 			}
 		} else if (src == startSonificationButton) {
-			// Do something
-		}
+			if( inputFile != null && outputFile != null && selectedGenre != null ) {
+				try {
+					if( outputFile.exists()) {
+						Object[] options = {"Ja", "Nein"};
+						int selected = JOptionPane.showOptionDialog(null, "Die Datei mit dem Namen " + outputFile.getAbsolutePath()
+								+ "existiert bereits. Wollen Sie diese wirklich überschreiben?", "Ausgabedatei existiert bereits!", JOptionPane.DEFAULT_OPTION,
+								JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+						if( selected == 1) {
+							return;
+						}
+					}
+					Sonificator.sonificate( Genre.getByName(selectedGenre), inputFile, outputFile);
+					JOptionPane.showMessageDialog(null, "Sonifizierung wurde erfolgreich abgeschlossen!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+				}catch (IOException e) {					
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+				} catch (InvalidMidiDataException e) {
+					JOptionPane.showMessageDialog(null, "Die Dateien zum Generieren der Musik sind korrupt. Wenden Sie sich an den IT-Support unter der Nummer 867-5309", "Installation korrupt!", JOptionPane.ERROR_MESSAGE);
+				} catch(NotImplementedException e) {
+					JOptionPane.showMessageDialog(null, "Der Algorithmus zum Generieren von " + selectedGenre
+							+ " ist noch nicht implementiert! Bitte wählen Sie eine anderes Genre aus.", "Fehler", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		} 
 	}
 
 	/**
 	 * The main-method creates a new Instance of GUI.
 	 */
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		new GUI("OMNI Sense - Sonifizierung");
+=======
+		new GUI("OMNI Sense - Audifizierung");
+>>>>>>> master
 	}
 
 	/**
 	 * This class is a simple FileChooser.
 	 * 
+<<<<<<< HEAD
 	 * @param file
 	 *            is either the input or the output file
 	 * @param FilenameFilter
 	 *            filters only textfiles for the open-dialog
+=======
+	 * @param file is either the input or the output file
+	 * @param FilenameFilter filters only textfiles for the open-dialog
+>>>>>>> master
 	 * @author Martin Kiessling
 	 */
 	private class FileChooser extends JFileChooser {
@@ -180,10 +276,17 @@ public class GUI extends JFrame implements ActionListener {
 		/* variables */
 		private File file;
 		private FileFilter filterTXT = new FileFilter() {
+<<<<<<< HEAD
 			@Override
 			public boolean accept(File f) {
 				return f.isDirectory()
 						|| f.getName().toLowerCase().endsWith(".txt");
+=======
+			
+			@Override
+			public boolean accept(File f) {
+				return f.isDirectory() || f.getName().toLowerCase().endsWith(".txt");
+>>>>>>> master
 			}
 
 			@Override
@@ -240,10 +343,13 @@ public class GUI extends JFrame implements ActionListener {
 			int state = this.showSaveDialog(contentPane);
 			if (state == JFileChooser.APPROVE_OPTION) {
 				file = this.getSelectedFile();
+<<<<<<< HEAD
 				if (!(this.getSelectedFile().getName().toLowerCase()
 						.endsWith(".mid"))) {
 					file = new File(file.getPath() + ".mid");
 				}
+=======
+>>>>>>> master
 				return file;
 			} else {
 				if (outputFile != null) {

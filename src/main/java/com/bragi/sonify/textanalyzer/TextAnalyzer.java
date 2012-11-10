@@ -38,7 +38,6 @@ public class TextAnalyzer {
 	 * Constructor for TextAnalyzer
 	 * 
 	 * @param text Text to be analyzed. This has to be real text!
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public TextAnalyzer(String text) {
 		analyzeText(text);
@@ -47,7 +46,6 @@ public class TextAnalyzer {
 	/**
 	 * Function which returns the calculated character count
 	 * @return Integer Total character count
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public int totalCharCount() {
 		return totalCharCount;
@@ -56,7 +54,6 @@ public class TextAnalyzer {
 	/**
 	 * Function which returns the calculated word count
 	 * @return Integer Total word count
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public int totalWordCount() {
 		return totalWordCount;
@@ -65,7 +62,6 @@ public class TextAnalyzer {
 	/**
 	 * Function which returns the calculated sentence count
 	 * @return Integer Total sentence count
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public int totalSentenceCount() {
 		return totalSentenceCount;
@@ -74,7 +70,6 @@ public class TextAnalyzer {
 	/**
 	 * Function which returns the calculated average word length
 	 * @return Integer Average word length
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public int averageWordLength() {
 		return averageWordLength;
@@ -86,7 +81,6 @@ public class TextAnalyzer {
 	 * The calculated value contains average of the sum of all characters
 	 * in the sentence
 	 * @return Integer Average sentence character length
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public int averageSentenceCharLength() {
 		return averageSentenceCharLength;
@@ -98,7 +92,6 @@ public class TextAnalyzer {
 	 * The calculated value contains average of the length of all words
 	 * in the sentence
 	 * @return Integer Average sentence word length
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public int averageSentenceWordLength() {
 		return averageSentenceWordLength;
@@ -110,7 +103,6 @@ public class TextAnalyzer {
 	 * functions.
 	 * 
 	 * @param text Text to be analyzed
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	private void analyzeText(String text) {
 	
@@ -161,5 +153,61 @@ public class TextAnalyzer {
 		averageSentenceCharLength = Math.round(sentenceCharLengthSum/totalSentenceCount);	
 		averageSentenceWordLength = Math.round(sentenceWordLengthSum/totalSentenceCount);		
 	}
+
+	@Override
+	public int hashCode() {
+		
+		/*
+		 * The Lord is my shepherd; I shall not want. 2 He makes me to lie down
+		 * in green pastures; He leads me beside the still waters. 3 He restores
+		 * my soul; He leads me in the paths of righteousness For His name’s
+		 * sake. 4 Yea, though I walk through the valley of the shadow of death,
+		 * I will fear no evil; For You are with me; Your rod and Your staff,
+		 * they comfort me. 5 You prepare a table before me in the presence of
+		 * my enemies; You anoint my head with oil; My cup runs over. 6 Surely
+		 * goodness and mercy shall follow me All the days of my life; And I
+		 * will dwell[a] in the house of the Lord Forever.
+		 * 
+		 * The Holy Bible, New King James Version
+		 * 
+		 * Just a test whether someone reads the source code, not any religious issue.
+		 */
+		final int prime = 23;
+		
+		int result = 1;
+		result = prime * result + averageSentenceCharLength;
+		result = prime * result + averageSentenceWordLength;
+		result = prime * result + averageWordLength;
+		result = prime * result + totalCharCount;
+		result = prime * result + totalSentenceCount;
+		result = prime * result + totalWordCount;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TextAnalyzer other = (TextAnalyzer) obj;
+		if (averageSentenceCharLength != other.averageSentenceCharLength)
+			return false;
+		if (averageSentenceWordLength != other.averageSentenceWordLength)
+			return false;
+		if (averageWordLength != other.averageWordLength)
+			return false;
+		if (totalCharCount != other.totalCharCount)
+			return false;
+		if (totalSentenceCount != other.totalSentenceCount)
+			return false;
+		if (totalWordCount != other.totalWordCount)
+			return false;
+		return true;
+	}
+	
+	
 	
 }
