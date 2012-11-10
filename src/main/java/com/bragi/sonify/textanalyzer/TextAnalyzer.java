@@ -38,7 +38,6 @@ public class TextAnalyzer {
 	 * Constructor for TextAnalyzer
 	 * 
 	 * @param text Text to be analyzed. This has to be real text!
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public TextAnalyzer(String text) {
 		analyzeText(text);
@@ -47,7 +46,6 @@ public class TextAnalyzer {
 	/**
 	 * Function which returns the calculated character count
 	 * @return Integer Total character count
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public int totalCharCount() {
 		return totalCharCount;
@@ -56,7 +54,6 @@ public class TextAnalyzer {
 	/**
 	 * Function which returns the calculated word count
 	 * @return Integer Total word count
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public int totalWordCount() {
 		return totalWordCount;
@@ -65,7 +62,6 @@ public class TextAnalyzer {
 	/**
 	 * Function which returns the calculated sentence count
 	 * @return Integer Total sentence count
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public int totalSentenceCount() {
 		return totalSentenceCount;
@@ -74,7 +70,6 @@ public class TextAnalyzer {
 	/**
 	 * Function which returns the calculated average word length
 	 * @return Integer Average word length
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public int averageWordLength() {
 		return averageWordLength;
@@ -86,7 +81,6 @@ public class TextAnalyzer {
 	 * The calculated value contains average of the sum of all characters
 	 * in the sentence
 	 * @return Integer Average sentence character length
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public int averageSentenceCharLength() {
 		return averageSentenceCharLength;
@@ -98,7 +92,6 @@ public class TextAnalyzer {
 	 * The calculated value contains average of the length of all words
 	 * in the sentence
 	 * @return Integer Average sentence word length
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	public int averageSentenceWordLength() {
 		return averageSentenceWordLength;
@@ -110,7 +103,6 @@ public class TextAnalyzer {
 	 * functions.
 	 * 
 	 * @param text Text to be analyzed
-	 * @author Sebastian Muszytowski <sebastian@muszytowski.net>
 	 */
 	private void analyzeText(String text) {
 	
