@@ -21,6 +21,7 @@ package com.bragi.sonify.composer.riffology;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -290,6 +291,7 @@ public class KirnbergerDiceGame extends AComposer {
 		
 		MidiAppender appender = new MidiAppender(MIDI_RESOLUTION);
 		Random r = new Random(analyzer.hashCode());
+		InputStream stream;
 		
 		List<Integer> randomSequence = new LinkedList<Integer>();
 
@@ -299,16 +301,18 @@ public class KirnbergerDiceGame extends AComposer {
 			int diceRoll = r.nextInt(6) + 1;
 
 			int measureNumber = measureMapList.get(i).get(diceRoll);
-			File f = FileUtil.getResourcetFile(String.format(PATH_TO_MIDI_FORMAT, measureNumber));
-			appender.addFile(f);
+			stream = FileUtil.getResourcetStream(String.format(PATH_TO_MIDI_FORMAT, measureNumber));
+			appender.addFile(stream);
 			randomSequence.add(diceRoll);
+			stream.close();
 		}
 		
 		// Repetition of first part
 		for (int i = 0; i < NUM_MEASURES_PER_PART; i++) {
 			int measureNumber = measureMapList.get(i).get(randomSequence.get(i));
-			File f = FileUtil.getResourcetFile(String.format(PATH_TO_MIDI_FORMAT, measureNumber));
-			appender.addFile(f);			
+			stream = FileUtil.getResourcetStream(String.format(PATH_TO_MIDI_FORMAT, measureNumber));
+			appender.addFile(stream);
+			stream.close();
 		}
 
 		// Second part
@@ -323,16 +327,18 @@ public class KirnbergerDiceGame extends AComposer {
 			int diceRoll = r.nextInt(6) + 1;
 
 			int measureNumber = measureMapList.get(i).get(diceRoll);
-			File f = FileUtil.getResourcetFile(String.format(PATH_TO_MIDI_FORMAT, measureNumber));
-			appender.addFile(f);	
+			stream = FileUtil.getResourcetStream(String.format(PATH_TO_MIDI_FORMAT, measureNumber));
+			appender.addFile(stream);	
 			randomSequence.add(diceRoll);
+			stream.close();
 		}
 		
 		// Repetition of second part
 		for (int i = NUM_MEASURES_PER_PART; i < NUM_MEASURES_PER_PART*2; i++) {
 			int measureNumber = measureMapList.get(i).get(randomSequence.get(i));
-			File f = FileUtil.getResourcetFile(String.format(PATH_TO_MIDI_FORMAT, measureNumber));
-			appender.addFile(f);			
+			stream = FileUtil.getResourcetStream(String.format(PATH_TO_MIDI_FORMAT, measureNumber));
+			appender.addFile(stream);
+			stream.close();
 		}
 
 		return appender.getSequence();

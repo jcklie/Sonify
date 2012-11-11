@@ -21,7 +21,7 @@ package com.bragi.sonify.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
@@ -52,52 +52,15 @@ public class FileUtil {
 	}
 	
 	/**
-	 * Gives easy access to files in the resource folder (src/main/resources/)
-	 * @param path Path to the resource. 
-	 * @return The file of the requested resource
+	 * Gets an input stream on a resource
+	 * @param path The path to the resource
+	 * @return input stream on the resource specified by path 
 	 */
-	public static File getResourcetFile(String path) {
-		
-		/*
-		 * Depending on the fact whether the application is run a *.jar or a
-		 * *.class file, the resouces have different locations
-		 */
-		if( runFromJar() ) {
-			if( path.startsWith("/")) {
-				path = path.replaceFirst("/", "");
-			}
-			return new File("src/main/resources/", path);
-		} else {
-			
-			/*
-			 * According to the rules of the getResource method called,
-			 * resources identfied by an absolute path need a trailing 
-			 * front slash
-			 */
-			if( !path.startsWith("/")) {
-				path = "/" + path;
-			}
-			
-			URL url = FileUtil.class.getResource(path);
-			return new File(url.getFile());
+	public static InputStream getResourcetStream(String path) {
+		if( !path.startsWith("/")) {
+			path = "/" + path;
 		}
-	}
-	
-	/**
-	 * Checks whether this function is called from a *.jar or a *.class
-	 * @return
-	 */
-	public static boolean runFromJar() {
-		String className = FileUtil.class.getName().replace('.', '/');
-		String classJar = FileUtil.class.getResource("/" + className + ".class").toString();
-		if (classJar.startsWith("jar:")) {			 
-			return true;
-		}		
-		return false;
 		
+		return FileUtil.class.getResourceAsStream(path);		
 	}
-		
-	
-
-
 }

@@ -24,12 +24,13 @@ import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.EnumSet;
 import java.util.Properties;
 
@@ -96,10 +97,9 @@ public class GUI extends JFrame implements ActionListener {
 	 */
 	public GUI() throws IOException {		
 		props = new Properties();
-		File propertyFile = FileUtil.getResourcetFile("/labels.properties");
-		BufferedInputStream stream = new BufferedInputStream(new FileInputStream(propertyFile));
-		props.load(stream);
-		stream.close();
+		InputStream s = FileUtil.getResourcetStream("/labels.properties");
+		props.load(s);
+		s.close();
 		
 		YES_NO_QUESTION_OPTIONS = new Object[2];
 		YES_NO_QUESTION_OPTIONS[0] = props.getProperty("yes");
@@ -110,8 +110,9 @@ public class GUI extends JFrame implements ActionListener {
 		/*
 		 * Get omni sense icon
 		 */
-		File f = FileUtil.getResourcetFile(ICON_PATH);
-		omnisenseIcon = new ImageIcon( f.getPath()).getImage().getScaledInstance(150, 75, java.awt.Image.SCALE_SMOOTH);
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		URL url = getClass().getResource(ICON_PATH);
+		omnisenseIcon = tk.createImage(url).getScaledInstance(150, 75, java.awt.Image.SCALE_SMOOTH);
 		
 		/*
 		 * Init GUI components and draw it on the screen

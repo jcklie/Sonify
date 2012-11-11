@@ -19,8 +19,8 @@
 
 package com.bragi.sonify.composer.riffology;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiEvent;
@@ -63,8 +63,8 @@ public class MidiAppender {
 	 * @throws InvalidMidiDataException
 	 * @throws IOException
 	 */
-	public void addFile(File f) throws InvalidMidiDataException, IOException {
-		Sequence seq = MidiSystem.getSequence(f);		
+	public void addFile(InputStream stream) throws InvalidMidiDataException, IOException {
+		Sequence seq = MidiSystem.getSequence(stream);		
 
 		for( Track t : seq.getTracks()) {
 			for( int i = 0; i < t.size(); i++) {

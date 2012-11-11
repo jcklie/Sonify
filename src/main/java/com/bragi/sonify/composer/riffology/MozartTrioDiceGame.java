@@ -21,6 +21,7 @@ package com.bragi.sonify.composer.riffology;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -265,7 +266,6 @@ public class MozartTrioDiceGame extends AComposer {
 		measureMap.put(4, 10);
 		measureMap.put(5, 91);
 		measureMap.put(6, 31);
-
 	}
 	
 	public MozartTrioDiceGame(File f) throws IOException {		
@@ -283,8 +283,9 @@ public class MozartTrioDiceGame extends AComposer {
 				int diceRoll = r.nextInt(6) + 1;
 	
 				int measureNumber = measureMapList.get(i).get(diceRoll);
-				File f = FileUtil.getResourcetFile(String.format(PATH_TO_MIDI_FORMAT, measureNumber));
-				appender.addFile(f);
+				InputStream stream = FileUtil.getResourcetStream(String.format(PATH_TO_MIDI_FORMAT, measureNumber));
+				appender.addFile(stream);
+				stream.close();
 			}		
 		}		
 		return appender.getSequence();
