@@ -319,7 +319,7 @@ public class TestScenarioTest extends TestCase {
 		
 		FileAssert.assertBinaryEquals(firstFile, secondFile);
 		
-		// Non-Fiction		
+		// Novel
 		
 		firstComposer = new MozartWaltzDiceGame(novel);
 		firstSequence = firstComposer.createSequence();
@@ -361,7 +361,7 @@ public class TestScenarioTest extends TestCase {
 		
 		FileAssert.assertBinaryEquals(firstFile, secondFile);
 		
-		// Non-Fiction		
+		// Novel
 		
 		firstComposer = new MozartWaltzDiceGame(novel);
 		firstSequence = firstComposer.createSequence();
