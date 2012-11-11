@@ -52,7 +52,6 @@ public abstract class AComposer {
 	 * Generates a Sequence (collection of Tracks which itself are a
 	 * collection of MIDI-Events) and returns it.
 	 * 
-	 * @param text The text used to determine the generation process
 	 * @return The generated sequence
 	 * @throws InvalidMidiDataException 
 	 * @throws IOException 

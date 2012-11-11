@@ -62,7 +62,7 @@ public class MidiAppender {
 	
 	/**
 	 * Appends the MIDI file given to the MIDI sequence of this MidiAppender instance
-	 * @param f The MIDI file to append
+	 * @param stream Stream pointing to the MIDI file to append
 	 * @throws InvalidMidiDataException
 	 * @throws IOException
 	 */

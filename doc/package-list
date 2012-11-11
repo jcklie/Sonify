@@ -1,1 +1,8 @@
+com.bragi.sonify
+com.bragi.sonify.composer
+com.bragi.sonify.composer.lsystem
+com.bragi.sonify.composer.riffology
+com.bragi.sonify.music
+com.bragi.sonify.music.parser
 com.bragi.sonify.textanalyzer
+com.bragi.sonify.util

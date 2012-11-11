@@ -131,7 +131,6 @@ public class SongWriter {
 	/**
 	 * Sets the tempo of the given track to the supplied beats per minute
 	 * 
-	 * @param track The handle for the track to set the BPM for
 	 * @param bpm The new tempo of the track, given in beats per minute
 	 * @throws InvalidMidiDataException
 	 */
@@ -290,7 +289,6 @@ public class SongWriter {
 	 * track is closed for mutations and can be saved if all other tracks of
 	 * this SongWriter instance have been ended, too.
 	 * 
-	 * @param track The handle for the track to end
 	 * @throws InvalidMidiDataException
 	 */
 	public void endTrack(TrackHandle handle) throws InvalidMidiDataException {		
