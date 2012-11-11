@@ -313,7 +313,7 @@ public class GUI extends JFrame implements ActionListener {
 				file = this.getSelectedFile();
 				if (!(this.getSelectedFile().getName().toLowerCase()
 						.endsWith(".mid"))) {
-					file = new File(file.getPath() , ".mid");
+					file = new File(file.getPath() + ".mid");
 				}
 				return file;
 			} else {
