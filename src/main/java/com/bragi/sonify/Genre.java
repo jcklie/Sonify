@@ -58,8 +58,7 @@ public enum Genre {
 			case "Sachbuch": return NONFICTION;
 		default:
 			throw new InvalidParameterException("There is no genre which has the specified name: " + s);
-		}
-		
+		}		
 	}
 
 }

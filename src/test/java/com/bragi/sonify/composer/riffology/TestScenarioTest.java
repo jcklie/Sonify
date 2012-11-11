@@ -38,6 +38,8 @@ import com.bragi.sonify.composer.AComposer;
 /**
  * This unit test is home of the tests which are described in chapter 10 of the
  * functional specifications document. (As far as software tests can achieve it).
+ * 
+ * @author Jan-Christoph Klie
  */
 public class TestScenarioTest extends TestCase {
 	
