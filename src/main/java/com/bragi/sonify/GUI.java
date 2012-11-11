@@ -13,16 +13,22 @@
  *
  * Contributors:
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Martin Kiessling - Everything
 =======
  * Dominik Kuenne - First 'working' very basic prototype
  * Martin Kiessling - Everything else
 >>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
+=======
+ * Dominik Kuenne - First 'working' very basic prototype
+ * Martin Kiessling - Everything else
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
  * 
  *******************************************************************************/
 
 package com.bragi.sonify;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -30,6 +36,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 =======
+=======
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -42,15 +50,22 @@ import java.util.EnumSet;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.swing.ImageIcon;
+<<<<<<< HEAD
 >>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
+=======
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import javax.swing.JLabel;
 >>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
+=======
+import javax.swing.JLabel;
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -58,17 +73,23 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /**
  * This class is the GUI of the sonificator.
  * 
 =======
+=======
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * This class is the GUI of the sonificator.
  * 
  * @author Dominik Kuenne
+<<<<<<< HEAD
 >>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
+=======
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
  * @author Martin Kiessling
  */
 public class GUI extends JFrame implements ActionListener {
@@ -84,6 +105,7 @@ public class GUI extends JFrame implements ActionListener {
 	private JButton outputButton;
 	private JButton startSonificationButton;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* variables */
 	private final String[] genres = { "Drama", "Kinderbuch", "Lyrik", "Roman",
@@ -91,19 +113,25 @@ public class GUI extends JFrame implements ActionListener {
 	private File inputFile;
 	private File outputFile;
 =======
+=======
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 	private JPanel corporatePane;
 	private ImageIcon corporateLogo;
 	private JLabel corporateName;
-	
+
 	private static final String ICON_PATH = "etc/img/OmniSenseAuge.png";
 
 	/* variables */
 	private final EnumSet<Genre> genres = EnumSet.allOf(Genre.class);
-	private final Image omnisenseIcon = new ImageIcon(ICON_PATH).getImage().getScaledInstance(150, 75, java.awt.Image.SCALE_SMOOTH);
+	private final Image omnisenseIcon = new ImageIcon(ICON_PATH).getImage()
+			.getScaledInstance(150, 75, java.awt.Image.SCALE_SMOOTH);
 	private File inputFile;
 	private File outputFile;
 	private String selectedGenre;
+<<<<<<< HEAD
 >>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
+=======
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 
 	/**
 	 * constructor of GUI
@@ -119,22 +147,29 @@ public class GUI extends JFrame implements ActionListener {
 	 */
 	private void initComponents() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		String[] genreStrings = new String[ genres.size()];
+=======
+		String[] genreStrings = new String[genres.size()];
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 		int i = 0;
-		for( Genre g : genres) {
+		for (Genre g : genres) {
 			genreStrings[i++] = g.name;
 		}
-		
+
 		// initialize selected genre
 		selectedGenre = genreStrings[0];
-		
+
 		// initialize corporatePane
 		corporatePane = new JPanel();
 		corporatePane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		corporatePane.setLayout(new GridLayout(1, 2, 5, 5));
 
+<<<<<<< HEAD
 >>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
+=======
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 		// initialize contentPane
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -143,12 +178,18 @@ public class GUI extends JFrame implements ActionListener {
 		// frame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		setContentPane(contentPane);
 =======
 		setLayout(new BorderLayout());
 		add(corporatePane, BorderLayout.NORTH);
 		add(contentPane, BorderLayout.SOUTH);
 >>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
+=======
+		setLayout(new BorderLayout());
+		add(corporatePane, BorderLayout.NORTH);
+		add(contentPane, BorderLayout.SOUTH);
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 		setResizable(false);
 
 		// initialize components
@@ -158,21 +199,30 @@ public class GUI extends JFrame implements ActionListener {
 		outputField.setEditable(false);
 		inputButton = new JButton("Eingabedatei...");
 		outputButton = new JButton("Ausgabedatei...");
+<<<<<<< HEAD
 		startSonificationButton = new JButton("Audifikation starten");
 <<<<<<< HEAD
 		genreChooser = new JComboBox<String>(genres);
 
 		// add components to contentPane
 =======
+=======
+		startSonificationButton = new JButton("Sonifizierung starten");
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 		genreChooser = new JComboBox<String>(genreStrings);
 		corporateLogo = new ImageIcon(omnisenseIcon);
-		corporateName = new JLabel(	"<html>OMNI <FONT COLOR=#009933>Sense</FONT></html>", JLabel.CENTER);
+		corporateName = new JLabel(
+				"<html>OMNI <FONT COLOR=#009933>Sense</FONT></html>",
+				JLabel.CENTER);
 		corporateName.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
 
 		// add components to contentPane
 		corporatePane.add(corporateName);
 		corporatePane.add(new JLabel(corporateLogo));
+<<<<<<< HEAD
 >>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
+=======
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 		contentPane.add(inputField);
 		contentPane.add(inputButton);
 		contentPane.add(outputField);
@@ -181,6 +231,7 @@ public class GUI extends JFrame implements ActionListener {
 		contentPane.add(startSonificationButton);
 
 		pack();
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		// add actionListeners to buttons
@@ -230,13 +281,15 @@ public class GUI extends JFrame implements ActionListener {
 	 * @param FilenameFilter
 	 *            filters only textfiles for the open-dialog
 =======
+=======
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 
 		// add actionListeners to buttons
 		inputButton.addActionListener(this);
 		outputButton.addActionListener(this);
 		startSonificationButton.addActionListener(this);
 		genreChooser.addActionListener(this);
-		
+
 	}
 
 	/**
@@ -260,53 +313,83 @@ public class GUI extends JFrame implements ActionListener {
 			} else {
 				outputField.setText(null);
 			}
-		} else if ( src == genreChooser) {
-			// Returns an array of Objects containing one element -- the selected item
+		} else if (src == genreChooser) {
+			// Returns an array of Objects containing one element -- the
+			// selected item
 			Object selected[] = genreChooser.getSelectedObjects();
-			if( selected.length == 0 ) {
+			if (selected.length == 0) {
 				selectedGenre = null;
 			} else {
 				selectedGenre = (String) selected[0];
 			}
 		} else if (src == startSonificationButton) {
-			if( inputFile != null && outputFile != null && selectedGenre != null ) {
+			if (inputFile != null && outputFile != null
+					&& selectedGenre != null) {
 				try {
-					if( outputFile.exists()) {
-						Object[] options = {"Ja", "Nein"};
-						int selected = JOptionPane.showOptionDialog(null, "Die Datei mit dem Namen " + outputFile.getAbsolutePath()
-								+ "existiert bereits. Wollen Sie diese wirklich überschreiben?", "Ausgabedatei existiert bereits!", JOptionPane.DEFAULT_OPTION,
-								JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-						if( selected == 1) {
+					if (outputFile.exists()) {
+						Object[] options = { "Ja", "Nein" };
+						int selected = JOptionPane
+								.showOptionDialog(
+										null,
+										"Die Datei mit dem Namen "
+												+ outputFile.getAbsolutePath()
+												+ "existiert bereits. Wollen Sie diese wirklich überschreiben?",
+										"Ausgabedatei existiert bereits!",
+										JOptionPane.DEFAULT_OPTION,
+										JOptionPane.INFORMATION_MESSAGE, null,
+										options, options[0]);
+						if (selected == 1) {
 							return;
 						}
 					}
-					Sonificator.sonificate( Genre.getByName(selectedGenre), inputFile, outputFile);
-					JOptionPane.showMessageDialog(null, "Sonifizierung wurde erfolgreich abgeschlossen!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
-				}catch (IOException e) {					
-					JOptionPane.showMessageDialog(null, e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
+					Sonificator.sonificate(Genre.getByName(selectedGenre),
+							inputFile, outputFile);
+					JOptionPane.showMessageDialog(null,
+							"Sonifizierung wurde erfolgreich abgeschlossen!",
+							"Erfolg", JOptionPane.INFORMATION_MESSAGE);
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage(),
+							"Fehler", JOptionPane.ERROR_MESSAGE);
 				} catch (InvalidMidiDataException e) {
-					JOptionPane.showMessageDialog(null, "Die Dateien zum Generieren der Musik sind korrupt. Wenden Sie sich an den IT-Support unter der Nummer 867-5309", "Installation korrupt!", JOptionPane.ERROR_MESSAGE);
-				} catch(NotImplementedException e) {
-					JOptionPane.showMessageDialog(null, "Der Algorithmus zum Generieren von " + selectedGenre
-							+ " ist noch nicht implementiert! Bitte wählen Sie eine anderes Genre aus.", "Fehler", JOptionPane.ERROR_MESSAGE);
+					JOptionPane
+							.showMessageDialog(
+									null,
+									"Die Dateien zum Generieren der Musik sind korrupt. Wenden Sie sich an den IT-Support unter der Nummer 867-5309",
+									"Installation korrupt!",
+									JOptionPane.ERROR_MESSAGE);
+				} catch (NotImplementedException e) {
+					JOptionPane
+							.showMessageDialog(
+									null,
+									"Der Algorithmus zum Generieren von "
+											+ selectedGenre
+											+ " ist noch nicht implementiert! Bitte wählen Sie eine anderes Genre aus.",
+									"Fehler", JOptionPane.ERROR_MESSAGE);
 				}
 			}
-		} 
+		}
 	}
 
 	/**
 	 * The main-method creates a new Instance of GUI.
 	 */
 	public static void main(String[] args) {
-		new GUI("OMNI Sense - Audifizierung");
+		new GUI("OMNI Sense - Sonifizierung");
 	}
 
 	/**
 	 * This class is a simple FileChooser.
 	 * 
+<<<<<<< HEAD
 	 * @param file is either the input or the output file
 	 * @param FilenameFilter filters only textfiles for the open-dialog
 >>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
+=======
+	 * @param file
+	 *            is either the input or the output file
+	 * @param FilenameFilter
+	 *            filters only textfiles for the open-dialog
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 	 * @author Martin Kiessling
 	 */
 	private class FileChooser extends JFileChooser {
@@ -316,16 +399,23 @@ public class GUI extends JFrame implements ActionListener {
 		private File file;
 		private FileFilter filterTXT = new FileFilter() {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 			@Override
 			public boolean accept(File f) {
 				return f.isDirectory()
 						|| f.getName().toLowerCase().endsWith(".txt");
+<<<<<<< HEAD
 =======
 			
 			@Override
 			public boolean accept(File f) {
 				return f.isDirectory() || f.getName().toLowerCase().endsWith(".txt");
 >>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
+=======
+>>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 			}
 
 			@Override
@@ -382,6 +472,10 @@ public class GUI extends JFrame implements ActionListener {
 			int state = this.showSaveDialog(contentPane);
 			if (state == JFileChooser.APPROVE_OPTION) {
 				file = this.getSelectedFile();
+				if (!(this.getSelectedFile().getName().toLowerCase()
+						.endsWith(".mid"))) {
+					file = new File(file.getPath() + ".mid");
+				}
 				return file;
 			} else {
 				if (outputFile != null) {
