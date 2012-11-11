@@ -26,9 +26,13 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.EnumSet;
+import java.util.Properties;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.swing.ImageIcon;
@@ -42,6 +46,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
+
+import com.bragi.sonify.util.FileUtil;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -66,6 +72,8 @@ public class GUI extends JFrame implements ActionListener {
 	private JPanel corporatePane;
 	private ImageIcon corporateLogo;
 	private JLabel corporateName;
+	
+	private final Properties props;
 
 	private static final String ICON_PATH = "etc/img/OmniSenseAuge.png";
 	
@@ -81,8 +89,18 @@ public class GUI extends JFrame implements ActionListener {
 	/**
 	 * constructor of GUI
 	 */
-	public GUI(String title) {
-		super(title);
+	public GUI() {		
+		props = new Properties();
+		try {			
+			File propertyFile = FileUtil.getResourcetFile("/labels.properties");
+			BufferedInputStream stream = new BufferedInputStream(new FileInputStream(propertyFile));
+			props.load(stream);
+			stream.close();
+		} catch (FileNotFoundException e) {			
+			e.printStackTrace();
+		} catch (IOException e) {			
+			e.printStackTrace();
+		}
 		initComponents();
 		setVisible(true);
 	}
@@ -122,9 +140,9 @@ public class GUI extends JFrame implements ActionListener {
 		inputField.setEditable(false);
 		outputField = new JTextField();
 		outputField.setEditable(false);
-		inputButton = new JButton("Eingabedatei...");
-		outputButton = new JButton("Ausgabedatei...");
-		startSonificationButton = new JButton("Sonifizierung starten");
+		inputButton = new JButton( props.getProperty("inputButton") );
+		outputButton = new JButton( props.getProperty("outputButton") );
+		startSonificationButton = new JButton(props.getProperty("startSonification"));
 		genreChooser = new JComboBox<String>(genreStrings);
 		corporateLogo = new ImageIcon(omnisenseIcon);
 		corporateName = new JLabel("<html>OMNI <FONT COLOR=#009933>Sense</FONT></html>", JLabel.CENTER);
@@ -147,7 +165,9 @@ public class GUI extends JFrame implements ActionListener {
 		outputButton.addActionListener(this);
 		startSonificationButton.addActionListener(this);
 		genreChooser.addActionListener(this);
-
+		
+		// Set title
+		setTitle( props.getProperty("title"));
 	}
 
 	/**
@@ -182,42 +202,86 @@ public class GUI extends JFrame implements ActionListener {
 			}
 		} else if (src == startSonificationButton) {
 			if (inputFile != null && outputFile != null && selectedGenre != null) {
-				try {
-					if (outputFile.exists()) {
+				sonificate();
+			}
+		}
+	}
+	
+	/**
+	 * Checks the inputs from the GUI components for existing files and 
+	 * then starts the sonification process
+	 */
+	private void sonificate() {
+		try {
+			if (outputFile.exists()) {
 
-						int selected = JOptionPane.showOptionDialog(null, "Die Datei mit dem Namen " + outputFile.getAbsolutePath()
-								+ " existiert bereits. Wollen Sie diese wirklich \u00FCberschreiben?", "Ausgabedatei existiert bereits!",
-								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, YES_NO_QUESTION_OPTIONS, YES_NO_QUESTION_OPTIONS[0]);
-						
-						// No
-						if (selected == 1) {
-							return;
-						}
-					}
-					Sonificator.sonificate(Genre.getByName(selectedGenre), inputFile, outputFile);
-					JOptionPane.showMessageDialog(null, "Sonifizierung wurde erfolgreich abgeschlossen!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
-					
-					if( Desktop.isDesktopSupported()) {						
-						int selected = JOptionPane.showOptionDialog(null, "Wollen Sie die erzeugte MIDI-Datei abspielen?", "Erfolg",
-								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, YES_NO_QUESTION_OPTIONS, YES_NO_QUESTION_OPTIONS[0]);
-						
-						// yes
-						if (selected == 0) {
-							Desktop.getDesktop().open(outputFile);
-						}
-					}
-					
-				} catch (IOException e) {
-					JOptionPane.showMessageDialog(null, e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
-				} catch (InvalidMidiDataException e) {
-					JOptionPane.showMessageDialog(null,
-							"Die Dateien zum Generieren der Musik sind korrupt. Wenden Sie sich an den IT-Support unter der Nummer 867-5309",
-							"Installation korrupt!", JOptionPane.ERROR_MESSAGE);
-				} catch (NotImplementedException e) {
-					JOptionPane.showMessageDialog(null, "Der Algorithmus zum Generieren von " + selectedGenre
-							+ " ist noch nicht implementiert! Bitte w\u00E4hlen Sie eine anderes Genre aus.", "Fehler", JOptionPane.ERROR_MESSAGE);
+				/*
+				 * Check if chosen output file already exists. If so, we ask
+				 * gently whether the user wants to overwrite
+				 */
+				int selected = JOptionPane.showOptionDialog(null,
+						String.format(props.getProperty("overwrite"), 
+						outputFile.getAbsolutePath()),
+						props.getProperty("overwriteTitle"),
+						JOptionPane.DEFAULT_OPTION,
+						JOptionPane.INFORMATION_MESSAGE,
+						null,
+						YES_NO_QUESTION_OPTIONS,
+						YES_NO_QUESTION_OPTIONS[0]);
+				
+				// If "No", we do nothing
+				if (selected == 1) {
+					return;
 				}
 			}
+			
+			Sonificator.sonificate(Genre.getByName(selectedGenre), inputFile, outputFile);
+			JOptionPane.showMessageDialog(null,
+					props.getProperty("success"),
+					props.getProperty("successTitle"),
+					JOptionPane.INFORMATION_MESSAGE);
+
+			/*
+			 * We offer the possibility to open the created MIDI file
+			 * with the default program on the users' computer. But
+			 * first we need to check whether the users JVM implementation
+			 * allows us to do that.
+			 */
+			if (Desktop.isDesktopSupported()) {
+				
+				int selected = JOptionPane.showOptionDialog(null,
+						props.getProperty("play"),
+						props.getProperty("success"),
+						JOptionPane.DEFAULT_OPTION,
+						JOptionPane.INFORMATION_MESSAGE,
+						null,
+						YES_NO_QUESTION_OPTIONS,
+						YES_NO_QUESTION_OPTIONS[0]);
+
+				/*
+				 * If "Yes", we open the created reated MIDI file with the
+				 * default program
+				 */
+				if (selected == 0) {
+					Desktop.getDesktop().open(outputFile);
+				}
+			}
+
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null,
+					e.getMessage(),
+					props.getProperty("error"),
+					JOptionPane.ERROR_MESSAGE);
+		} catch (InvalidMidiDataException e) {
+			JOptionPane.showMessageDialog(null,
+					props.getProperty("corrupt"),
+					props.getProperty("corruptTitle"),
+					JOptionPane.ERROR_MESSAGE);
+		} catch (NotImplementedException e) {
+			JOptionPane.showMessageDialog(null,
+					String.format(props.getProperty("unfinished"), selectedGenre),
+					props.getProperty("error"),
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -225,7 +289,7 @@ public class GUI extends JFrame implements ActionListener {
 	 * The main-method creates a new Instance of GUI.
 	 */
 	public static void main(String[] args) {
-		new GUI("OMNI Sense - Sonifizierung");
+		new GUI();
 	}
 
 	/**
@@ -274,7 +338,11 @@ public class GUI extends JFrame implements ActionListener {
 					file = this.getSelectedFile();
 					return file;
 				} else {
-					JOptionPane.showMessageDialog(contentPane, "Die angegebene Datei existiert nicht.", "Information", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(
+							contentPane,
+							props.getProperty("fileNotExisting"),
+							props.getProperty("error"),
+							JOptionPane.INFORMATION_MESSAGE);
 					if (inputFile != null) {
 						return inputFile;
 					} else {
