@@ -23,9 +23,6 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import com.bragi.sonify.composer.lsystem.LSystemTest;
-import com.bragi.sonify.composer.riffology.KirnbergerDiceGameTest;
-import com.bragi.sonify.composer.riffology.MozartTrioDiceGameTest;
-import com.bragi.sonify.composer.riffology.MozartWaltzDiceGameTest;
 import com.bragi.sonify.composer.riffology.TestScenarioTest;
 
 /**
@@ -51,11 +48,9 @@ public class AppTest extends TestCase {
 		TestSuite s = new TestSuite();
 		s.addTest(new LSystemTest("testGenerate"));
 		
-		s.addTest(new KirnbergerDiceGameTest("testReproducabillity"));
-		s.addTest(new MozartTrioDiceGameTest("testReproducabillity"));
-		s.addTest(new MozartWaltzDiceGameTest("testReproducabillity"));
-		
 		s.addTest(new TestScenarioTest("testGeneratingMidi"));
+		s.addTest(new TestScenarioTest("testReproducibility"));
+		s.addTest(new TestScenarioTest("testPlayingTime"));
 		
 
 		return s;
