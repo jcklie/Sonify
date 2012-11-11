@@ -12,32 +12,13 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
-<<<<<<< HEAD
-<<<<<<< HEAD
- * Martin Kiessling - Everything
-=======
  * Dominik Kuenne - First 'working' very basic prototype
  * Martin Kiessling - Everything else
->>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
-=======
- * Dominik Kuenne - First 'working' very basic prototype
- * Martin Kiessling - Everything else
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
  * 
  *******************************************************************************/
 
 package com.bragi.sonify;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-
-=======
-=======
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -50,46 +31,23 @@ import java.util.EnumSet;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.swing.ImageIcon;
-<<<<<<< HEAD
->>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
-=======
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import javax.swing.JLabel;
->>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
-=======
-import javax.swing.JLabel;
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/**
- * This class is the GUI of the sonificator.
- * 
-=======
-=======
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * This class is the GUI of the sonificator.
  * 
  * @author Dominik Kuenne
-<<<<<<< HEAD
->>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
-=======
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
  * @author Martin Kiessling
  */
 public class GUI extends JFrame implements ActionListener {
@@ -104,17 +62,6 @@ public class GUI extends JFrame implements ActionListener {
 	private JButton inputButton;
 	private JButton outputButton;
 	private JButton startSonificationButton;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-	/* variables */
-	private final String[] genres = { "Drama", "Kinderbuch", "Lyrik", "Roman",
-			"Sachbuch" };
-	private File inputFile;
-	private File outputFile;
-=======
-=======
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 	private JPanel corporatePane;
 	private ImageIcon corporateLogo;
 	private JLabel corporateName;
@@ -128,10 +75,6 @@ public class GUI extends JFrame implements ActionListener {
 	private File inputFile;
 	private File outputFile;
 	private String selectedGenre;
-<<<<<<< HEAD
->>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
-=======
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 
 	/**
 	 * constructor of GUI
@@ -146,17 +89,7 @@ public class GUI extends JFrame implements ActionListener {
 	 * This function initializes the GUI components
 	 */
 	private void initComponents() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-		String[] genreStrings = new String[ genres.size()];
-=======
 		String[] genreStrings = new String[genres.size()];
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
-=======
-		String[] genreStrings = new String[genres.size()];
->>>>>>> master
 		int i = 0;
 		for (Genre g : genres) {
 			genreStrings[i++] = g.name;
@@ -170,10 +103,6 @@ public class GUI extends JFrame implements ActionListener {
 		corporatePane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		corporatePane.setLayout(new GridLayout(1, 2, 5, 5));
 
-<<<<<<< HEAD
->>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
-=======
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 		// initialize contentPane
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -181,19 +110,9 @@ public class GUI extends JFrame implements ActionListener {
 
 		// frame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-<<<<<<< HEAD
-<<<<<<< HEAD
-		setContentPane(contentPane);
-=======
 		setLayout(new BorderLayout());
 		add(corporatePane, BorderLayout.NORTH);
 		add(contentPane, BorderLayout.SOUTH);
->>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
-=======
-		setLayout(new BorderLayout());
-		add(corporatePane, BorderLayout.NORTH);
-		add(contentPane, BorderLayout.SOUTH);
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 		setResizable(false);
 
 		// initialize components
@@ -203,20 +122,7 @@ public class GUI extends JFrame implements ActionListener {
 		outputField.setEditable(false);
 		inputButton = new JButton("Eingabedatei...");
 		outputButton = new JButton("Ausgabedatei...");
-<<<<<<< HEAD
-<<<<<<< HEAD
-		startSonificationButton = new JButton("Audifikation starten");
-<<<<<<< HEAD
-		genreChooser = new JComboBox<String>(genres);
-
-		// add components to contentPane
-=======
-=======
 		startSonificationButton = new JButton("Sonifizierung starten");
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
-=======
-		startSonificationButton = new JButton("Sonifizierung starten");
->>>>>>> master
 		genreChooser = new JComboBox<String>(genreStrings);
 		corporateLogo = new ImageIcon(omnisenseIcon);
 		corporateName = new JLabel(
@@ -227,10 +133,6 @@ public class GUI extends JFrame implements ActionListener {
 		// add components to contentPane
 		corporatePane.add(corporateName);
 		corporatePane.add(new JLabel(corporateLogo));
-<<<<<<< HEAD
->>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
-=======
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 		contentPane.add(inputField);
 		contentPane.add(inputButton);
 		contentPane.add(outputField);
@@ -239,58 +141,6 @@ public class GUI extends JFrame implements ActionListener {
 		contentPane.add(startSonificationButton);
 
 		pack();
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-		// add actionListeners to buttons
-		inputButton.addActionListener(this);
-		outputButton.addActionListener(this);
-		startSonificationButton.addActionListener(this);
-	}
-
-	/**
-	 * Overrides the actionPerformed-method and determines which button was
-	 * pressed to start the right action.
-	 */
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		Object src = arg0.getSource();
-		if (src == inputButton) {
-			inputFile = new FileChooser().inputFile();
-			if (inputFile != null) {
-				inputField.setText(inputFile.getAbsolutePath());
-			} else {
-				inputField.setText(null);
-			}
-		} else if (src == outputButton) {
-			outputFile = new FileChooser().outputFile();
-			if (outputFile != null) {
-				outputField.setText(outputFile.getAbsolutePath());
-			} else {
-				outputField.setText(null);
-			}
-		} else if (src == startSonificationButton) {
-			// Do something
-		}
-	}
-
-	/**
-	 * The main-method creates a new Instance of GUI.
-	 */
-	public static void main(String[] args) {
-		new GUI("Brafisoft - Sonify");
-	}
-
-	/**
-	 * This class is a simple FileChooser.
-	 * 
-	 * @param file
-	 *            is either the input or the output file
-	 * @param FilenameFilter
-	 *            filters only textfiles for the open-dialog
-=======
-=======
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
 
 		// add actionListeners to buttons
 		inputButton.addActionListener(this);
@@ -341,7 +191,7 @@ public class GUI extends JFrame implements ActionListener {
 										null,
 										"Die Datei mit dem Namen "
 												+ outputFile.getAbsolutePath()
-												+ "existiert bereits. Wollen Sie diese wirklich überschreiben?",
+												+ " existiert bereits. Wollen Sie diese wirklich \u00FCberschreiben?",
 										"Ausgabedatei existiert bereits!",
 										JOptionPane.DEFAULT_OPTION,
 										JOptionPane.INFORMATION_MESSAGE, null,
@@ -371,7 +221,7 @@ public class GUI extends JFrame implements ActionListener {
 									null,
 									"Der Algorithmus zum Generieren von "
 											+ selectedGenre
-											+ " ist noch nicht implementiert! Bitte wählen Sie eine anderes Genre aus.",
+											+ " ist noch nicht implementiert! Bitte w\u00E4hlen Sie eine anderes Genre aus.",
 									"Fehler", JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -388,22 +238,10 @@ public class GUI extends JFrame implements ActionListener {
 	/**
 	 * This class is a simple FileChooser.
 	 * 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	 * @param file is either the input or the output file
-	 * @param FilenameFilter filters only textfiles for the open-dialog
->>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
-=======
-=======
->>>>>>> master
 	 * @param file
 	 *            is either the input or the output file
 	 * @param FilenameFilter
 	 *            filters only textfiles for the open-dialog
-<<<<<<< HEAD
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
-=======
->>>>>>> master
 	 * @author Martin Kiessling
 	 */
 	private class FileChooser extends JFileChooser {
@@ -412,32 +250,11 @@ public class GUI extends JFrame implements ActionListener {
 		/* variables */
 		private File file;
 		private FileFilter filterTXT = new FileFilter() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
-			@Override
-			public boolean accept(File f) {
-				return f.isDirectory()
-						|| f.getName().toLowerCase().endsWith(".txt");
-<<<<<<< HEAD
-=======
-			
-			@Override
-			public boolean accept(File f) {
-				return f.isDirectory() || f.getName().toLowerCase().endsWith(".txt");
->>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
-=======
->>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
-=======
 
 			@Override
 			public boolean accept(File f) {
 				return f.isDirectory()
 						|| f.getName().toLowerCase().endsWith(".txt");
->>>>>>> master
 			}
 
 			@Override
