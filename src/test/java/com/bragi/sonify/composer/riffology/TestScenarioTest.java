@@ -18,6 +18,15 @@
 
 package com.bragi.sonify.composer.riffology;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.Sequence;
+
+import com.bragi.sonify.composer.AComposer;
+
 import junit.framework.TestCase;
 
 /**
@@ -25,6 +34,20 @@ import junit.framework.TestCase;
  * functional specifications document. (As far as software tests can achieve it).
  */
 public class TestScenarioTest extends TestCase {
+	
+	private File getTestFile(String name) {
+		URL url = this.getClass().getResource("/literature/" + name);
+		return new File(url.getFile());
+	}
+	
+	private final File drama = getTestFile("drama.txt");
+	private final File kidsBook = getTestFile("kinderbuch.txt");
+	private final File lyric = getTestFile("lyrik.txt");
+	private final File novel = getTestFile("roman.txt");
+	private final File nonFiction = getTestFile("sachbuch.txt");
+	
+	private static final long THIRTY_SECONDS = 30000;
+	private static final long TEN_MINUTES =  600000000;
 	
 	public TestScenarioTest(String testName) {
 		super(testName);
@@ -39,6 +62,110 @@ public class TestScenarioTest extends TestCase {
 	 *  If the file is invalid MIDI, an InvalidMidiDataException is thrown and the test fails.
 	 */
 	public void testGeneratingMidi() {
+		
+		
+	}
+	
+	/**
+	 * /TS0020/ Playing time
+	 * 
+	 * The playing time of a sequence has to be 
+	 * @throws IOException 
+	 * @throws InvalidMidiDataException 
+	 */
+	public void testPlayingTime() throws IOException, InvalidMidiDataException {
+		AComposer composer;
+		Sequence sequence;
+		long playtime;
+		
+		/*
+		 * Mozart trio composer
+		 */
+		
+		composer =  new MozartTrioDiceGame(drama);		
+		sequence = composer.createSequence();	
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartTrioDiceGame(kidsBook);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartTrioDiceGame(lyric);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartTrioDiceGame(novel);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartTrioDiceGame(nonFiction);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		/*
+		 * Mozart waltz composer
+		 */
+		
+		composer =  new MozartWaltzDiceGame(drama);		
+		sequence = composer.createSequence();	
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartWaltzDiceGame(kidsBook);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartWaltzDiceGame(lyric);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartWaltzDiceGame(novel);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartWaltzDiceGame(nonFiction);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		/*
+		 * Kirnberger composer
+		 */
+		
+		composer =  new KirnbergerDiceGame(drama);		
+		sequence = composer.createSequence();	
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new KirnbergerDiceGame(kidsBook);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new KirnbergerDiceGame(lyric);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new KirnbergerDiceGame(novel);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new KirnbergerDiceGame(nonFiction);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+
+		
 		
 		
 	}
