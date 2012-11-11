@@ -20,6 +20,7 @@
 package com.bragi.sonify;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -67,11 +68,12 @@ public class GUI extends JFrame implements ActionListener {
 	private JLabel corporateName;
 
 	private static final String ICON_PATH = "etc/img/OmniSenseAuge.png";
+	
+	private static final Object[] YES_NO_QUESTION_OPTIONS = { "Ja", "Nein" };
 
 	/* variables */
 	private final EnumSet<Genre> genres = EnumSet.allOf(Genre.class);
-	private final Image omnisenseIcon = new ImageIcon(ICON_PATH).getImage()
-			.getScaledInstance(150, 75, java.awt.Image.SCALE_SMOOTH);
+	private final Image omnisenseIcon = new ImageIcon(ICON_PATH).getImage().getScaledInstance(150, 75, java.awt.Image.SCALE_SMOOTH);
 	private File inputFile;
 	private File outputFile;
 	private String selectedGenre;
@@ -125,9 +127,7 @@ public class GUI extends JFrame implements ActionListener {
 		startSonificationButton = new JButton("Sonifizierung starten");
 		genreChooser = new JComboBox<String>(genreStrings);
 		corporateLogo = new ImageIcon(omnisenseIcon);
-		corporateName = new JLabel(
-				"<html>OMNI <FONT COLOR=#009933>Sense</FONT></html>",
-				JLabel.CENTER);
+		corporateName = new JLabel("<html>OMNI <FONT COLOR=#009933>Sense</FONT></html>", JLabel.CENTER);
 		corporateName.setFont(new Font("Microsoft Tai Le", Font.BOLD, 20));
 
 		// add components to contentPane
@@ -181,10 +181,10 @@ public class GUI extends JFrame implements ActionListener {
 				selectedGenre = (String) selected[0];
 			}
 		} else if (src == startSonificationButton) {
-			if (inputFile != null && outputFile != null
-					&& selectedGenre != null) {
+			if (inputFile != null && outputFile != null && selectedGenre != null) {
 				try {
 					if (outputFile.exists()) {
+<<<<<<< HEAD
 						Object[] options = { "Ja", "Nein" };
 						int selected = JOptionPane
 								.showOptionDialog(
@@ -196,26 +196,39 @@ public class GUI extends JFrame implements ActionListener {
 										JOptionPane.DEFAULT_OPTION,
 										JOptionPane.INFORMATION_MESSAGE, null,
 										options, options[0]);
+=======
+
+						int selected = JOptionPane.showOptionDialog(null, "Die Datei mit dem Namen " + outputFile.getAbsolutePath()
+								+ " existiert bereits. Wollen Sie diese wirklich \u00FCberschreiben?", "Ausgabedatei existiert bereits!",
+								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, YES_NO_QUESTION_OPTIONS, YES_NO_QUESTION_OPTIONS[0]);
+						
+						// No
+>>>>>>> dd07a1a2752d2efc6335643ba8e5ed8cc553b4a8
 						if (selected == 1) {
 							return;
 						}
 					}
-					Sonificator.sonificate(Genre.getByName(selectedGenre),
-							inputFile, outputFile);
-					JOptionPane.showMessageDialog(null,
-							"Sonifizierung wurde erfolgreich abgeschlossen!",
-							"Erfolg", JOptionPane.INFORMATION_MESSAGE);
+					Sonificator.sonificate(Genre.getByName(selectedGenre), inputFile, outputFile);
+					JOptionPane.showMessageDialog(null, "Sonifizierung wurde erfolgreich abgeschlossen!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+					
+					if( Desktop.isDesktopSupported()) {						
+						int selected = JOptionPane.showOptionDialog(null, "Wollen Sie die erzeugte MIDI-Datei abspielen?", "Erfolg",
+								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, YES_NO_QUESTION_OPTIONS, YES_NO_QUESTION_OPTIONS[0]);
+						
+						// yes
+						if (selected == 0) {
+							Desktop.getDesktop().open(outputFile);
+						}
+					}
+					
 				} catch (IOException e) {
-					JOptionPane.showMessageDialog(null, e.getMessage(),
-							"Fehler", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
 				} catch (InvalidMidiDataException e) {
-					JOptionPane
-							.showMessageDialog(
-									null,
-									"Die Dateien zum Generieren der Musik sind korrupt. Wenden Sie sich an den IT-Support unter der Nummer 867-5309",
-									"Installation korrupt!",
-									JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,
+							"Die Dateien zum Generieren der Musik sind korrupt. Wenden Sie sich an den IT-Support unter der Nummer 867-5309",
+							"Installation korrupt!", JOptionPane.ERROR_MESSAGE);
 				} catch (NotImplementedException e) {
+<<<<<<< HEAD
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -223,6 +236,10 @@ public class GUI extends JFrame implements ActionListener {
 											+ selectedGenre
 											+ " ist noch nicht implementiert! Bitte w\u00E4hlen Sie eine anderes Genre aus.",
 									"Fehler", JOptionPane.ERROR_MESSAGE);
+=======
+					JOptionPane.showMessageDialog(null, "Der Algorithmus zum Generieren von " + selectedGenre
+							+ " ist noch nicht implementiert! Bitte w\u00E4hlen Sie eine anderes Genre aus.", "Fehler", JOptionPane.ERROR_MESSAGE);
+>>>>>>> dd07a1a2752d2efc6335643ba8e5ed8cc553b4a8
 				}
 			}
 		}
@@ -238,10 +255,8 @@ public class GUI extends JFrame implements ActionListener {
 	/**
 	 * This class is a simple FileChooser.
 	 * 
-	 * @param file
-	 *            is either the input or the output file
-	 * @param FilenameFilter
-	 *            filters only textfiles for the open-dialog
+	 * @param file is either the input or the output file
+	 * @param FilenameFilter filters only textfiles for the open-dialog
 	 * @author Martin Kiessling
 	 */
 	private class FileChooser extends JFileChooser {
@@ -253,8 +268,7 @@ public class GUI extends JFrame implements ActionListener {
 
 			@Override
 			public boolean accept(File f) {
-				return f.isDirectory()
-						|| f.getName().toLowerCase().endsWith(".txt");
+				return f.isDirectory() || f.getName().toLowerCase().endsWith(".txt");
 			}
 
 			@Override
@@ -284,9 +298,7 @@ public class GUI extends JFrame implements ActionListener {
 					file = this.getSelectedFile();
 					return file;
 				} else {
-					JOptionPane.showMessageDialog(contentPane,
-							"Die angegebene Datei existiert nicht.",
-							"Information", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(contentPane, "Die angegebene Datei existiert nicht.", "Information", JOptionPane.INFORMATION_MESSAGE);
 					if (inputFile != null) {
 						return inputFile;
 					} else {
@@ -311,8 +323,7 @@ public class GUI extends JFrame implements ActionListener {
 			int state = this.showSaveDialog(contentPane);
 			if (state == JFileChooser.APPROVE_OPTION) {
 				file = this.getSelectedFile();
-				if (!(this.getSelectedFile().getName().toLowerCase()
-						.endsWith(".mid"))) {
+				if (!(this.getSelectedFile().getName().toLowerCase().endsWith(".mid"))) {
 					file = new File(file.getPath() + ".mid");
 				}
 				return file;
