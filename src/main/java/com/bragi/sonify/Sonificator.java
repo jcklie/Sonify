@@ -85,9 +85,8 @@ public class Sonificator {
 				return new MozartTrioDiceGame(f);
 			case NONFICTION:
 				return new MozartWaltzDiceGame(f);
-			case NOVEL:
-				throw new NotImplementedException();
-				//return new KirnbergerDiceGame(f);
+			case NOVEL:				
+				return new KirnbergerDiceGame(f);
 			default:
 				// Should never happen
 				throw new InvalidParameterException("The given genre is invalid!: " + genre );		

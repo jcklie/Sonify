@@ -41,7 +41,7 @@ public class MidiAppender {
 	private long offset;
 	
 	/**
-	 * Creates a new MidiAppender istance while specifying the resolution of the
+	 * Creates a new MidiAppender instance while specifying the resolution of the
 	 * MIDI sequence to generate.
 	 * 
 	 * THIS HAS TO BE THE SAME RESOLUTION AS THE ONE OF ALL FOLLOWING FILES
@@ -64,7 +64,7 @@ public class MidiAppender {
 	 * @throws IOException
 	 */
 	public void addFile(File f) throws InvalidMidiDataException, IOException {
-		Sequence seq = MidiSystem.getSequence(f);
+		Sequence seq = MidiSystem.getSequence(f);		
 
 		for( Track t : seq.getTracks()) {
 			for( int i = 0; i < t.size(); i++) {
