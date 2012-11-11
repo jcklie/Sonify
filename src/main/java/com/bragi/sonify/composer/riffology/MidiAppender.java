@@ -24,6 +24,7 @@ import java.io.InputStream;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiEvent;
+import javax.sound.midi.MidiMessage;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Track;
@@ -39,6 +40,8 @@ public class MidiAppender {
 	private Sequence sequence;
 	private Track track;
 	private long offset;
+	
+	private static final int MIDI_NOTE_ON = 144;
 	
 	/**
 	 * Creates a new MidiAppender instance while specifying the resolution of the
@@ -63,18 +66,29 @@ public class MidiAppender {
 	 * @throws InvalidMidiDataException
 	 * @throws IOException
 	 */
-	public void addFile(InputStream stream) throws InvalidMidiDataException, IOException {
-		Sequence seq = MidiSystem.getSequence(stream);		
+	public void addFile(InputStream stream) throws InvalidMidiDataException, IOException {		
+		Sequence seq = MidiSystem.getSequence(stream);
 
 		for( Track t : seq.getTracks()) {
 			for( int i = 0; i < t.size(); i++) {
-				MidiEvent event = t.get(i);				
+				MidiEvent event = t.get(i);	
+				MidiMessage m = event.getMessage();
+				
+				/*
+				 * We do not want to add zero notes, since they destroy the flow
+				 * inbetween two midi measure files
+				 */
+				if( m.getStatus() == MIDI_NOTE_ON) {					
+					if( m.getMessage()[1] == 0 || m.getMessage()[2] == 0) {
+						break;
+					}
+				}
+				
 				long tick = event.getTick();
 				event.setTick(tick + offset);
-				track.add(event);
+				track.add(event);				
 			}
-		}
-		
+		}		
 		offset = sequence.getTickLength();
 	}
 

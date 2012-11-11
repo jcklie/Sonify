@@ -64,7 +64,7 @@ public class MozartTrioDiceGame extends AComposer {
 	private static final int NUM_MEASURES = 16;
 	private static final int MIDI_RESOLUTION = 480;
 	private static final String PATH_TO_MIDI_FORMAT = "/midi/mozart_trio/T%d.mid";
-	private static final int REPEATS = 2;
+	private static final int REPEATS = 1;
 	
 	static {
 		measureMapList = new LinkedList<Map<Integer, Integer>>();
@@ -277,7 +277,7 @@ public class MozartTrioDiceGame extends AComposer {
 		MidiAppender appender =  new MidiAppender(MIDI_RESOLUTION);
 		Random r = new Random( analyzer.hashCode());
 		
-		for( int repeat = 0; repeat < REPEATS; repeat++) {
+		for( int repeat = 0; repeat <= REPEATS; repeat++) {
 			for(int i = 0; i < NUM_MEASURES; i++) {
 				// One dice roll
 				int diceRoll = r.nextInt(6) + 1;

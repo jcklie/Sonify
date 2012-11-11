@@ -382,11 +382,5 @@ public class TestScenarioTest extends TestCase {
 		
 		FileAssert.assertBinaryEquals(firstFile, secondFile);		
 	}
-	
-	
-	
-	
-
-
 
 }

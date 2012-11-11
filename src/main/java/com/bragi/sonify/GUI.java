@@ -47,8 +47,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import com.bragi.sonify.util.FileUtil;
 
 /**
@@ -79,6 +77,8 @@ public class GUI extends JFrame implements ActionListener {
 	 * src/main/resources/labels.properties
 	 */
 	private final Properties props;
+	
+	private static String OS = System.getProperty("os.name").toLowerCase();
 
 	private static final String ICON_PATH = "/img/OmniSenseAuge.png";
 	
@@ -263,7 +263,7 @@ public class GUI extends JFrame implements ActionListener {
 			 * first we need to check whether the users JVM implementation
 			 * allows us to do that.
 			 */
-			if (Desktop.isDesktopSupported()) {
+			if (!OS.contains("win") && Desktop.isDesktopSupported()) {
 				
 				int selected = JOptionPane.showOptionDialog(null,
 						props.getProperty("play"),
@@ -272,13 +272,13 @@ public class GUI extends JFrame implements ActionListener {
 						JOptionPane.INFORMATION_MESSAGE,
 						null,
 						YES_NO_QUESTION_OPTIONS,
-						YES_NO_QUESTION_OPTIONS[0]);
+						YES_NO_QUESTION_OPTIONS[0]);				
 
 				/*
 				 * If "Yes", we open the created MIDI file with the
 				 * default program
 				 */
-				if (selected == 0) {
+				if (selected == 0) {					
 					Desktop.getDesktop().open(outputFile);
 				}
 			}
@@ -293,9 +293,9 @@ public class GUI extends JFrame implements ActionListener {
 					props.getProperty("corrupt"),
 					props.getProperty("corruptTitle"),
 					JOptionPane.ERROR_MESSAGE);
-		} catch (NotImplementedException e) {
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,
-					String.format(props.getProperty("unfinished"), selectedGenre),
+					e.getStackTrace(),
 					props.getProperty("error"),
 					JOptionPane.ERROR_MESSAGE);
 		}

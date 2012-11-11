@@ -1,0 +1,153 @@
+
+/*
+ * Measure 1
+ */
+
+measureMap = measureMapList.get(0);
+measureMap.put(2, 70);
+measureMap.put(3, 10);
+measureMap.put(4, 33);
+measureMap.put(5, 36);
+measureMap.put(6, 105);
+measureMap.put(7, 165);
+measureMap.put(8, 7);
+measureMap.put(9, 142);
+measureMap.put(10, 99);
+measureMap.put(11, 85);
+measureMap.put(12, 145);
+
+/*
+ * Measure 2
+ */
+
+measureMap = measureMapList.get(1);
+measureMap.put(2, 155);
+measureMap.put(3, 148);
+measureMap.put(4, 22);
+measureMap.put(5, 4);
+measureMap.put(6, 136);
+measureMap.put(7, 144);
+measureMap.put(8, 116);
+measureMap.put(9, 66);
+measureMap.put(10, 93);
+measureMap.put(11, 61);
+measureMap.put(12, 50);
+
+/*
+ * Measure 3
+ */
+
+measureMap = measureMapList.get(2);
+measureMap.put(2, 3);
+measureMap.put(3, 28);
+measureMap.put(4, 176);
+measureMap.put(5, 157);
+measureMap.put(6, 91);
+measureMap.put(7, 104);
+measureMap.put(8, 133);
+measureMap.put(9, 124);
+measureMap.put(10, 55);
+measureMap.put(11, 34);
+measureMap.put(12, 79);
+
+/*
+ * Measure 4
+ */
+
+measureMap = measureMapList.get(3);
+measureMap.put(2, 162);
+measureMap.put(3, 135);
+measureMap.put(4, 62);
+measureMap.put(5, 38);
+measureMap.put(6, 138);
+measureMap.put(7, 87);
+measureMap.put(8, 72);
+measureMap.put(9, 26);
+measureMap.put(10, 29);
+measureMap.put(11, 119);
+measureMap.put(12, 175);
+
+/*
+ * Measure 5
+ */
+
+measureMap = measureMapList.get(4);
+measureMap.put(2, 170);
+measureMap.put(3, 173);
+measureMap.put(4, 126);
+measureMap.put(5, 9);
+measureMap.put(6, 19);
+measureMap.put(7, 107);
+measureMap.put(8, 141);
+measureMap.put(9, 84);
+measureMap.put(10, 51);
+measureMap.put(11, 46);
+measureMap.put(12, 76);
+
+/*
+ * Measure 6
+ */
+
+measureMap = measureMapList.get(5);
+measureMap.put(2, 13);
+measureMap.put(3, 169);
+measureMap.put(4, 31);
+measureMap.put(5, 151);
+measureMap.put(6, 134);
+measureMap.put(7, 128);
+measureMap.put(8, 94);
+measureMap.put(9, 75);
+measureMap.put(10, 42);
+measureMap.put(11, 59);
+measureMap.put(12, 113);
+
+/*
+ * Measure 7
+ */
+
+measureMap = measureMapList.get(6);
+measureMap.put(2, 166);
+measureMap.put(3, 174);
+measureMap.put(4, 24);
+measureMap.put(5, 32);
+measureMap.put(6, 101);
+measureMap.put(7, 48);
+measureMap.put(8, 80);
+measureMap.put(9, 103);
+measureMap.put(10, 110);
+measureMap.put(11, 54);
+measureMap.put(12, 88);
+
+/*
+ * Measure 8
+ */
+
+measureMap = measureMapList.get(7);
+measureMap.put(2, 95);
+measureMap.put(3, 2);
+measureMap.put(4, 159);
+measureMap.put(5, 17);
+measureMap.put(6, 154);
+measureMap.put(7, 109);
+measureMap.put(8, 129);
+measureMap.put(9, 96);
+measureMap.put(10, 108);
+measureMap.put(11, 60);
+measureMap.put(12, 53);
+
+/*
+ * Measure 9
+ */
+
+measureMap = measureMapList.get(8);
+measureMap.put(2, 5);
+measureMap.put(3, 20);
+measureMap.put(4, 41);
+measureMap.put(5, 171);
+measureMap.put(6, 146);
+measureMap.put(7, 74);
+measureMap.put(8, 65);
+measureMap.put(9, 127);
+measureMap.put(10, 98);
+measureMap.put(11, 47);
+measureMap.put(12, 118);

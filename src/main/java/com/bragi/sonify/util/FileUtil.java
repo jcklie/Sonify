@@ -59,7 +59,7 @@ public class FileUtil {
 	public static InputStream getResourcetStream(String path) {
 		if( !path.startsWith("/")) {
 			path = "/" + path;
-		}
+		}		
 		
 		return FileUtil.class.getResourceAsStream(path);		
 	}

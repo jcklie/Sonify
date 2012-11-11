@@ -26,10 +26,10 @@ import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import com.bragi.sonify.composer.AComposer;
 import com.bragi.sonify.composer.riffology.KirnbergerDiceGame;
+import com.bragi.sonify.composer.riffology.MozartContraDanceOneDiceGame;
+import com.bragi.sonify.composer.riffology.MozartContraDanceTwoDiceGame;
 import com.bragi.sonify.composer.riffology.MozartTrioDiceGame;
 import com.bragi.sonify.composer.riffology.MozartWaltzDiceGame;
 
@@ -63,7 +63,7 @@ public class Sonificator {
 		AComposer composer = chooseComposer(genre, input);
 		Sequence sequence = composer.createSequence();
 		
-		MidiSystem.write( sequence, 1, output);
+		MidiSystem.write( sequence, 0, output);
 	}
 	
 	/**
@@ -78,9 +78,9 @@ public class Sonificator {
 	private static AComposer chooseComposer(Genre genre, File f) throws IOException {		
 		switch( genre ) {
 			case DRAMA:
-				throw new NotImplementedException();
+				return new MozartContraDanceOneDiceGame(f);
 			case KIDS_BOOK:
-				throw new NotImplementedException(); 
+				return new MozartContraDanceTwoDiceGame(f);
 			case LYRICS:
 				return new MozartTrioDiceGame(f);
 			case NONFICTION:
