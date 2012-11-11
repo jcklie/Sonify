@@ -68,6 +68,8 @@ public class GUI extends JFrame implements ActionListener {
 	private JLabel corporateName;
 
 	private static final String ICON_PATH = "etc/img/OmniSenseAuge.png";
+	
+	private static final Object[] YES_NO_QUESTION_OPTIONS = { "Ja", "Nein" };
 
 	/* variables */
 	private final EnumSet<Genre> genres = EnumSet.allOf(Genre.class);
@@ -182,10 +184,10 @@ public class GUI extends JFrame implements ActionListener {
 			if (inputFile != null && outputFile != null && selectedGenre != null) {
 				try {
 					if (outputFile.exists()) {
-						Object[] options = { "Ja", "Nein" };
+
 						int selected = JOptionPane.showOptionDialog(null, "Die Datei mit dem Namen " + outputFile.getAbsolutePath()
 								+ " existiert bereits. Wollen Sie diese wirklich \u00FCberschreiben?", "Ausgabedatei existiert bereits!",
-								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, YES_NO_QUESTION_OPTIONS, YES_NO_QUESTION_OPTIONS[0]);
 						
 						// No
 						if (selected == 1) {
@@ -195,13 +197,14 @@ public class GUI extends JFrame implements ActionListener {
 					Sonificator.sonificate(Genre.getByName(selectedGenre), inputFile, outputFile);
 					JOptionPane.showMessageDialog(null, "Sonifizierung wurde erfolgreich abgeschlossen!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
 					
-					Object[] options = { "Ja", "Nein" };
-					int selected = JOptionPane.showOptionDialog(null, "Wollen Sie die erzeugte MIDI-Datei abspielen?", "Erfolg",
-							JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-					
-					// yes
-					if (selected == 0) {
-						Desktop.getDesktop().open(outputFile);
+					if( Desktop.isDesktopSupported()) {						
+						int selected = JOptionPane.showOptionDialog(null, "Wollen Sie die erzeugte MIDI-Datei abspielen?", "Erfolg",
+								JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, YES_NO_QUESTION_OPTIONS, YES_NO_QUESTION_OPTIONS[0]);
+						
+						// yes
+						if (selected == 0) {
+							Desktop.getDesktop().open(outputFile);
+						}
 					}
 					
 				} catch (IOException e) {
