@@ -191,7 +191,7 @@ public class GUI extends JFrame implements ActionListener {
 										null,
 										"Die Datei mit dem Namen "
 												+ outputFile.getAbsolutePath()
-												+ "existiert bereits. Wollen Sie diese wirklich überschreiben?",
+												+ " existiert bereits. Wollen Sie diese wirklich \u00FCberschreiben?",
 										"Ausgabedatei existiert bereits!",
 										JOptionPane.DEFAULT_OPTION,
 										JOptionPane.INFORMATION_MESSAGE, null,
@@ -221,7 +221,7 @@ public class GUI extends JFrame implements ActionListener {
 									null,
 									"Der Algorithmus zum Generieren von "
 											+ selectedGenre
-											+ " ist noch nicht implementiert! Bitte wählen Sie eine anderes Genre aus.",
+											+ " ist noch nicht implementiert! Bitte w\u00E4hlen Sie eine anderes Genre aus.",
 									"Fehler", JOptionPane.ERROR_MESSAGE);
 				}
 			}
