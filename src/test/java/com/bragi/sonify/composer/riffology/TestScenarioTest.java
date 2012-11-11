@@ -36,7 +36,7 @@ public class TestScenarioTest extends TestCase {
 	 * This tests uses every implementation of the AComposer, generates a MIDI file
 	 * and saves it afterwards. It is then imported with the MidiFileReader class.
 	 * 
-	 *  If the is invalid MIDI, an InvalidMidiDataException is thrown and the test fails.
+	 *  If the file is invalid MIDI, an InvalidMidiDataException is thrown and the test fails.
 	 */
 	public void testGeneratingMidi() {
 		

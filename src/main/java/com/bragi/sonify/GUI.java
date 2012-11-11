@@ -148,11 +148,15 @@ public class GUI extends JFrame implements ActionListener {
 	private void initComponents() {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		String[] genreStrings = new String[ genres.size()];
 =======
 		String[] genreStrings = new String[genres.size()];
 >>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
+=======
+		String[] genreStrings = new String[genres.size()];
+>>>>>>> master
 		int i = 0;
 		for (Genre g : genres) {
 			genreStrings[i++] = g.name;
@@ -200,6 +204,7 @@ public class GUI extends JFrame implements ActionListener {
 		inputButton = new JButton("Eingabedatei...");
 		outputButton = new JButton("Ausgabedatei...");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		startSonificationButton = new JButton("Audifikation starten");
 <<<<<<< HEAD
 		genreChooser = new JComboBox<String>(genres);
@@ -209,6 +214,9 @@ public class GUI extends JFrame implements ActionListener {
 =======
 		startSonificationButton = new JButton("Sonifizierung starten");
 >>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
+=======
+		startSonificationButton = new JButton("Sonifizierung starten");
+>>>>>>> master
 		genreChooser = new JComboBox<String>(genreStrings);
 		corporateLogo = new ImageIcon(omnisenseIcon);
 		corporateName = new JLabel(
@@ -381,15 +389,21 @@ public class GUI extends JFrame implements ActionListener {
 	 * This class is a simple FileChooser.
 	 * 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	 * @param file is either the input or the output file
 	 * @param FilenameFilter filters only textfiles for the open-dialog
 >>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
 =======
+=======
+>>>>>>> master
 	 * @param file
 	 *            is either the input or the output file
 	 * @param FilenameFilter
 	 *            filters only textfiles for the open-dialog
+<<<<<<< HEAD
 >>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
+=======
+>>>>>>> master
 	 * @author Martin Kiessling
 	 */
 	private class FileChooser extends JFileChooser {
@@ -398,6 +412,7 @@ public class GUI extends JFrame implements ActionListener {
 		/* variables */
 		private File file;
 		private FileFilter filterTXT = new FileFilter() {
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -416,6 +431,13 @@ public class GUI extends JFrame implements ActionListener {
 >>>>>>> 5a91adfa438365421f57d8216cd268af8d3dcb25
 =======
 >>>>>>> 2597724a848be79cc3d51885d7490387dcdf4ab4
+=======
+
+			@Override
+			public boolean accept(File f) {
+				return f.isDirectory()
+						|| f.getName().toLowerCase().endsWith(".txt");
+>>>>>>> master
 			}
 
 			@Override
