@@ -21,13 +21,19 @@ package com.bragi.sonify.composer.riffology;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
 
-import com.bragi.sonify.composer.AComposer;
-
 import junit.framework.TestCase;
+import junitx.framework.FileAssert;
+
+import com.bragi.sonify.composer.AComposer;
 
 /**
  * This unit test is home of the tests which are described in chapter 10 of the
@@ -49,8 +55,22 @@ public class TestScenarioTest extends TestCase {
 	private static final long THIRTY_SECONDS = 30000;
 	private static final long TEN_MINUTES =  600000000;
 	
+	private List<File> tempFiles;
+	
 	public TestScenarioTest(String testName) {
 		super(testName);
+	}
+	
+	@Override
+	protected void setUp() throws Exception {
+		tempFiles = new LinkedList<File>();
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		for( File f : tempFiles ) {
+			f.delete();
+		}
 	}
 	
 	/**
@@ -69,7 +89,8 @@ public class TestScenarioTest extends TestCase {
 	/**
 	 * /TS0020/ Playing time
 	 * 
-	 * The playing time of a sequence has to be 
+	 * The playing time of a sequence has to be at least 30 seconds and at most 10 minutes.
+	 * 
 	 * @throws IOException 
 	 * @throws InvalidMidiDataException 
 	 */
@@ -163,12 +184,204 @@ public class TestScenarioTest extends TestCase {
 		composer =  new KirnbergerDiceGame(nonFiction);		
 		sequence = composer.createSequence();		
 		playtime = sequence.getMicrosecondLength();
-		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
-
-		
-		
-		
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);		
 	}
+	
+	/**
+	 * /TS0030/ Reproducibility
+	 * 
+	 * Identic input yields identic output.
+	 * 
+	 * In this test, a text is sonified twice with the same text and the both
+	 * results are compared binary. Since the result of sonifiing the same text
+	 * twice should yield the exact same file, this case is asserted.
+	 * 
+	 * @throws IOException
+	 * @throws InvalidMidiDataException
+	 */
+	public void testReproducibility() throws IOException, InvalidMidiDataException {
+		AComposer firstComposer;
+		AComposer secondComposer;
+		
+		Sequence firstSequence;
+		Sequence secondSequence;
+		
+		Path firstTempPath;
+		Path secondTempPath;
+		
+		File firstFile;
+		File secondFile;
+		
+		/*
+		 * Mozart trio composer
+		 */
+		
+		// Drama
+		
+		firstComposer = new MozartTrioDiceGame(drama);
+		firstSequence = firstComposer.createSequence();
+		firstTempPath = Files.createTempFile("test", null );
+		firstFile = firstTempPath.toFile();
+		MidiSystem.write( firstSequence, 1, firstFile);
+		
+		secondComposer = new MozartTrioDiceGame(drama);
+		secondSequence = secondComposer.createSequence();
+		secondTempPath = Files.createTempFile("test", null );
+		secondFile = secondTempPath.toFile();
+		MidiSystem.write( secondSequence, 1, secondFile);
+		
+		tempFiles.add(firstFile);
+		tempFiles.add(secondFile);
+		
+		FileAssert.assertBinaryEquals(firstFile, secondFile);
+		
+		// Non-Fiction		
+		
+		firstComposer = new MozartTrioDiceGame(nonFiction);
+		firstSequence = firstComposer.createSequence();
+		firstTempPath = Files.createTempFile("test", null );
+		firstFile = firstTempPath.toFile();
+		MidiSystem.write( firstSequence, 1, firstFile);
+		
+		secondComposer = new MozartTrioDiceGame(nonFiction);
+		secondSequence = secondComposer.createSequence();
+		secondTempPath = Files.createTempFile("test", null );
+		secondFile = secondTempPath.toFile();
+		MidiSystem.write( secondSequence, 1, secondFile);
+		
+		tempFiles.add(firstFile);
+		tempFiles.add(secondFile);
+		
+		FileAssert.assertBinaryEquals(firstFile, secondFile);
+		
+		/*
+		 * Mozart trio composer
+		 */
+		
+		// Drama
+		
+		firstComposer = new MozartTrioDiceGame(drama);
+		firstSequence = firstComposer.createSequence();
+		firstTempPath = Files.createTempFile("test", null );
+		firstFile = firstTempPath.toFile();
+		MidiSystem.write( firstSequence, 1, firstFile);
+		
+		secondComposer = new MozartTrioDiceGame(drama);
+		secondSequence = secondComposer.createSequence();
+		secondTempPath = Files.createTempFile("test", null );
+		secondFile = secondTempPath.toFile();
+		MidiSystem.write( secondSequence, 1, secondFile);
+		
+		tempFiles.add(firstFile);
+		tempFiles.add(secondFile);
+		
+		FileAssert.assertBinaryEquals(firstFile, secondFile);
+		
+		// Non-Fiction		
+		
+		firstComposer = new MozartTrioDiceGame(nonFiction);
+		firstSequence = firstComposer.createSequence();
+		firstTempPath = Files.createTempFile("test", null );
+		firstFile = firstTempPath.toFile();
+		MidiSystem.write( firstSequence, 1, firstFile);
+		
+		secondComposer = new MozartTrioDiceGame(nonFiction);
+		secondSequence = secondComposer.createSequence();
+		secondTempPath = Files.createTempFile("test", null );
+		secondFile = secondTempPath.toFile();
+		MidiSystem.write( secondSequence, 1, secondFile);
+		
+		tempFiles.add(firstFile);
+		tempFiles.add(secondFile);
+		
+		FileAssert.assertBinaryEquals(firstFile, secondFile);
+		
+		/*
+		 * Mozart trio composer
+		 */
+		
+		// Kids book
+		
+		firstComposer = new MozartWaltzDiceGame(kidsBook);
+		firstSequence = firstComposer.createSequence();
+		firstTempPath = Files.createTempFile("test", null );
+		firstFile = firstTempPath.toFile();
+		MidiSystem.write( firstSequence, 1, firstFile);
+		
+		secondComposer = new MozartWaltzDiceGame(kidsBook);
+		secondSequence = secondComposer.createSequence();
+		secondTempPath = Files.createTempFile("test", null );
+		secondFile = secondTempPath.toFile();
+		MidiSystem.write( secondSequence, 1, secondFile);
+		
+		tempFiles.add(firstFile);
+		tempFiles.add(secondFile);
+		
+		FileAssert.assertBinaryEquals(firstFile, secondFile);
+		
+		// Novel
+		
+		firstComposer = new MozartWaltzDiceGame(novel);
+		firstSequence = firstComposer.createSequence();
+		firstTempPath = Files.createTempFile("test", null );
+		firstFile = firstTempPath.toFile();
+		MidiSystem.write( firstSequence, 1, firstFile);
+		
+		secondComposer = new MozartWaltzDiceGame(novel);
+		secondSequence = secondComposer.createSequence();
+		secondTempPath = Files.createTempFile("test", null );
+		secondFile = secondTempPath.toFile();
+		MidiSystem.write( secondSequence, 1, secondFile);
+		
+		tempFiles.add(firstFile);
+		tempFiles.add(secondFile);
+		
+		FileAssert.assertBinaryEquals(firstFile, secondFile);
+		
+		/*
+		 * Kirnberger composer
+		 */
+		
+		// Lyric
+		
+		firstComposer = new MozartWaltzDiceGame(lyric);
+		firstSequence = firstComposer.createSequence();
+		firstTempPath = Files.createTempFile("test", null );
+		firstFile = firstTempPath.toFile();
+		MidiSystem.write( firstSequence, 1, firstFile);
+		
+		secondComposer = new MozartWaltzDiceGame(lyric);
+		secondSequence = secondComposer.createSequence();
+		secondTempPath = Files.createTempFile("test", null );
+		secondFile = secondTempPath.toFile();
+		MidiSystem.write( secondSequence, 1, secondFile);
+		
+		tempFiles.add(firstFile);
+		tempFiles.add(secondFile);
+		
+		FileAssert.assertBinaryEquals(firstFile, secondFile);
+		
+		// Novel
+		
+		firstComposer = new MozartWaltzDiceGame(novel);
+		firstSequence = firstComposer.createSequence();
+		firstTempPath = Files.createTempFile("test", null );
+		firstFile = firstTempPath.toFile();
+		MidiSystem.write( firstSequence, 1, firstFile);
+		
+		secondComposer = new MozartWaltzDiceGame(novel);
+		secondSequence = secondComposer.createSequence();
+		secondTempPath = Files.createTempFile("test", null );
+		secondFile = secondTempPath.toFile();
+		MidiSystem.write( secondSequence, 1, secondFile);
+		
+		tempFiles.add(firstFile);
+		tempFiles.add(secondFile);
+		
+		FileAssert.assertBinaryEquals(firstFile, secondFile);		
+	}
+	
+	
 	
 	
 
