@@ -31,6 +31,7 @@ import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.Sequence;
 
 import com.bragi.sonify.composer.AComposer;
+import com.bragi.sonify.util.FileUtil;
 
 /**
  * This AComposer uses the measures given by the sheet music "Anleitung so viel
@@ -61,7 +62,7 @@ public class MozartTrioDiceGame extends AComposer {
 	private static List<Map<Integer, Integer>> measureMapList;
 	private static final int NUM_MEASURES = 16;
 	private static final int MIDI_RESOLUTION = 480;
-	private static final String PATH_TO_MIDI_FORMAT = "etc" + File.separator + "midi" + File.separator + "mozart_trio" + File.separator + "T%d.mid";
+	private static final String PATH_TO_MIDI_FORMAT = "/midi/mozart_trio/T%d.mid";
 	private static final int REPEATS = 2;
 	
 	static {
@@ -282,7 +283,7 @@ public class MozartTrioDiceGame extends AComposer {
 				int diceRoll = r.nextInt(6) + 1;
 	
 				int measureNumber = measureMapList.get(i).get(diceRoll);
-				File f = new File( String.format(PATH_TO_MIDI_FORMAT, measureNumber));
+				File f = FileUtil.getResourcetFile(String.format(PATH_TO_MIDI_FORMAT, measureNumber));
 				appender.addFile(f);
 			}		
 		}		

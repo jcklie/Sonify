@@ -29,7 +29,6 @@ import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.EnumSet;
 import java.util.Properties;
@@ -47,9 +46,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
-import com.bragi.sonify.util.FileUtil;
-
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import com.bragi.sonify.util.FileUtil;
 
 /**
  * This class is the GUI of the sonificator.
@@ -73,34 +72,50 @@ public class GUI extends JFrame implements ActionListener {
 	private ImageIcon corporateLogo;
 	private JLabel corporateName;
 	
+	/**
+	 * For the ease of updating labels and much easier localization of this
+	 * user interface, all the labels are stored in a properties file found in
+	 * src/main/resources/labels.properties
+	 */
 	private final Properties props;
 
-	private static final String ICON_PATH = "etc/img/OmniSenseAuge.png";
+	private static final String ICON_PATH = "/img/OmniSenseAuge.png";
 	
-	private static final Object[] YES_NO_QUESTION_OPTIONS = { "Ja", "Nein" };
+	private static Object[] YES_NO_QUESTION_OPTIONS;
 
 	/* variables */
-	private final EnumSet<Genre> genres = EnumSet.allOf(Genre.class);
-	private final Image omnisenseIcon = new ImageIcon(ICON_PATH).getImage().getScaledInstance(150, 75, java.awt.Image.SCALE_SMOOTH);
+	private final EnumSet<Genre> genres;
+	private final Image omnisenseIcon;
 	private File inputFile;
 	private File outputFile;
 	private String selectedGenre;
 
 	/**
 	 * constructor of GUI
+	 * @throws IOException 
 	 */
-	public GUI() {		
+	public GUI() throws IOException {		
 		props = new Properties();
-		try {			
-			File propertyFile = FileUtil.getResourcetFile("/labels.properties");
-			BufferedInputStream stream = new BufferedInputStream(new FileInputStream(propertyFile));
-			props.load(stream);
-			stream.close();
-		} catch (FileNotFoundException e) {			
-			e.printStackTrace();
-		} catch (IOException e) {			
-			e.printStackTrace();
-		}
+		File propertyFile = FileUtil.getResourcetFile("/labels.properties");
+		BufferedInputStream stream = new BufferedInputStream(new FileInputStream(propertyFile));
+		props.load(stream);
+		stream.close();
+		
+		YES_NO_QUESTION_OPTIONS = new Object[2];
+		YES_NO_QUESTION_OPTIONS[0] = props.getProperty("yes");
+		YES_NO_QUESTION_OPTIONS[1] = props.getProperty("no");	
+		
+		genres = EnumSet.allOf(Genre.class);
+		
+		/*
+		 * Get omni sense icon
+		 */
+		File f = FileUtil.getResourcetFile(ICON_PATH);
+		omnisenseIcon = new ImageIcon( f.getPath()).getImage().getScaledInstance(150, 75, java.awt.Image.SCALE_SMOOTH);
+		
+		/*
+		 * Init GUI components and draw it on the screen
+		 */
 		initComponents();
 		setVisible(true);
 	}
@@ -259,7 +274,7 @@ public class GUI extends JFrame implements ActionListener {
 						YES_NO_QUESTION_OPTIONS[0]);
 
 				/*
-				 * If "Yes", we open the created reated MIDI file with the
+				 * If "Yes", we open the created MIDI file with the
 				 * default program
 				 */
 				if (selected == 0) {
@@ -289,7 +304,14 @@ public class GUI extends JFrame implements ActionListener {
 	 * The main-method creates a new Instance of GUI.
 	 */
 	public static void main(String[] args) {
-		new GUI();
+		try {
+			new GUI();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null,
+					e.getMessage(),
+					e.getClass().toString(),
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	/**
