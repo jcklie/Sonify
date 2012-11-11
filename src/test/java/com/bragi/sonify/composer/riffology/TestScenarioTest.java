@@ -186,7 +186,65 @@ public class TestScenarioTest extends TestCase {
 		composer =  new KirnbergerDiceGame(nonFiction);		
 		sequence = composer.createSequence();		
 		playtime = sequence.getMicrosecondLength();
-		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);		
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		/*
+		 * Mozart contra dance one composer
+		 */
+		
+		composer =  new MozartContraDanceOneDiceGame(drama);		
+		sequence = composer.createSequence();	
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartContraDanceOneDiceGame(kidsBook);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartContraDanceOneDiceGame(lyric);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartContraDanceOneDiceGame(novel);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartContraDanceOneDiceGame(nonFiction);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		/*
+		 * Mozart contra dance two composer
+		 */
+		
+		composer =  new MozartContraDanceTwoDiceGame(drama);		
+		sequence = composer.createSequence();	
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartContraDanceTwoDiceGame(kidsBook);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartContraDanceTwoDiceGame(lyric);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartContraDanceTwoDiceGame(novel);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
+		
+		composer =  new MozartContraDanceTwoDiceGame(nonFiction);		
+		sequence = composer.createSequence();		
+		playtime = sequence.getMicrosecondLength();
+		assertTrue(playtime > THIRTY_SECONDS && playtime <= TEN_MINUTES);
 	}
 	
 	/**
@@ -380,7 +438,91 @@ public class TestScenarioTest extends TestCase {
 		tempFiles.add(firstFile);
 		tempFiles.add(secondFile);
 		
-		FileAssert.assertBinaryEquals(firstFile, secondFile);		
+		FileAssert.assertBinaryEquals(firstFile, secondFile);	
+		
+		/*
+		 * Mozart contra dance one composer
+		 */
+		
+		// Lyric
+		
+		firstComposer = new MozartContraDanceOneDiceGame(lyric);
+		firstSequence = firstComposer.createSequence();
+		firstTempPath = Files.createTempFile("test", null );
+		firstFile = firstTempPath.toFile();
+		MidiSystem.write( firstSequence, 1, firstFile);
+		
+		secondComposer = new MozartContraDanceOneDiceGame(lyric);
+		secondSequence = secondComposer.createSequence();
+		secondTempPath = Files.createTempFile("test", null );
+		secondFile = secondTempPath.toFile();
+		MidiSystem.write( secondSequence, 1, secondFile);
+		
+		tempFiles.add(firstFile);
+		tempFiles.add(secondFile);
+		
+		FileAssert.assertBinaryEquals(firstFile, secondFile);
+		
+		// Novel
+		
+		firstComposer = new MozartContraDanceOneDiceGame(novel);
+		firstSequence = firstComposer.createSequence();
+		firstTempPath = Files.createTempFile("test", null );
+		firstFile = firstTempPath.toFile();
+		MidiSystem.write( firstSequence, 1, firstFile);
+		
+		secondComposer = new MozartContraDanceOneDiceGame(novel);
+		secondSequence = secondComposer.createSequence();
+		secondTempPath = Files.createTempFile("test", null );
+		secondFile = secondTempPath.toFile();
+		MidiSystem.write( secondSequence, 1, secondFile);
+		
+		tempFiles.add(firstFile);
+		tempFiles.add(secondFile);
+		
+		FileAssert.assertBinaryEquals(firstFile, secondFile);
+		
+		/*
+		 *  Mozart contra dance two composer
+		 */
+		
+		// Lyric
+		
+		firstComposer = new MozartContraDanceTwoDiceGame(lyric);
+		firstSequence = firstComposer.createSequence();
+		firstTempPath = Files.createTempFile("test", null );
+		firstFile = firstTempPath.toFile();
+		MidiSystem.write( firstSequence, 1, firstFile);
+		
+		secondComposer = new MozartContraDanceTwoDiceGame(lyric);
+		secondSequence = secondComposer.createSequence();
+		secondTempPath = Files.createTempFile("test", null );
+		secondFile = secondTempPath.toFile();
+		MidiSystem.write( secondSequence, 1, secondFile);
+		
+		tempFiles.add(firstFile);
+		tempFiles.add(secondFile);
+		
+		FileAssert.assertBinaryEquals(firstFile, secondFile);
+		
+		// Novel
+		
+		firstComposer = new MozartContraDanceTwoDiceGame(novel);
+		firstSequence = firstComposer.createSequence();
+		firstTempPath = Files.createTempFile("test", null );
+		firstFile = firstTempPath.toFile();
+		MidiSystem.write( firstSequence, 1, firstFile);
+		
+		secondComposer = new MozartContraDanceTwoDiceGame(novel);
+		secondSequence = secondComposer.createSequence();
+		secondTempPath = Files.createTempFile("test", null );
+		secondFile = secondTempPath.toFile();
+		MidiSystem.write( secondSequence, 1, secondFile);
+		
+		tempFiles.add(firstFile);
+		tempFiles.add(secondFile);
+		
+		FileAssert.assertBinaryEquals(firstFile, secondFile);
 	}
 
 }

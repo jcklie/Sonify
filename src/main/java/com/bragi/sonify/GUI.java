@@ -12,7 +12,7 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Dominik Kuenne - First 'working' very basic prototype
+ * Dominik Kuenne - Prototype
  * Martin Kiessling - Everything else
  * 
  *******************************************************************************/

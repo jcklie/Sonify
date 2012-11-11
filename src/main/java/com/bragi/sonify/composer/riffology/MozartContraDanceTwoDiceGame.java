@@ -12,9 +12,8 @@
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * Contributors:
- * Sebastian Muszytowski - Digitalizing the sheet music and generating the midi files for every measure of the sheets TLDR: The digitizing
- * Jan-Christoph Klie - Everything else
- * 
+ * Jan-Christoph Klie - General layout 
+ * Sebastian Muszytowski - Digitizing, implementation
  *******************************************************************************/
 
 package com.bragi.sonify.composer.riffology;
